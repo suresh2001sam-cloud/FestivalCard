@@ -502,13 +502,19 @@ function encodeCard(card){
     d.i = card.imgData;
   }
   try{
-    return btoa(unescape(encodeURIComponent(JSON.stringify(d))));
+    // ✅ URL-safe base64: replace + → - and / → _ so URL never breaks
+    const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(d))));
+    return b64.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
   }catch(ex){return null;}
 }
 
 function decodeCard(str){
   try{
-    const d = JSON.parse(decodeURIComponent(escape(atob(str))));
+    // ✅ Restore URL-safe base64 back to standard base64
+    const b64 = str.replace(/-/g,'+').replace(/_/g,'/');
+    // Re-add padding if stripped
+    const padded = b64 + '=='.slice(0,(4 - b64.length % 4) % 4);
+    const d = JSON.parse(decodeURIComponent(escape(atob(padded))));
     return {
       type:d.t||'general', name:d.n||'', msg:d.m||'',
       from:d.f||'', tpl:d.tp||'classic', effect:d.e||'confetti',
@@ -516,6 +522,16 @@ function decodeCard(str){
       imgData:d.i||null
     };
   }catch(ex){return null;}
+}
+
+// ✅ Decode old-style links too (with + signs / spaces from URLSearchParams)
+function safeGetCardParam(){
+  // Method 1: URLSearchParams (converts + to space — unreliable for base64)
+  const raw = new URLSearchParams(location.search).get('card');
+  if(!raw) return null;
+  // Fix: spaces back to + (from URLSearchParams converting + to space)
+  const fixed = raw.replace(/ /g,'+');
+  return fixed;
 }
 
 // ══════════════════════════════════════════
@@ -1085,9 +1101,8 @@ window.addEventListener('load',()=>{
 
   load();seed();
 
-  // ✅ Check for share link
-  const params = new URLSearchParams(location.search);
-  const cardParam = params.get('card');
+  // ✅ Check for share link — safeGetCardParam fixes the + sign URL bug
+  const cardParam = safeGetCardParam();
 
   if(cardParam){
     const card = decodeCard(cardParam);
