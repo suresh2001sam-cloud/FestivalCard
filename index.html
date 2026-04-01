@@ -285,6 +285,18 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
             </select>
           </div>
         </div>
+
+        <!-- Dynamic Date/Age row — shown based on event type -->
+        <div class="form-row" id="date-age-row" style="display:none">
+          <div class="fld" id="date-field-wrap" style="display:none">
+            <label id="date-label">📅 Event Date</label>
+            <input type="date" id="f-date" onchange="livePreview()">
+          </div>
+          <div class="fld" id="age-field-wrap" style="display:none">
+            <label id="age-label">🎂 Age (Turning)</label>
+            <input type="number" id="f-age" placeholder="e.g. 25" min="1" max="120" oninput="livePreview()" style="appearance:none;-moz-appearance:textfield">
+          </div>
+        </div>
         <div class="fld">
           <label>Animation Effect</label>
           <div class="style-grid" id="style-grid"></div>
@@ -422,6 +434,16 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
         <label style="color:var(--gold)">🎯 Recipient Name</label>
         <input type="text" id="em-recipient" maxlength="40" placeholder="Who will receive this?">
       </div>
+      <div class="form-row">
+        <div class="fld">
+          <label id="em-date-label">📅 Event Date</label>
+          <input type="date" id="em-date">
+        </div>
+        <div class="fld" id="em-age-wrap">
+          <label id="em-age-label">🎂 Age / Years</label>
+          <input type="number" id="em-age" placeholder="e.g. 25" min="1" max="120" style="appearance:none;-moz-appearance:textfield">
+        </div>
+      </div>
     </div>
     <div class="modal-footer">
       <button class="btn btn-primary" onclick="confirmEdit()">💾 Save</button>
@@ -495,14 +517,18 @@ function encodeCard(card){
   const d={
     t:card.type, n:card.name, m:card.msg,
     f:card.from, tp:card.tpl, e:card.effect,
-    ps:card.photoShape, r:card.recipient||''
+    ps:card.photoShape, r:card.recipient||'',
+    dt:card.date||'', ag:card.age||''
   };
-  // Only include image if it's small enough (< 180KB base64 ~ safe URL limit)
-  if(card.imgData && card.imgData.length < 180000){
-    d.i = card.imgData;
+  // ✅ IMAGE FIX: Strip "data:image/xxx;base64," prefix, encode raw bytes only
+  // This avoids the / characters in the prefix from corrupting URL-safe encoding
+  if(card.imgData && card.imgData.length < 200000){
+    const raw = card.imgData.replace(/^data:image\/[^;]+;base64,/,'');
+    // URL-safe encode the raw image base64
+    d.i = raw.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
   }
   try{
-    // ✅ URL-safe base64: replace + → - and / → _ so URL never breaks
+    // URL-safe base64 encode the whole JSON
     const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(d))));
     return b64.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
   }catch(ex){return null;}
@@ -510,28 +536,32 @@ function encodeCard(card){
 
 function decodeCard(str){
   try{
-    // ✅ Restore URL-safe base64 back to standard base64
+    // Restore URL-safe → standard base64, re-pad
     const b64 = str.replace(/-/g,'+').replace(/_/g,'/');
-    // Re-add padding if stripped
     const padded = b64 + '=='.slice(0,(4 - b64.length % 4) % 4);
     const d = JSON.parse(decodeURIComponent(escape(atob(padded))));
+    // ✅ IMAGE FIX: Restore image — re-add data URI prefix and standard base64
+    let imgData = null;
+    if(d.i){
+      const rawB64 = d.i.replace(/-/g,'+').replace(/_/g,'/');
+      const rawPad = rawB64 + '=='.slice(0,(4 - rawB64.length % 4) % 4);
+      imgData = 'data:image/jpeg;base64,' + rawPad;
+    }
     return {
       type:d.t||'general', name:d.n||'', msg:d.m||'',
       from:d.f||'', tpl:d.tp||'classic', effect:d.e||'confetti',
       photoShape:d.ps||'circle', recipient:d.r||'',
-      imgData:d.i||null
+      date:d.dt||'', age:d.ag||'',
+      imgData
     };
   }catch(ex){return null;}
 }
 
-// ✅ Decode old-style links too (with + signs / spaces from URLSearchParams)
+// ✅ Safe URL param reader — handles + signs that URLSearchParams converts to spaces
 function safeGetCardParam(){
-  // Method 1: URLSearchParams (converts + to space — unreliable for base64)
   const raw = new URLSearchParams(location.search).get('card');
   if(!raw) return null;
-  // Fix: spaces back to + (from URLSearchParams converting + to space)
-  const fixed = raw.replace(/ /g,'+');
-  return fixed;
+  return raw.replace(/ /g,'+'); // Restore spaces → + from URLSearchParams quirk
 }
 
 // ══════════════════════════════════════════
@@ -638,14 +668,23 @@ function nav(id){
 // ══════════════════════════════════════════
 //  BUILD CARD HTML
 // ══════════════════════════════════════════
+function formatDate(dateStr){
+  if(!dateStr) return '';
+  try{
+    const d=new Date(dateStr+'T00:00:00');
+    return d.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+  }catch(e){return dateStr;}
+}
+
 function buildCard(c,full=false){
   const th=T[c.type]||T.general, tpl=TPLS[c.tpl]||TPLS.classic;
   const bg=`linear-gradient(160deg,${th.bg[0]},${th.bg[1]},${th.bg[2]})`;
-  const h=full?'520px':'340px', pSz=full?'130px':'80px';
+  const h=full?'540px':'340px', pSz=full?'120px':'75px';
   const nameSz=full?tpl.nameSz:parseFloat(tpl.nameSz)*.7+'rem';
   const msgSz=full?tpl.msgSz:parseFloat(tpl.msgSz)*.82+'rem';
   const iconSz=full?'5.5rem':'3.2rem';
   const pts=getParticles(c.effect||'confetti',full);
+
   let ph='';
   if(c.imgData){
     const s=c.photoShape||'circle';
@@ -658,19 +697,36 @@ function buildCard(c,full=false){
   }else{
     ph=`<div style="font-size:${iconSz};margin-bottom:${full?'.7rem':'.3rem'};animation:floatUp 3s ease-in-out infinite;text-align:center">${th.icon}</div>`;
   }
-  const div=tpl.divider?`<div style="width:${full?'60px':'36px'};height:${full?'2px':'1.5px'};background:linear-gradient(90deg,transparent,${th.color},transparent);margin:${full?'.7rem':'.4rem'} auto;border-radius:2px"></div>`:'';
-  const frm=c.from?`<div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:${full?'.92rem':'.68rem'};margin-top:${full?'.8rem':'.4rem'};opacity:.55">${c.from}</div>`:'';
+
+  const div=tpl.divider?`<div style="width:${full?'60px':'36px'};height:${full?'2px':'1.5px'};background:linear-gradient(90deg,transparent,${th.color},transparent);margin:${full?'.6rem':'.3rem'} auto;border-radius:2px"></div>`:'';
+  const frm=c.from?`<div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:${full?'.88rem':'.65rem'};margin-top:${full?'.5rem':'.3rem'};opacity:.5">${c.from}</div>`:'';
+
+  // Age badge — Birthday & Anniversary
+  let ageBadge='';
+  if(c.age && (c.type==='birthday'||c.type==='anniversary')){
+    const label=c.type==='birthday'?`Turning ${c.age} 🎂`:`${c.age} Years Together 💕`;
+    ageBadge=`<div style="display:inline-block;background:linear-gradient(135deg,${th.color}44,${th.accent}33);border:1.5px solid ${th.color}88;border-radius:50px;padding:${full?'.35rem .9rem':'.2rem .55rem'};font-size:${full?'.82rem':'.6rem'};font-weight:800;letter-spacing:.5px;margin:${full?'.5rem 0 .4rem':'0.25rem 0'};color:${th.accent}">${label}</div>`;
+  }
+
+  // Date display
+  let dateLine='';
+  if(c.date){
+    const fmtDate=formatDate(c.date);
+    dateLine=`<div style="display:flex;align-items:center;justify-content:center;gap:.3rem;margin-top:${full?'.5rem':'.3rem'};font-size:${full?'.78rem':'.58rem'};opacity:.65;font-weight:600">📅 ${fmtDate}</div>`;
+  }
 
   return `<div style="width:100%;min-height:${h};background:${bg};position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif">
 <div style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none">${pts}</div>
 <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,${th.color}18,transparent)"></div>
-<div style="position:relative;z-index:2;text-align:center;padding:${full?'2rem 2.5rem':'1rem 1.2rem'};width:100%;color:#fff">
+<div style="position:relative;z-index:2;text-align:center;padding:${full?'1.8rem 2.5rem':'1rem 1.2rem'};width:100%;color:#fff">
 ${ph}
-<div style="font-size:${full?'.65rem':'.5rem'};font-weight:900;letter-spacing:3px;text-transform:uppercase;opacity:.6;margin-bottom:${full?'.5rem':'.25rem'};color:${th.accent}">${th.label}</div>
+<div style="font-size:${full?'.65rem':'.5rem'};font-weight:900;letter-spacing:3px;text-transform:uppercase;opacity:.6;margin-bottom:${full?'.4rem':'.2rem'};color:${th.accent}">${th.label}</div>
 ${div}
-<div style="font-family:${tpl.nameFont};font-size:${nameSz};font-weight:700;line-height:1.2;margin:${full?'.3rem 0 .6rem':'0.2rem 0 .3rem'};text-shadow:0 2px 20px rgba(0,0,0,.4);color:#fff">${c.name||'Your Name'}</div>
+${ageBadge}
+<div style="font-family:${tpl.nameFont};font-size:${nameSz};font-weight:700;line-height:1.2;margin:${full?'.2rem 0 .5rem':'0.15rem 0 .25rem'};text-shadow:0 2px 20px rgba(0,0,0,.4);color:#fff">${c.name||'Your Name'}</div>
 ${div}
-<div style="font-size:${msgSz};line-height:1.65;opacity:.88;max-width:${full?'380px':'240px'};margin:0 auto;font-weight:500">${c.msg||(th.msg)}</div>
+<div style="font-size:${msgSz};line-height:1.6;opacity:.88;max-width:${full?'380px':'240px'};margin:0 auto;font-weight:500">${c.msg||(th.msg)}</div>
+${dateLine}
 ${frm}
 </div>
 <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,${th.color},${th.accent},${th.color},transparent);z-index:3"></div>
@@ -908,7 +964,40 @@ function pickStyle(id,el){_style=id;document.querySelectorAll('.style-tile').for
 
 function onTypeChange(){
   const t=document.getElementById('f-type').value;
-  if(t&&T[t]&&!document.getElementById('f-msg').value)document.getElementById('f-msg').value=T[t].msg;
+  if(t&&T[t]&&!document.getElementById('f-msg').value) document.getElementById('f-msg').value=T[t].msg;
+
+  // Show/hide date & age fields based on type
+  const row=document.getElementById('date-age-row');
+  const dateWrap=document.getElementById('date-field-wrap');
+  const ageWrap=document.getElementById('age-field-wrap');
+  const dateLabel=document.getElementById('date-label');
+  const ageLabel=document.getElementById('age-label');
+
+  // Reset
+  dateWrap.style.display='none'; ageWrap.style.display='none'; row.style.display='none';
+
+  if(t==='birthday'){
+    row.style.display='grid';
+    dateWrap.style.display='block'; dateLabel.textContent='🎂 Date of Birth';
+    ageWrap.style.display='block';  ageLabel.textContent='🎂 Turning Age';
+  } else if(t==='wedding'||t==='marriage'){
+    row.style.display='grid';
+    dateWrap.style.display='block'; dateLabel.textContent='💍 Wedding Date';
+  } else if(t==='anniversary'){
+    row.style.display='grid';
+    dateWrap.style.display='block'; dateLabel.textContent='💕 Anniversary Date';
+    ageWrap.style.display='block';  ageLabel.textContent='💕 Years Together';
+  } else if(t==='graduation'){
+    row.style.display='grid';
+    dateWrap.style.display='block'; dateLabel.textContent='🎓 Graduation Date';
+  } else if(['diwali','christmas','eid','newyear','holi','pongal','onam','navratri'].includes(t)){
+    row.style.display='grid';
+    dateWrap.style.display='block'; dateLabel.textContent='📅 Festival Date';
+  } else if(t){
+    row.style.display='grid';
+    dateWrap.style.display='block'; dateLabel.textContent='📅 Event Date';
+  }
+
   livePreview();
 }
 
@@ -967,14 +1056,19 @@ function getFormCard(){
     msg:document.getElementById('f-msg')?.value||'',
     from:document.getElementById('f-from')?.value||'',
     tpl:document.getElementById('f-tpl')?.value||'classic',
-    effect:_style,imgData:_imgData,photoShape:getShape(),
+    effect:_style, imgData:_imgData, photoShape:getShape(),
     recipient:document.getElementById('f-recipient')?.value||'',
+    date:document.getElementById('f-date')?.value||'',
+    age:document.getElementById('f-age')?.value||'',
   };
 }
 
 function clearForm(){
-  ['f-type','f-name','f-msg','f-from','f-recipient'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+  ['f-type','f-name','f-msg','f-from','f-recipient','f-date','f-age'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
   document.getElementById('f-tpl').value='classic';
+  document.getElementById('date-age-row').style.display='none';
+  document.getElementById('date-field-wrap').style.display='none';
+  document.getElementById('age-field-wrap').style.display='none';
   removeImg();_style='confetti';buildStyleGrid();livePreview();
 }
 
@@ -1048,6 +1142,11 @@ function openEdit(id){
   document.getElementById('em-msg').value=c.msg||'';
   document.getElementById('em-from').value=c.from||'';
   document.getElementById('em-recipient').value=c.recipient||'';
+  document.getElementById('em-date').value=c.date||'';
+  document.getElementById('em-age').value=c.age||'';
+  // Show/hide age based on type
+  const showAge=['birthday','anniversary'].includes(c.type);
+  document.getElementById('em-age-wrap').style.display=showAge?'block':'none';
   openModal('edit-modal');
 }
 
@@ -1059,6 +1158,8 @@ function confirmEdit(){
   c.name=name;c.msg=document.getElementById('em-msg').value;
   c.from=document.getElementById('em-from').value;
   c.recipient=document.getElementById('em-recipient').value;
+  c.date=document.getElementById('em-date').value;
+  c.age=document.getElementById('em-age').value;
   save();closeModal('edit-modal');toast('✅ Card updated!');
   if(isSes())renderAdmin();
   renderGallery();
