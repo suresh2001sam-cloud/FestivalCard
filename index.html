@@ -1175,22 +1175,150 @@ function toast(msg){
 }
 
 // ══════════════════════════════════════════
-//  HASH-BASED SHARE — with recipient name
+//  HASH-BASED SHARE — CARD-ONLY MODE
+//  Link share பண்ணும்போது app முழுக்க hide,
+//  card மட்டும் fullscreen-ல show ஆகும்
 // ══════════════════════════════════════════
+let _isShareMode = false;
+
 function checkHash(){
   const h=location.hash;
   if(h.startsWith('#view=')){
-    // parse: #view=ID&for=Name
     const parts=h.slice(1).split('&');
     let cardId='', recipient='';
     parts.forEach(p=>{
       if(p.startsWith('view=')) cardId=p.slice(5);
       if(p.startsWith('for=')) recipient=decodeURIComponent(p.slice(4));
     });
-    if(cardId && cards.find(c=>c.id===cardId)){
-      viewCard(cardId, recipient||undefined);
+    const card=cards.find(c=>c.id===cardId);
+    if(cardId && card){
+      _isShareMode=true;
+      enterShareMode(card, recipient||undefined);
     }
   }
+}
+
+function enterShareMode(card, recipient){
+  // Hide entire app UI
+  document.getElementById('root').style.display='none';
+  document.getElementById('bg-canvas').style.display='none';
+
+  // Hide modals
+  document.querySelectorAll('.modal-wrap').forEach(m=>m.style.display='none');
+
+  // Build dedicated share view
+  const th=T[card.type]||T.general;
+  const shareWrap=document.createElement('div');
+  shareWrap.id='share-mode-wrap';
+  shareWrap.style.cssText=`
+    position:fixed;inset:0;z-index:9999;
+    background:linear-gradient(160deg,${th.bg[0]},${th.bg[1]},${th.bg[2]});
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    overflow:hidden;
+  `;
+
+  // Personalized banner
+  const bannerHTML = recipient ? `
+    <div style="
+      position:absolute;top:0;left:0;right:0;
+      padding:.9rem 1.5rem;text-align:center;
+      background:rgba(0,0,0,.35);backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,255,255,.1);
+      z-index:10;animation:slideDown .6s ease;
+    ">
+      <div style="font-family:'Great Vibes',cursive;font-size:1.9rem;background:linear-gradient(90deg,#f0c040,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+        Hey ${recipient}, you have a special greeting! 🎉
+      </div>
+      <div style="font-size:.78rem;color:rgba(255,255,255,.55);margin-top:.2rem">Someone special sent this just for you ✨</div>
+    </div>
+  ` : '';
+
+  // Card HTML
+  const cardHTML = buildCard(card, true);
+
+  // Bottom share row
+  const base=location.href.split('#')[0];
+  const shareUrl=base+'#view='+card.id+(recipient?'&for='+encodeURIComponent(recipient):'');
+
+  shareWrap.innerHTML = `
+    ${bannerHTML}
+    <canvas id="share-confetti-canvas" style="position:fixed;inset:0;z-index:1;pointer-events:none"></canvas>
+    <div style="
+      position:relative;z-index:2;
+      width:100%;max-width:480px;
+      border-radius:24px;overflow:hidden;
+      box-shadow:0 30px 100px rgba(0,0,0,.8);
+      ${recipient ? 'margin-top:90px;' : ''}
+    ">${cardHTML}</div>
+    <div style="
+      position:absolute;bottom:0;left:0;right:0;z-index:10;
+      padding:1rem 1.5rem 1.5rem;
+      background:linear-gradient(to top,rgba(0,0,0,.8),transparent);
+      display:flex;flex-direction:column;gap:.7rem;align-items:center;
+    ">
+      <div style="display:flex;align-items:center;gap:.6rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:50px;padding:.4rem .4rem .4rem .9rem;backdrop-filter:blur(10px);max-width:480px;width:100%">
+        <div style="flex:1;font-size:.75rem;color:rgba(255,255,255,.5);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${shareUrl}</div>
+        <button onclick="navigator.clipboard.writeText('${shareUrl}').then(()=>{this.textContent='✅ Copied!';setTimeout(()=>this.textContent='📋 Copy',2000)})" style="background:linear-gradient(135deg,#f0c040,#e89020);border:none;border-radius:50px;padding:.35rem .85rem;font-size:.75rem;font-weight:700;cursor:pointer;color:#0a0812;white-space:nowrap">📋 Copy</button>
+        <button onclick="if(navigator.share){navigator.share({title:'${recipient?'A special greeting for '+recipient+'!':'FestivaCard Greeting'}',url:'${shareUrl}'})}else{navigator.clipboard.writeText('${shareUrl}')}" style="background:linear-gradient(135deg,#f472b6,#e11d85);border:none;border-radius:50px;padding:.35rem .85rem;font-size:.75rem;font-weight:700;cursor:pointer;color:#fff;white-space:nowrap">↗ Share</button>
+      </div>
+      <div style="font-size:.72rem;color:rgba(255,255,255,.3)">Made with FestivaCard ✨</div>
+    </div>
+  `;
+
+  document.body.appendChild(shareWrap);
+
+  // Run confetti/effects on share canvas
+  setTimeout(()=>{
+    const cv=document.getElementById('share-confetti-canvas');
+    cv.width=window.innerWidth;cv.height=window.innerHeight;
+    runShareEffect(card.effect||'confetti', cv);
+  }, 400);
+}
+
+function runShareEffect(eff, cv){
+  if(eff==='confetti'&&typeof confetti!=='undefined'){
+    let frame;let t=0;
+    (function shoot(){
+      if(t<300){
+        confetti({particleCount:6,angle:60,spread:55,origin:{x:0,y:.7},colors:['#f0c040','#f472b6','#a78bfa','#fff']});
+        confetti({particleCount:6,angle:120,spread:55,origin:{x:1,y:.7},colors:['#f0c040','#f472b6','#a78bfa','#fff']});
+      }
+      t++;frame=requestAnimationFrame(shoot);
+    })();
+    setTimeout(()=>{cancelAnimationFrame(frame);confetti.reset()},5000);
+    return;
+  }
+  if(eff==='firework'&&typeof confetti!=='undefined'){
+    let frame;let t=0;
+    (function burst(){
+      if(t%30===0&&t<360){
+        confetti({particleCount:35,spread:360,startVelocity:20,decay:.88,origin:{x:.1+Math.random()*.8,y:.1+Math.random()*.5},colors:['#f0c040','#f472b6','#fff','#38bdf8']});
+      }
+      t++;frame=requestAnimationFrame(burst);
+    })();
+    setTimeout(()=>{cancelAnimationFrame(frame);confetti.reset()},6000);
+    return;
+  }
+  if(eff==='hearts'&&typeof confetti!=='undefined'){
+    const heart=confetti.shapeFromText({text:'❤',scalar:2});
+    let frame;let t=0;
+    (function rain(){
+      if(t<300) confetti({particleCount:4,spread:60,origin:{x:Math.random(),y:-.1},shapes:[heart],scalar:1.5,colors:['#f472b6','#fb7185','#fff']});
+      t++;frame=requestAnimationFrame(rain);
+    })();
+    setTimeout(()=>{cancelAnimationFrame(frame);confetti.reset()},5000);
+    return;
+  }
+  // canvas fallback
+  const ctx=cv.getContext('2d');
+  const COLS=['#f0c040','#f472b6','#a78bfa','#38bdf8','#4ade80'];
+  const pts=Array.from({length:60},()=>({x:Math.random()*cv.width,y:Math.random()*cv.height,vx:(Math.random()-.5)*1.5,vy:-.5-Math.random()*1.5,r:2+Math.random()*4,col:COLS[Math.floor(Math.random()*COLS.length)],life:1}));
+  let raf;let t=0;
+  (function tick(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.03;p.life-=.004;if(p.y>cv.height||p.life<=0){p.x=Math.random()*cv.width;p.y=cv.height+10;p.vy=-(1+Math.random()*2);p.life=1}ctx.globalAlpha=p.life;ctx.fillStyle=p.col;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();});
+    ctx.globalAlpha=1;t++;if(t<360)raf=requestAnimationFrame(tick);
+  })();
 }
 
 // ══════════════════════════════════════════
@@ -1215,6 +1343,7 @@ style.textContent=`
 @keyframes fallPart{0%{transform:translateY(-10px) rotate(0deg);opacity:.9}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
 @keyframes risePart{0%{transform:translateY(20px) scale(.5);opacity:0}40%{opacity:.9}100%{transform:translateY(-80px) scale(1.2);opacity:0}}
 @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-8px)}80%{transform:translateX(8px)}}
+@keyframes slideDown{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
 `;
 document.head.appendChild(style);
 
@@ -1223,16 +1352,20 @@ document.head.appendChild(style);
 // ══════════════════════════════════════════
 window.addEventListener('load',()=>{
   load();seed();
+  // Check if this is a share link FIRST — if yes, show only card, hide app
+  const h=location.hash;
+  if(h.startsWith('#view=')){
+    checkHash(); // enters share mode, app stays hidden
+    return;      // skip app init entirely
+  }
+  // Normal app load
   initBG();
   renderGallery();
-  // If admin was logged in this session, restore
-  if(isAdminLoggedIn()){
-    // session still active, panel will show when user navigates to admin
-  }
-  checkHash();
 });
-window.addEventListener('hashchange',checkHash);
-window.addEventListener('keydown',e=>{if(e.key==='Escape')closeView()});
+window.addEventListener('hashchange',()=>{
+  if(!_isShareMode) checkHash();
+});
+window.addEventListener('keydown',e=>{if(e.key==='Escape'&&!_isShareMode)closeView()});
 </script>
 </body>
 </html>
