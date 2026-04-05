@@ -126,26 +126,26 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
 /* ══════════════════════════════════
    SHARE VIEW — recipient sees only card
    ══════════════════════════════════ */
-#share-view{display:none;position:fixed;inset:0;z-index:9999;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:1rem}
+#share-view{display:none;position:fixed;inset:0;z-index:9999;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;overflow-y:auto;padding:env(safe-area-inset-top,1rem) 1rem env(safe-area-inset-bottom,1rem);min-height:100dvh;min-height:100vh}
 #share-view.on{display:flex}
-#sconf-cv{position:fixed;inset:0;z-index:1;pointer-events:none}
-.s-card-wrap{position:relative;z-index:2;width:100%;max-width:480px;border-radius:24px;overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.8)}
-.s-banner{display:none;animation:slideDown .6s ease;z-index:3;width:100%;max-width:480px;padding:.9rem 1.5rem;text-align:center;background:rgba(0,0,0,.55);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.1);border-radius:16px;margin-bottom:.8rem}
+#sconf-cv{position:fixed;inset:0;z-index:1;pointer-events:none;width:100%;height:100%}
+.s-card-wrap{position:relative;z-index:2;width:100%;max-width:min(480px,94vw);border-radius:24px;overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.8);flex-shrink:0}
+.s-banner{display:none;animation:slideDown .6s ease;z-index:3;width:100%;max-width:min(480px,94vw);padding:.9rem 1.5rem;text-align:center;background:rgba(0,0,0,.55);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.1);border-radius:16px;margin-bottom:.8rem}
 .s-banner-name{font-family:'Great Vibes',cursive;font-size:2rem;background:linear-gradient(90deg,#f0c040,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.s-bottom{z-index:3;width:100%;max-width:480px;margin-top:.8rem;display:flex;flex-direction:column;align-items:center;gap:.6rem}
+.s-bottom{z-index:3;width:100%;max-width:min(480px,94vw);margin-top:.8rem;display:flex;flex-direction:column;align-items:center;gap:.6rem;padding-bottom:env(safe-area-inset-bottom,0)}
 .s-copy-row{display:flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:50px;padding:.4rem .4rem .4rem .9rem;width:100%}
 .s-url{flex:1;font-size:.7rem;color:rgba(255,255,255,.4);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 /* INTERNAL VIEW */
-#view-page{position:fixed;inset:0;z-index:500;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;overflow-y:auto;padding:4rem 1rem 6rem}
+#view-page{position:fixed;inset:0;z-index:500;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;overflow-y:auto;padding:4rem 1rem 6rem;min-height:100dvh;min-height:100vh;-webkit-overflow-scrolling:touch}
 #view-page.on{display:flex}
-#vconf-cv{position:fixed;inset:0;z-index:1;pointer-events:none}
-#view-canvas{width:100%;max-width:480px;border-radius:var(--r2);overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.8);position:relative;z-index:2}
+#vconf-cv{position:fixed;inset:0;z-index:1;pointer-events:none;width:100%;height:100%}
+#view-canvas{width:100%;max-width:min(480px,94vw);border-radius:var(--r2);overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.8);position:relative;z-index:2}
 
 /* ── KEY FIX: Share URL Banner ── */
-.v-share-banner{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;align-items:center;gap:.6rem;padding:.7rem 1.2rem;background:rgba(0,0,0,.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.1)}
+.v-share-banner{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;align-items:center;gap:.6rem;padding:.7rem 1.2rem;padding-top:max(.7rem,env(safe-area-inset-top));background:rgba(0,0,0,.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.1)}
 .v-share-url{flex:1;font-size:.7rem;color:rgba(255,255,255,.5);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:.4rem .7rem;font-family:monospace}
-.v-bottom{position:fixed;bottom:0;left:0;right:0;z-index:10;padding:.8rem 1rem 1.2rem;background:linear-gradient(to top,rgba(0,0,0,.9) 70%,transparent);display:flex;flex-direction:column;gap:.5rem;align-items:center}
+.v-bottom{position:fixed;bottom:0;left:0;right:0;z-index:10;padding:.8rem 1rem;padding-bottom:max(1.2rem,env(safe-area-inset-bottom));background:linear-gradient(to top,rgba(0,0,0,.95) 70%,transparent);display:flex;flex-direction:column;gap:.5rem;align-items:center}
 .v-btn-row{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center}
 
 /* MODALS */
@@ -204,6 +204,8 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
     </a>
     <nav class="nav-tabs">
       <button class="nav-tab on" data-page="gallery" onclick="nav('gallery')">🌟 Gallery</button>
+      <button class="nav-tab" data-page="personal" onclick="nav('personal')">👤 Personal</button>
+      <button class="nav-tab" data-page="festival" onclick="nav('festival')">🎊 Festival</button>
       <button class="nav-tab" data-page="create"  onclick="nav('create')">✨ Create</button>
       <button class="nav-tab" data-page="admin"   onclick="nav('admin')">⚙️ Admin</button>
     </nav>
@@ -223,6 +225,52 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
     <div class="stats-row" id="stats-row"></div>
     <div class="filter-row" id="filter-row"></div>
     <div class="grid" id="gallery-grid"></div>
+  </main>
+
+  <!-- PERSONAL -->
+  <main class="page" id="pg-personal">
+    <div class="s-head">
+      <div class="s-title">👤 My Personal Cards</div>
+      <div class="s-sub">Your birthday, wedding, anniversary & personal greeting cards</div>
+    </div>
+    <div class="filter-row" id="personal-filter-row"></div>
+    <div style="display:flex;gap:.8rem;margin-bottom:1.4rem;flex-wrap:wrap">
+      <button class="btn btn-primary btn-sm" onclick="nav('create');setTypeGroup('personal')">✨ Add Personal Card</button>
+    </div>
+    <div class="grid" id="personal-grid"></div>
+  </main>
+
+  <!-- FESTIVAL -->
+  <main class="page" id="pg-festival">
+    <div class="s-head">
+      <div class="s-title">🎊 Festival Cards</div>
+      <div class="s-sub">Diwali, Christmas, Eid, New Year, Holi & more festival greetings</div>
+    </div>
+    <div class="filter-row" id="festival-filter-row"></div>
+    <div style="display:flex;gap:.8rem;margin-bottom:1.4rem;flex-wrap:wrap;align-items:center">
+      <button class="btn btn-primary btn-sm" onclick="nav('create');setTypeGroup('festival')">✨ Add Festival Card</button>
+      <button class="btn btn-rose btn-sm" onclick="openAddFestivalModal()">🌟 + New Festival Name</button>
+    </div>
+    <div class="grid" id="festival-grid"></div>
+
+    <!-- Quick Festival Templates -->
+    <div style="margin-top:2.5rem">
+      <div class="s-title" style="font-size:1.4rem;margin-bottom:.5rem">⚡ Quick Festival Templates</div>
+      <div class="s-sub" style="margin-bottom:1.2rem">One-click create — just add your name!</div>
+      <div class="grid" id="festival-templates-grid"></div>
+    </div>
+
+    <!-- Custom Festivals Section -->
+    <div style="margin-top:2.5rem" id="custom-festivals-section" style="display:none">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem;margin-bottom:1rem">
+        <div>
+          <div class="s-title" style="font-size:1.4rem;margin-bottom:.2rem">✏️ My Custom Festivals</div>
+          <div class="s-sub">Your saved custom festival types</div>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="openAddFestivalModal()">+ Add Another</button>
+      </div>
+      <div class="grid" id="custom-festival-grid"></div>
+    </div>
   </main>
 
   <!-- CREATE -->
@@ -452,6 +500,83 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
   </div>
 </div>
 
+<!-- ADD CUSTOM FESTIVAL MODAL -->
+<div class="modal-wrap" id="add-festival-modal">
+  <div class="modal-box" style="max-width:480px">
+    <button class="modal-close" onclick="closeModal('add-festival-modal')">✕</button>
+    <div class="modal-title">🌟 Add New Festival</div>
+    <div class="modal-sub">Create your own festival type — it will appear in the dropdown & templates!</div>
+    <div style="display:flex;flex-direction:column;gap:1.1rem">
+      <div class="form-row">
+        <div class="fld">
+          <label>Festival Name *</label>
+          <input type="text" id="nf-name" placeholder="e.g. Ugadi, Vishu, Baisakhi…" maxlength="30" oninput="previewNF()">
+        </div>
+        <div class="fld">
+          <label>Icon / Emoji *</label>
+          <input type="text" id="nf-icon" placeholder="🎉" maxlength="4" oninput="previewNF()" style="font-size:1.5rem;text-align:center">
+        </div>
+      </div>
+      <div class="fld">
+        <label>Greeting Message</label>
+        <textarea id="nf-msg" placeholder="Write a default greeting message for this festival…" maxlength="220" oninput="previewNF()"></textarea>
+      </div>
+      <div class="fld">
+        <label>Festival Color Theme</label>
+        <div id="nf-color-grid" style="display:grid;grid-template-columns:repeat(6,1fr);gap:.5rem;margin-top:.3rem"></div>
+      </div>
+      <!-- Live mini preview -->
+      <div>
+        <div class="preview-label"><span></span> Preview <span></span></div>
+        <div id="nf-preview" style="border-radius:16px;overflow:hidden;max-width:200px;margin:0 auto;box-shadow:0 10px 40px rgba(0,0,0,.5)"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" onclick="saveCustomFestival()">💾 Save Festival</button>
+      <button class="btn btn-ghost" onclick="closeModal('add-festival-modal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT CUSTOM FESTIVAL MODAL -->
+<div class="modal-wrap" id="edit-festival-modal">
+  <div class="modal-box" style="max-width:480px">
+    <button class="modal-close" onclick="closeModal('edit-festival-modal')">✕</button>
+    <div class="modal-title">✏️ Edit Festival</div>
+    <div class="modal-sub">Update your custom festival details.</div>
+    <input type="hidden" id="ef-key">
+    <div style="display:flex;flex-direction:column;gap:1.1rem">
+      <div class="form-row">
+        <div class="fld">
+          <label>Festival Name *</label>
+          <input type="text" id="ef-name" placeholder="Festival name…" maxlength="30" oninput="previewEF()">
+        </div>
+        <div class="fld">
+          <label>Icon / Emoji *</label>
+          <input type="text" id="ef-icon" placeholder="🎉" maxlength="4" oninput="previewEF()" style="font-size:1.5rem;text-align:center">
+        </div>
+      </div>
+      <div class="fld">
+        <label>Greeting Message</label>
+        <textarea id="ef-msg" placeholder="Default greeting message…" maxlength="220" oninput="previewEF()"></textarea>
+      </div>
+      <div class="fld">
+        <label>Festival Color Theme</label>
+        <div id="ef-color-grid" style="display:grid;grid-template-columns:repeat(6,1fr);gap:.5rem;margin-top:.3rem"></div>
+      </div>
+      <div>
+        <div class="preview-label"><span></span> Preview <span></span></div>
+        <div id="ef-preview" style="border-radius:16px;overflow:hidden;max-width:200px;margin:0 auto;box-shadow:0 10px 40px rgba(0,0,0,.5)"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" onclick="updateCustomFestival()">💾 Update</button>
+      <button class="btn btn-red btn-sm" onclick="deleteCustomFestival()">🗑️ Delete Festival</button>
+      <button class="btn btn-ghost" onclick="closeModal('edit-festival-modal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
 <!-- DELETE MODAL -->
 <div class="modal-wrap" id="del-modal">
   <div class="modal-box" style="max-width:360px;text-align:center">
@@ -470,9 +595,11 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
 // ══════════════════════════════════════════
 //  CONFIG
 // ══════════════════════════════════════════
-const SK_DATA='fcv6_data', SK_PWD='fcv6_pwd', SK_SES='fcv6_ses';
+const SK_DATA='fcv6_data', SK_PWD='fcv6_pwd', SK_SES='fcv6_ses', SK_CFEST='fcv6_custom_festivals';
 let cards=[], _imgData=null, _style='confetti', _filter='all', _editId=null, _delId=null;
 let _shareUrl='', _shareRecipient='', _baseUrl='';
+let _customFestivals={};   // key → {label,icon,color,accent,bg,msg}
+let _nfColor=0, _efColor=0; // selected color index for new/edit festival modals
 
 const T={
   birthday:   {label:'Birthday',   icon:'🎂',color:'#f472b6',accent:'#fbbf24',bg:['#2d0a4e','#5b0f7c','#2d0a4e'],msg:"Wishing you a day as magical as you are! May all your dreams come true! 🎉"},
@@ -626,6 +753,178 @@ function load(){try{const d=localStorage.getItem(SK_DATA);if(d)cards=JSON.parse(
 function save(){localStorage.setItem(SK_DATA,JSON.stringify(cards));}
 
 // ══════════════════════════════════════════
+//  CUSTOM FESTIVALS
+// ══════════════════════════════════════════
+const NF_COLORS=[
+  {color:'#f97316',accent:'#fb923c',bg:['#1a0700','#3d1500','#1a0700'],label:'Orange Flame'},
+  {color:'#f472b6',accent:'#fbbf24',bg:['#2d0a4e','#5b0f7c','#2d0a4e'],label:'Festival Pink'},
+  {color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],label:'Emerald Green'},
+  {color:'#38bdf8',accent:'#7dd3fc',bg:['#00071a','#001035','#00071a'],label:'Sky Blue'},
+  {color:'#fbbf24',accent:'#fde68a',bg:['#1a1000','#3a2000','#1a1000'],label:'Golden Sun'},
+  {color:'#c084fc',accent:'#f472b6',bg:['#200040','#400080','#200040'],label:'Royal Purple'},
+  {color:'#34d399',accent:'#6ee7b7',bg:['#00180e','#003520','#00180e'],label:'Jade Green'},
+  {color:'#fb7185',accent:'#fda4af',bg:['#2a0020','#550040','#2a0020'],label:'Rose Red'},
+  {color:'#f0c040',accent:'#a78bfa',bg:['#0d0b1e','#1e1840','#0d0b1e'],label:'Celebration Gold'},
+  {color:'#94a3b8',accent:'#cbd5e1',bg:['#0a1020','#162040','#0a1020'],label:'Silver Night'},
+  {color:'#a78bfa',accent:'#c4b5fd',bg:['#0e0630','#1e0b60','#0e0630'],label:'Cosmic Violet'},
+  {color:'#fb923c',accent:'#fde047',bg:['#00180a','#003a14','#00180a'],label:'Harvest Orange'},
+];
+
+function loadCustomFestivals(){
+  try{const d=localStorage.getItem(SK_CFEST);if(d)_customFestivals=JSON.parse(d);}catch(e){_customFestivals={};}
+  // Merge into T so they work everywhere
+  Object.assign(T,_customFestivals);
+}
+function saveCustomFestivals(){
+  localStorage.setItem(SK_CFEST,JSON.stringify(_customFestivals));
+}
+
+function buildColorGrid(gridId, selectedIdx, onClickFn){
+  const g=document.getElementById(gridId);
+  if(!g)return;
+  g.innerHTML=NF_COLORS.map((c,i)=>`
+    <div onclick="${onClickFn}(${i})" title="${c.label}" style="
+      width:100%;aspect-ratio:1;border-radius:8px;cursor:pointer;
+      background:linear-gradient(135deg,${c.bg[0]},${c.bg[1]});
+      border:3px solid ${i===selectedIdx?c.color:'transparent'};
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:${i===selectedIdx?0 0 12px ${c.color}88:'none'};
+      transition:all .2s;position:relative;overflow:hidden;
+    ">
+      <div style="width:16px;height:16px;border-radius:50%;background:${c.color};box-shadow:0 0 8px ${c.color}"></div>
+      ${i===selectedIdx?'<div style="position:absolute;top:2px;right:3px;font-size:.6rem;color:#fff">✓</div>':''}
+    </div>`).join('');
+}
+
+function selectNFColor(i){_nfColor=i;buildColorGrid('nf-color-grid',_nfColor,'selectNFColor');previewNF();}
+function selectEFColor(i){_efColor=i;buildColorGrid('ef-color-grid',_efColor,'selectEFColor');previewEF();}
+
+function previewNF(){
+  const name=document.getElementById('nf-name').value||'Festival';
+  const icon=document.getElementById('nf-icon').value||'🎉';
+  const msg=document.getElementById('nf-msg').value||'Wishing you joy and happiness!';
+  const col=NF_COLORS[_nfColor];
+  document.getElementById('nf-preview').innerHTML=buildCard({
+    type:'_preview_',name,msg,from:'',tpl:'classic',effect:'sparkle',
+    imgData:null,photoShape:'circle',recipient:'',date:'',age:''
+  },false,{label:name,icon,color:col.color,accent:col.accent,bg:col.bg,msg});
+}
+
+function previewEF(){
+  const name=document.getElementById('ef-name').value||'Festival';
+  const icon=document.getElementById('ef-icon').value||'🎉';
+  const msg=document.getElementById('ef-msg').value||'Wishing you joy and happiness!';
+  const col=NF_COLORS[_efColor];
+  document.getElementById('ef-preview').innerHTML=buildCard({
+    type:'_preview_',name,msg,from:'',tpl:'classic',effect:'sparkle',
+    imgData:null,photoShape:'circle',recipient:'',date:'',age:''
+  },false,{label:name,icon,color:col.color,accent:col.accent,bg:col.bg,msg});
+}
+
+function openAddFestivalModal(){
+  _nfColor=0;
+  document.getElementById('nf-name').value='';
+  document.getElementById('nf-icon').value='';
+  document.getElementById('nf-msg').value='';
+  buildColorGrid('nf-color-grid',_nfColor,'selectNFColor');
+  previewNF();
+  openModal('add-festival-modal');
+}
+
+function saveCustomFestival(){
+  const name=document.getElementById('nf-name').value.trim();
+  const icon=document.getElementById('nf-icon').value.trim()||'🎊';
+  const msg=document.getElementById('nf-msg').value.trim()||Happy ${name}! Wishing you joy and happiness! ${icon};
+  if(!name){toast('⚠️ Festival name is required');return;}
+  const col=NF_COLORS[_nfColor];
+  const key='cf_'+name.toLowerCase().replace(/\s+/g,'')+''+Date.now().toString(36);
+  const festData={label:name,icon,color:col.color,accent:col.accent,bg:col.bg,msg,_custom:true};
+  _customFestivals[key]=festData;
+  T[key]=festData;
+  FESTIVAL_TYPES.push(key);
+  saveCustomFestivals();
+  rebuildDropdown();
+  closeModal('add-festival-modal');
+  toast(✅ "${name}" festival added! 🎉);
+  renderFestival();
+}
+
+function openEditFestivalModal(key){
+  const f=_customFestivals[key];
+  if(!f)return;
+  document.getElementById('ef-key').value=key;
+  document.getElementById('ef-name').value=f.label;
+  document.getElementById('ef-icon').value=f.icon;
+  document.getElementById('ef-msg').value=f.msg;
+  // find closest color
+  _efColor=NF_COLORS.findIndex(c=>c.color===f.color);
+  if(_efColor<0)_efColor=0;
+  buildColorGrid('ef-color-grid',_efColor,'selectEFColor');
+  previewEF();
+  openModal('edit-festival-modal');
+}
+
+function updateCustomFestival(){
+  const key=document.getElementById('ef-key').value;
+  if(!_customFestivals[key])return;
+  const name=document.getElementById('ef-name').value.trim();
+  const icon=document.getElementById('ef-icon').value.trim()||'🎊';
+  const msg=document.getElementById('ef-msg').value.trim()||Happy ${name}! 🎊;
+  if(!name){toast('⚠️ Festival name is required');return;}
+  const col=NF_COLORS[_efColor];
+  const festData={label:name,icon,color:col.color,accent:col.accent,bg:col.bg,msg,_custom:true};
+  _customFestivals[key]=festData;
+  T[key]=festData;
+  saveCustomFestivals();
+  rebuildDropdown();
+  closeModal('edit-festival-modal');
+  toast(✅ "${name}" updated!);
+  renderFestival();renderGallery();
+}
+
+function deleteCustomFestival(){
+  const key=document.getElementById('ef-key').value;
+  const name=_customFestivals[key]?.label||'festival';
+  if(!confirm(Delete "${name}" festival type? Cards using it won't be affected.))return;
+  delete _customFestivals[key];
+  delete T[key];
+  const idx=FESTIVAL_TYPES.indexOf(key);
+  if(idx>-1)FESTIVAL_TYPES.splice(idx,1);
+  saveCustomFestivals();
+  rebuildDropdown();
+  closeModal('edit-festival-modal');
+  toast(🗑️ "${name}" festival removed);
+  renderFestival();
+}
+
+function rebuildDropdown(){
+  // Rebuild the create-page dropdown with custom festivals
+  const sel=document.getElementById('f-type');
+  if(!sel)return;
+  const cur=sel.value;
+  // Remove old custom optgroup if exists
+  const old=sel.querySelector('optgroup[label="My Custom Festivals"]');
+  if(old)old.remove();
+  const customKeys=Object.keys(_customFestivals);
+  if(customKeys.length){
+    const og=document.createElement('optgroup');
+    og.label='My Custom Festivals';
+    customKeys.forEach(k=>{
+      const f=_customFestivals[k];
+      const o=document.createElement('option');
+      o.value=k;o.textContent=${f.icon} ${f.label};
+      og.appendChild(o);
+    });
+    // Insert before the last <option> (General)
+    const last=sel.querySelector('option[value="general"]');
+    sel.insertBefore(og,last);
+  }
+  sel.value=cur;
+  // Also rebuild edit modal dropdown
+  rebuildEditDropdown();
+}
+
+// ══════════════════════════════════════════
 //  BG ANIMATION
 // ══════════════════════════════════════════
 function initBG(){
@@ -640,7 +939,7 @@ function initBG(){
       const y=cv.height*(o.y+Math.cos(t*o.sp*1.3)*0.1);
       const r=Math.min(cv.width,cv.height)*o.r;
       const g=cx.createRadialGradient(x,y,0,x,y,r);
-      const hs=`hsla(${o.h+Math.sin(t*0.001)*20},${o.s*100}%,50%,`;
+      const hs=hsla(${o.h+Math.sin(t*0.001)*20},${o.s*100}%,50%,;
       g.addColorStop(0,hs+'0.18)');g.addColorStop(1,hs+'0)');
       cx.fillStyle=g;cx.fillRect(0,0,cv.width,cv.height);
     });
@@ -656,10 +955,13 @@ function nav(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('on'));
   document.getElementById('pg-'+id).classList.add('on');
-  document.querySelector(`[data-page="${id}"]`).classList.add('on');
+  const tab=document.querySelector([data-page="${id}"]);
+  if(tab) tab.classList.add('on');
   // Restore clean URL when navigating
   try{history.replaceState({},'',_baseUrl);}catch(e){}
   if(id==='gallery')renderGallery();
+  if(id==='personal')renderPersonal();
+  if(id==='festival')renderFestival();
   if(id==='create')setupCreate();
   if(id==='admin'&&isSes())showAdminPanel();
   window.scrollTo({top:0,behavior:'smooth'});
@@ -676,9 +978,9 @@ function formatDate(dateStr){
   }catch(e){return dateStr;}
 }
 
-function buildCard(c,full=false){
-  const th=T[c.type]||T.general, tpl=TPLS[c.tpl]||TPLS.classic;
-  const bg=`linear-gradient(160deg,${th.bg[0]},${th.bg[1]},${th.bg[2]})`;
+function buildCard(c,full=false,themeOverride=null){
+  const th=themeOverride||(T[c.type]||T.general), tpl=TPLS[c.tpl]||TPLS.classic;
+  const bg=linear-gradient(160deg,${th.bg[0]},${th.bg[1]},${th.bg[2]});
   const h=full?'540px':'340px', pSz=full?'120px':'75px';
   const nameSz=full?tpl.nameSz:parseFloat(tpl.nameSz)*.7+'rem';
   const msgSz=full?tpl.msgSz:parseFloat(tpl.msgSz)*.82+'rem';
@@ -689,30 +991,30 @@ function buildCard(c,full=false){
   if(c.imgData){
     const s=c.photoShape||'circle';
     const css=s==='circle'
-      ?`border-radius:50%;border:4px solid rgba(255,255,255,.35);box-shadow:0 0 40px ${th.color}66`
+      ?border-radius:50%;border:4px solid rgba(255,255,255,.35);box-shadow:0 0 40px ${th.color}66
       :s==='rect'
-      ?`border-radius:14px;border:3px solid rgba(255,255,255,.3);box-shadow:0 8px 30px rgba(0,0,0,.6)`
-      :`clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%)`;
-    ph=`<img src="${c.imgData}" style="width:${pSz};height:${pSz};object-fit:cover;${css};display:block;margin:0 auto ${full?'1rem':'.5rem'}">`;
+      ?border-radius:14px;border:3px solid rgba(255,255,255,.3);box-shadow:0 8px 30px rgba(0,0,0,.6)
+      :clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+    ph=<img src="${c.imgData}" style="width:${pSz};height:${pSz};object-fit:cover;${css};display:block;margin:0 auto ${full?'1rem':'.5rem'}">;
   }else{
-    ph=`<div style="font-size:${iconSz};margin-bottom:${full?'.7rem':'.3rem'};animation:floatUp 3s ease-in-out infinite;text-align:center">${th.icon}</div>`;
+    ph=<div style="font-size:${iconSz};margin-bottom:${full?'.7rem':'.3rem'};animation:floatUp 3s ease-in-out infinite;text-align:center">${th.icon}</div>;
   }
 
-  const div=tpl.divider?`<div style="width:${full?'60px':'36px'};height:${full?'2px':'1.5px'};background:linear-gradient(90deg,transparent,${th.color},transparent);margin:${full?'.6rem':'.3rem'} auto;border-radius:2px"></div>`:'';
-  const frm=c.from?`<div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:${full?'.88rem':'.65rem'};margin-top:${full?'.5rem':'.3rem'};opacity:.5">${c.from}</div>`:'';
+  const div=tpl.divider?<div style="width:${full?'60px':'36px'};height:${full?'2px':'1.5px'};background:linear-gradient(90deg,transparent,${th.color},transparent);margin:${full?'.6rem':'.3rem'} auto;border-radius:2px"></div>:'';
+  const frm=c.from?<div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:${full?'.88rem':'.65rem'};margin-top:${full?'.5rem':'.3rem'};opacity:.5">${c.from}</div>:'';
 
   // Age badge — Birthday & Anniversary
   let ageBadge='';
   if(c.age && (c.type==='birthday'||c.type==='anniversary')){
-    const label=c.type==='birthday'?`Turning ${c.age} 🎂`:`${c.age} Years Together 💕`;
-    ageBadge=`<div style="display:inline-block;background:linear-gradient(135deg,${th.color}44,${th.accent}33);border:1.5px solid ${th.color}88;border-radius:50px;padding:${full?'.35rem .9rem':'.2rem .55rem'};font-size:${full?'.82rem':'.6rem'};font-weight:800;letter-spacing:.5px;margin:${full?'.5rem 0 .4rem':'0.25rem 0'};color:${th.accent}">${label}</div>`;
+    const label=c.type==='birthday'?Turning ${c.age} 🎂:${c.age} Years Together 💕;
+    ageBadge=<div style="display:inline-block;background:linear-gradient(135deg,${th.color}44,${th.accent}33);border:1.5px solid ${th.color}88;border-radius:50px;padding:${full?'.35rem .9rem':'.2rem .55rem'};font-size:${full?'.82rem':'.6rem'};font-weight:800;letter-spacing:.5px;margin:${full?'.5rem 0 .4rem':'0.25rem 0'};color:${th.accent}">${label}</div>;
   }
 
   // Date display
   let dateLine='';
   if(c.date){
     const fmtDate=formatDate(c.date);
-    dateLine=`<div style="display:flex;align-items:center;justify-content:center;gap:.3rem;margin-top:${full?'.5rem':'.3rem'};font-size:${full?'.78rem':'.58rem'};opacity:.65;font-weight:600">📅 ${fmtDate}</div>`;
+    dateLine=<div style="display:flex;align-items:center;justify-content:center;gap:.3rem;margin-top:${full?'.5rem':'.3rem'};font-size:${full?'.78rem':'.58rem'};opacity:.65;font-weight:600">📅 ${fmtDate}</div>;
   }
 
   return `<div style="width:100%;min-height:${h};background:${bg};position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif">
@@ -739,12 +1041,12 @@ function getParticles(eff,full){
   const p=MAP[eff]||MAP.sparkle;let out='';
   for(let i=0;i<cnt;i++){
     const x=Math.random()*100,y=Math.random()*100;
-    const sz=full?(0.8+Math.random()*1.6):(0.5+Math.random()*.9);
+    const sz=full?(0.8+Math.random()1.6):(0.5+Math.random().9);
     const dur=2+Math.random()*5,del=Math.random()*4;
     const anim=(eff==='snow'||eff==='leaves'||eff==='confetti')
-      ?`animation:fallPart ${dur}s ease-in-out infinite ${del}s`
-      :`animation:risePart ${dur}s ease-in-out infinite ${del}s`;
-    out+=`<div style="position:absolute;left:${x}%;top:${y}%;font-size:${sz}rem;${anim};opacity:${.3+Math.random()*.5}">${p[i%p.length]}</div>`;
+      ?animation:fallPart ${dur}s ease-in-out infinite ${del}s
+      :animation:risePart ${dur}s ease-in-out infinite ${del}s;
+    out+=<div style="position:absolute;left:${x}%;top:${y}%;font-size:${sz}rem;${anim};opacity:${.3+Math.random()*.5}">${p[i%p.length]}</div>;
   }
   return out;
 }
@@ -760,10 +1062,10 @@ function showShareView(card){
   document.getElementById('bg-canvas').style.display='none';
 
   const sv=document.getElementById('share-view');
-  sv.style.background=`linear-gradient(160deg,${th.bg[0]},${th.bg[1]},${th.bg[2]})`;
+  sv.style.background=linear-gradient(160deg,${th.bg[0]},${th.bg[1]},${th.bg[2]});
 
   if(card.recipient){
-    document.getElementById('s-banner-name').textContent=`Hey ${card.recipient}, you have a special greeting! 🎉`;
+    document.getElementById('s-banner-name').textContent=Hey ${card.recipient}, you have a special greeting! 🎉;
     document.getElementById('s-banner').style.display='block';
   }
 
@@ -790,447 +1092,5 @@ function sCopy(){
 }
 
 function sShare(){
-  const title=_shareRecipient?`A greeting for ${_shareRecipient}!`:'FestivaCard Greeting';
-  const text=_shareRecipient?`Hey ${_shareRecipient}, you have a special greeting! 🎉`:'Check out this greeting card!';
-  if(navigator.share)navigator.share({title,text,url:_shareUrl}).catch(()=>sCopy());
-  else sCopy();
-}
-
-// ══════════════════════════════════════════
-//  INTERNAL VIEW — Card owner's preview
-//  KEY FIX: URL bar updates to share link!
-// ══════════════════════════════════════════
-function viewCard(id){
-  const c=cards.find(x=>x.id===id);if(!c)return;
-  const th=T[c.type]||T.general;
-
-  document.getElementById('view-canvas').innerHTML=buildCard(c,true);
-  document.getElementById('view-page').style.background=`linear-gradient(160deg,${th.bg[0]},${th.bg[1]},${th.bg[2]})`;
-
-  _shareUrl=makeShareUrl(c);
-  _shareRecipient=c.recipient||'';
-
-  // Show share URL in banner
-  document.getElementById('v-url').textContent=_shareUrl;
-
-  // ✅ KEY FIX: Update browser address bar to the share URL
-  // Now: Copy from address bar = correct share link!
-  try{history.pushState({cardId:id},'',_shareUrl);}catch(e){}
-
-  document.getElementById('view-page').classList.add('on');
-  document.body.style.overflow='hidden';
-
-  setTimeout(()=>{
-    const cv=document.getElementById('vconf-cv');
-    cv.width=window.innerWidth;cv.height=window.innerHeight;
-    runEffect(c.effect||'confetti',cv);
-  },400);
-}
-
-function closeView(){
-  document.getElementById('view-page').classList.remove('on');
-  document.body.style.overflow='';
-  stopFX();
-  // ✅ Restore clean URL when closing
-  try{history.pushState({},'',_baseUrl);}catch(e){}
-}
-
-function vCopy(){
-  cpToClipboard(_shareUrl);
-  toast('📋 Link copied! Share via WhatsApp, SMS, Email — opens card on any device ✨');
-}
-
-function vShare(){
-  const title=_shareRecipient?`A greeting for ${_shareRecipient}!`:'FestivaCard';
-  const text=_shareRecipient?`Hey ${_shareRecipient}, you have a special greeting! 🎉`:'Check this greeting!';
-  if(navigator.share)navigator.share({title,text,url:_shareUrl}).catch(()=>vCopy());
-  else vCopy();
-}
-
-function vWhatsApp(){
-  const text=encodeURIComponent((_shareRecipient?`Hey ${_shareRecipient}, you have a special greeting! 🎉 `:'Check this greeting card! 🎊 ')+_shareUrl);
-  window.open('https://wa.me/?text='+text,'_blank');
-}
-
-function cpToClipboard(txt){
-  if(navigator.clipboard)navigator.clipboard.writeText(txt).catch(()=>legacyCopy(txt));
-  else legacyCopy(txt);
-}
-function legacyCopy(txt){const t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();}
-
-// ══════════════════════════════════════════
-//  EFFECTS
-// ══════════════════════════════════════════
-let _fx=null;
-function stopFX(){if(_fx){_fx();_fx=null;}}
-
-function runEffect(eff,cv){
-  stopFX();
-  if(typeof confetti!=='undefined'){
-    if(eff==='confetti'){
-      let f,t=0;
-      (function s(){
-        if(t<300){
-          confetti({particleCount:6,angle:60,spread:55,origin:{x:0,y:.7},colors:['#f0c040','#f472b6','#a78bfa','#fff']});
-          confetti({particleCount:6,angle:120,spread:55,origin:{x:1,y:.7},colors:['#f0c040','#f472b6','#a78bfa','#fff']});
-        }t++;f=requestAnimationFrame(s);
-      })();
-      _fx=()=>{cancelAnimationFrame(f);confetti.reset()};return;
-    }
-    if(eff==='firework'){
-      let f,t=0;
-      (function s(){
-        if(t%30===0&&t<360)confetti({particleCount:35,spread:360,startVelocity:20,decay:.88,origin:{x:.1+Math.random()*.8,y:.1+Math.random()*.5},colors:['#f0c040','#f472b6','#fff','#38bdf8']});
-        t++;f=requestAnimationFrame(s);
-      })();
-      _fx=()=>{cancelAnimationFrame(f);confetti.reset()};return;
-    }
-    if(eff==='hearts'){
-      const h=confetti.shapeFromText({text:'❤',scalar:2});let f,t=0;
-      (function s(){
-        if(t<300)confetti({particleCount:4,spread:60,origin:{x:Math.random(),y:-.1},shapes:[h],scalar:1.5,colors:['#f472b6','#fb7185','#fff']});
-        t++;f=requestAnimationFrame(s);
-      })();
-      _fx=()=>{cancelAnimationFrame(f);confetti.reset()};return;
-    }
-  }
-  // Canvas fallback
-  const ctx=cv.getContext('2d');
-  const C=['#f0c040','#f472b6','#a78bfa','#38bdf8','#4ade80'];
-  const pts=Array.from({length:60},()=>({x:Math.random()*cv.width,y:Math.random()*cv.height,vx:(Math.random()-.5)*1.5,vy:-.5-Math.random()*1.5,r:2+Math.random()*4,col:C[Math.floor(Math.random()*C.length)],life:1}));
-  let rf,t=0;
-  (function tick(){
-    ctx.clearRect(0,0,cv.width,cv.height);
-    pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.03;p.life-=.004;if(p.y>cv.height||p.life<=0){p.x=Math.random()*cv.width;p.y=cv.height+10;p.vy=-(1+Math.random()*2);p.life=1;}ctx.globalAlpha=p.life;ctx.fillStyle=p.col;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();});
-    ctx.globalAlpha=1;t++;if(t<400)rf=requestAnimationFrame(tick);
-  })();
-  _fx=()=>{cancelAnimationFrame(rf);ctx.clearRect(0,0,cv.width,cv.height);};
-}
-
-// ══════════════════════════════════════════
-//  GALLERY
-// ══════════════════════════════════════════
-function renderGallery(){
-  const tc=cards.reduce((a,c)=>{a[c.type]=(a[c.type]||0)+1;return a;},{});
-  document.getElementById('stats-row').innerHTML=
-    `<div class="stat"><b>${cards.length}</b> Cards</div>`+
-    Object.entries(tc).slice(0,5).map(([t,n])=>`<div class="stat"><b>${n}</b> ${T[t]?.label||t}</div>`).join('');
-
-  const types=[...new Set(cards.map(c=>c.type))];
-  document.getElementById('filter-row').innerHTML=
-    `<button class="filter-pill${_filter==='all'?' on':''}" onclick="setFilter('all',this)">All</button>`+
-    types.map(t=>`<button class="filter-pill${_filter===t?' on':''}" onclick="setFilter('${t}',this)">${T[t]?.icon||'🎊'} ${T[t]?.label||t}</button>`).join('');
-
-  const fl=_filter==='all'?cards:cards.filter(c=>c.type===_filter);
-  const g=document.getElementById('gallery-grid');
-  if(!fl.length){
-    g.innerHTML=`<div class="empty"><div class="empty-icon">🌟</div><h3>${cards.length?'No cards of this type':'No cards yet'}</h3><br><button class="btn btn-primary" onclick="nav('create')" style="margin-top:.8rem">✨ Create Card</button></div>`;
-    return;
-  }
-  g.innerHTML=fl.map(c=>{
-    const th=T[c.type]||T.general;
-    return `<div class="gtile">
-<div class="gtile-thumb" style="background:linear-gradient(160deg,${th.bg[0]},${th.bg[1]})" onclick="viewCard('${c.id}')">
-${c.imgData?`<img src="${c.imgData}" alt="${c.name}">`:`<div class="gtile-no-img">${th.icon}</div>`}
-<div class="gtile-badge" style="color:${th.color};border-color:${th.color}33">${th.label}</div>
-</div>
-<div class="gtile-body" onclick="viewCard('${c.id}')">
-<div class="gtile-name">${c.name}</div>
-<div class="gtile-date">${new Date(c.created).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</div>
-${c.recipient?`<div style="margin-top:.4rem;font-size:.72rem;background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.25);color:var(--gold);border-radius:50px;padding:.2rem .6rem;display:inline-block">🎯 For: ${c.recipient}</div>`:''}
-</div>
-<div class="gtile-actions">
-<button class="btn btn-primary btn-sm" style="flex:1" onclick="viewCard('${c.id}')">👁 View & Share</button>
-<button class="btn btn-ghost btn-sm" onclick="openEdit('${c.id}')">✏️</button>
-</div>
-</div>`;
-  }).join('');
-}
-
-function setFilter(f,el){_filter=f;document.querySelectorAll('.filter-pill').forEach(p=>p.classList.remove('on'));el.classList.add('on');renderGallery();}
-
-// ══════════════════════════════════════════
-//  CREATE PAGE
-// ══════════════════════════════════════════
-function setupCreate(){buildStyleGrid();livePreview();}
-
-function buildStyleGrid(){
-  document.getElementById('style-grid').innerHTML=EFFECTS.map(e=>
-    `<div class="style-tile${_style===e.id?' on':''}" onclick="pickStyle('${e.id}',this)"><div class="st-icon">${e.icon}</div><div class="st-name">${e.label}</div></div>`
-  ).join('');
-}
-
-function pickStyle(id,el){_style=id;document.querySelectorAll('.style-tile').forEach(t=>t.classList.remove('on'));el.classList.add('on');livePreview();}
-
-function onTypeChange(){
-  const t=document.getElementById('f-type').value;
-  if(t&&T[t]&&!document.getElementById('f-msg').value) document.getElementById('f-msg').value=T[t].msg;
-
-  // Show/hide date & age fields based on type
-  const row=document.getElementById('date-age-row');
-  const dateWrap=document.getElementById('date-field-wrap');
-  const ageWrap=document.getElementById('age-field-wrap');
-  const dateLabel=document.getElementById('date-label');
-  const ageLabel=document.getElementById('age-label');
-
-  // Reset
-  dateWrap.style.display='none'; ageWrap.style.display='none'; row.style.display='none';
-
-  if(t==='birthday'){
-    row.style.display='grid';
-    dateWrap.style.display='block'; dateLabel.textContent='🎂 Date of Birth';
-    ageWrap.style.display='block';  ageLabel.textContent='🎂 Turning Age';
-  } else if(t==='wedding'||t==='marriage'){
-    row.style.display='grid';
-    dateWrap.style.display='block'; dateLabel.textContent='💍 Wedding Date';
-  } else if(t==='anniversary'){
-    row.style.display='grid';
-    dateWrap.style.display='block'; dateLabel.textContent='💕 Anniversary Date';
-    ageWrap.style.display='block';  ageLabel.textContent='💕 Years Together';
-  } else if(t==='graduation'){
-    row.style.display='grid';
-    dateWrap.style.display='block'; dateLabel.textContent='🎓 Graduation Date';
-  } else if(['diwali','christmas','eid','newyear','holi','pongal','onam','navratri'].includes(t)){
-    row.style.display='grid';
-    dateWrap.style.display='block'; dateLabel.textContent='📅 Festival Date';
-  } else if(t){
-    row.style.display='grid';
-    dateWrap.style.display='block'; dateLabel.textContent='📅 Event Date';
-  }
-
-  livePreview();
-}
-
-function onImgChange(inp){
-  if(!inp.files||!inp.files[0])return;
-  const img=new Image(), r=new FileReader();
-  r.onload=e=>{
-    img.onload=()=>{
-      const c=document.createElement('canvas');
-      // Compress to 280px max, quality 0.60 — keeps URL short enough for sharing
-      const M=280;let w=img.width,h=img.height;
-      if(w>M||h>M){if(w>h){h=Math.round(h*M/w);w=M;}else{w=Math.round(w*M/h);h=M;}}
-      c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);
-      _imgData=c.toDataURL('image/jpeg',0.60);
-
-      const th=document.getElementById('img-prev-thumb');
-      th.src=_imgData;th.style.display='block';
-      document.getElementById('img-prev-name').textContent=inp.files[0].name+' (compressed ✓)';
-      document.getElementById('img-remove-btn').style.display='inline-block';
-      document.getElementById('photo-style-row').style.display='block';
-
-      // Warn if image might be too large for URL
-      const warn=document.getElementById('img-warn');
-      warn.style.display=_imgData.length>160000?'block':'none';
-
-      livePreview();
-    };
-    img.src=e.target.result;
-  };
-  r.readAsDataURL(inp.files[0]);
-}
-
-function removeImg(){
-  _imgData=null;
-  document.getElementById('img-prev-thumb').style.display='none';
-  document.getElementById('img-prev-name').textContent='';
-  document.getElementById('img-remove-btn').style.display='none';
-  document.getElementById('img-warn').style.display='none';
-  document.getElementById('photo-style-row').style.display='none';
-  document.getElementById('f-img').value='';
-  livePreview();
-}
-
-function getShape(){const r=document.querySelector('input[name="photo-shape"]:checked');return r?r.value:'circle';}
-
-function livePreview(){
-  const pw=document.getElementById('prev-wrap');
-  if(!pw)return;
-  pw.innerHTML=buildCard(getFormCard(),false);
-}
-
-function getFormCard(){
-  return {
-    type:document.getElementById('f-type')?.value||'general',
-    name:document.getElementById('f-name')?.value||'Your Name',
-    msg:document.getElementById('f-msg')?.value||'',
-    from:document.getElementById('f-from')?.value||'',
-    tpl:document.getElementById('f-tpl')?.value||'classic',
-    effect:_style, imgData:_imgData, photoShape:getShape(),
-    recipient:document.getElementById('f-recipient')?.value||'',
-    date:document.getElementById('f-date')?.value||'',
-    age:document.getElementById('f-age')?.value||'',
-  };
-}
-
-function clearForm(){
-  ['f-type','f-name','f-msg','f-from','f-recipient','f-date','f-age'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
-  document.getElementById('f-tpl').value='classic';
-  document.getElementById('date-age-row').style.display='none';
-  document.getElementById('date-field-wrap').style.display='none';
-  document.getElementById('age-field-wrap').style.display='none';
-  removeImg();_style='confetti';buildStyleGrid();livePreview();
-}
-
-function saveCard(){
-  const type=document.getElementById('f-type').value;
-  const name=document.getElementById('f-name').value.trim();
-  if(!type){toast('⚠️ Please select an event type');return;}
-  if(!name){toast('⚠️ Please enter a name');return;}
-  const c={
-    id:'fc_'+Date.now()+'_'+Math.random().toString(36).slice(2,6),
-    ...getFormCard(),name,type,created:new Date().toISOString()
-  };
-  cards.unshift(c);save();
-  toast('🎉 Card saved! Opening preview...');
-  nav('gallery');
-  setTimeout(()=>viewCard(c.id),300);
-  clearForm();
-}
-
-// ══════════════════════════════════════════
-//  ADMIN PANEL
-// ══════════════════════════════════════════
-function showAdminPanel(){
-  document.getElementById('admin-login-section').style.display='none';
-  document.getElementById('admin-panel').style.display='block';
-  renderAdmin();
-}
-
-function renderAdmin(){
-  const tc=cards.reduce((a,c)=>{a[c.type]=(a[c.type]||0)+1;return a;},{});
-  document.getElementById('admin-stats').innerHTML=
-    `<div class="stat"><b>${cards.length}</b> Total Cards</div>`+
-    Object.entries(tc).slice(0,5).map(([t,n])=>`<div class="stat"><b>${n}</b> ${T[t]?.label||t}</div>`).join('');
-
-  const w=document.getElementById('admin-tbl');
-  if(!cards.length){
-    w.innerHTML=`<div class="empty"><div class="empty-icon">📋</div><h3>No cards yet</h3><br><button class="btn btn-primary" onclick="nav('create')" style="margin-top:.8rem">+ Create New</button></div>`;
-    return;
-  }
-  w.innerHTML=`<div class="tbl-wrap"><table class="atbl">
-<thead><tr><th>Card</th><th>Type</th><th>For</th><th>Effect</th><th>Created</th><th>Actions</th></tr></thead>
-<tbody>${cards.map(c=>{
-  const th=T[c.type]||T.general;
-  return `<tr>
-<td><div style="display:flex;align-items:center;gap:.8rem">
-<div style="width:46px;height:46px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,${th.bg[0]},${th.bg[1]});flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.4rem">
-${c.imgData?`<img src="${c.imgData}" style="width:46px;height:46px;object-fit:cover">`:`${th.icon}`}</div>
-<div><div style="font-weight:700">${c.name}</div><div style="font-size:.75rem;color:var(--muted);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${(c.msg||'').slice(0,45)}…</div></div>
-</div></td>
-<td><span class="tbadge" style="background:${th.color}22;color:${th.color}">${th.label}</span></td>
-<td>${c.recipient?`<span style="background:rgba(240,192,64,.1);color:var(--gold);border-radius:50px;padding:.2rem .6rem;font-size:.75rem">🎯 ${c.recipient}</span>`:'<span style="color:var(--muted);font-size:.8rem">—</span>'}</td>
-<td style="color:var(--muted);font-size:.82rem">${c.effect||'confetti'}</td>
-<td style="color:var(--muted);font-size:.8rem;white-space:nowrap">${new Date(c.created).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</td>
-<td><div style="display:flex;gap:.4rem">
-<button class="btn btn-primary btn-xs" onclick="viewCard('${c.id}')">👁</button>
-<button class="btn btn-ghost btn-xs" onclick="openEdit('${c.id}')">✏️</button>
-<button class="btn btn-red btn-xs" onclick="promptDel('${c.id}')">🗑️</button>
-</div></td>
-</tr>`;
-}).join('')}</tbody></table></div>`;
-}
-
-// ══════════════════════════════════════════
-//  EDIT / DELETE
-// ══════════════════════════════════════════
-function openEdit(id){
-  const c=cards.find(x=>x.id===id);if(!c)return;
-  _editId=id;
-  document.getElementById('em-type').innerHTML=Object.keys(T).map(k=>`<option value="${k}"${k===c.type?' selected':''}>${T[k].icon} ${T[k].label}</option>`).join('');
-  document.getElementById('em-name').value=c.name||'';
-  document.getElementById('em-msg').value=c.msg||'';
-  document.getElementById('em-from').value=c.from||'';
-  document.getElementById('em-recipient').value=c.recipient||'';
-  document.getElementById('em-date').value=c.date||'';
-  document.getElementById('em-age').value=c.age||'';
-  // Show/hide age based on type
-  const showAge=['birthday','anniversary'].includes(c.type);
-  document.getElementById('em-age-wrap').style.display=showAge?'block':'none';
-  openModal('edit-modal');
-}
-
-function confirmEdit(){
-  const c=cards.find(x=>x.id===_editId);if(!c)return;
-  const name=document.getElementById('em-name').value.trim();
-  if(!name){toast('⚠️ Name required');return;}
-  c.type=document.getElementById('em-type').value;
-  c.name=name;c.msg=document.getElementById('em-msg').value;
-  c.from=document.getElementById('em-from').value;
-  c.recipient=document.getElementById('em-recipient').value;
-  c.date=document.getElementById('em-date').value;
-  c.age=document.getElementById('em-age').value;
-  save();closeModal('edit-modal');toast('✅ Card updated!');
-  if(isSes())renderAdmin();
-  renderGallery();
-}
-
-function promptDel(id){_delId=id;openModal('del-modal');}
-function confirmDel(){cards=cards.filter(c=>c.id!==_delId);save();closeModal('del-modal');toast('🗑️ Deleted');renderAdmin();renderGallery();}
-
-function openModal(id){document.getElementById(id).classList.add('on');}
-function closeModal(id){document.getElementById(id).classList.remove('on');}
-
-// ══════════════════════════════════════════
-//  TOAST
-// ══════════════════════════════════════════
-function toast(msg){
-  document.querySelectorAll('.toast').forEach(t=>t.remove());
-  const t=document.createElement('div');t.className='toast';t.innerHTML=msg;
-  document.body.appendChild(t);setTimeout(()=>t.remove(),3200);
-}
-
-// ══════════════════════════════════════════
-//  SEED DATA
-// ══════════════════════════════════════════
-function seed(){
-  if(cards.length)return;
-  cards=[
-    {id:'s1',type:'birthday',name:'Aanya Kapoor',msg:"Wishing you a day as magical as you are! 🎂",from:'With love, your family',tpl:'royal',effect:'confetti',imgData:null,photoShape:'circle',recipient:'Aanya',created:new Date().toISOString()},
-    {id:'s2',type:'diwali',name:'The Sharma Family',msg:"May the festival of lights bring joy! Happy Diwali! 🪔",from:'Warm wishes',tpl:'classic',effect:'firework',imgData:null,photoShape:'circle',recipient:'',created:new Date(Date.now()-86400000).toISOString()},
-    {id:'s3',type:'wedding',name:'Rahul & Priya',msg:"May your love grow stronger each day! 💍",from:'With blessings',tpl:'minimal',effect:'hearts',imgData:null,photoShape:'circle',recipient:'Priya',created:new Date(Date.now()-172800000).toISOString()},
-  ];
-  save();
-}
-
-// ══════════════════════════════════════════
-//  INIT — Check ?card= BEFORE app load
-// ══════════════════════════════════════════
-window.addEventListener('load',()=>{
-  // Save the clean base URL (without any ?card= param)
-  _baseUrl = location.href.split('?')[0].split('#')[0];
-
-  load();seed();
-
-  // ✅ Check for share link — safeGetCardParam fixes the + sign URL bug
-  const cardParam = safeGetCardParam();
-
-  if(cardParam){
-    const card = decodeCard(cardParam);
-    if(card){
-      showShareView(card);
-      return; // Stop here — show only card to recipient
-    }
-    // If decode failed, clean URL and show app
-    try{history.replaceState({},'',_baseUrl);}catch(e){}
-  }
-
-  // Normal app init
-  initBG();
-  renderGallery();
-});
-
-// Handle browser back button when card view is open
-window.addEventListener('popstate',()=>{
-  const vp=document.getElementById('view-page');
-  if(vp.classList.contains('on')){
-    vp.classList.remove('on');
-    document.body.style.overflow='';
-    stopFX();
-  }
-});
-
-window.addEventListener('keydown',e=>{if(e.key==='Escape')closeView();});
-</script>
-</body>
-</html>
+  const title=_shareRecipient?A greeting for ${_shareRecipient}!:'FestivaCard Greeting';
+  const text=_shareRecipient?Hey ${_shareRecipient}, you have a special greeting! 🎉:'Check out this greeting card
