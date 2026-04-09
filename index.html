@@ -83,6 +83,21 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
 .fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--violet)}
 .fld select option{background:var(--panel)}
 .fld textarea{resize:vertical;min-height:90px;line-height:1.6}
+
+/* Festival Name Edit Row */
+.festival-name-row{background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.25);border-radius:var(--r3);padding:1rem;display:none}
+.festival-name-row.show{display:block}
+.festival-name-row label{color:var(--violet)!important}
+.festival-hint{font-size:.73rem;color:var(--muted);margin-top:.35rem}
+
+/* Emoji Picker */
+.emoji-picker-wrap{position:relative}
+.emoji-grid{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem;background:var(--panel);border:1px solid var(--border2);border-radius:var(--r3);padding:.6rem;max-height:120px;overflow-y:auto}
+.ep-btn{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.3rem .5rem;font-size:1.2rem;cursor:pointer;transition:all .15s;line-height:1}
+.ep-btn:hover{background:rgba(167,139,250,.15);border-color:var(--violet);transform:scale(1.15)}
+.ep-btn.on{background:rgba(167,139,250,.2);border-color:var(--violet);box-shadow:0 0 0 2px rgba(167,139,250,.3)}
+.selected-emoji-preview{font-size:2rem;display:inline-block;vertical-align:middle;margin-right:.5rem}
+
 .style-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:.7rem}
 .style-tile{background:var(--panel);border:2px solid var(--border);border-radius:var(--r3);padding:.75rem .5rem;cursor:pointer;text-align:center;transition:all .2s;position:relative;overflow:hidden}
 .style-tile:hover{border-color:var(--violet);background:rgba(167,139,250,.07)}
@@ -123,9 +138,10 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
 .pwd-row{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:.8rem;align-items:end}
 @media(max-width:700px){.pwd-row{grid-template-columns:1fr}}
 
-/* ══════════════════════════════════
-   SHARE VIEW — recipient sees only card
-   ══════════════════════════════════ */
+/* ALT BADGE — Birthday Alternate */
+.alt-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3);border-radius:50px;padding:.25rem .7rem;font-size:.72rem;font-weight:700;color:var(--violet);margin-left:.5rem;vertical-align:middle}
+
+/* SHARE VIEW */
 #share-view{display:none;position:fixed;inset:0;z-index:9999;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:1rem}
 #share-view.on{display:flex}
 #sconf-cv{position:fixed;inset:0;z-index:1;pointer-events:none}
@@ -141,8 +157,6 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
 #view-page.on{display:flex}
 #vconf-cv{position:fixed;inset:0;z-index:1;pointer-events:none}
 #view-canvas{width:100%;max-width:480px;border-radius:var(--r2);overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.8);position:relative;z-index:2}
-
-/* ── KEY FIX: Share URL Banner ── */
 .v-share-banner{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;align-items:center;gap:.6rem;padding:.7rem 1.2rem;background:rgba(0,0,0,.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.1)}
 .v-share-url{flex:1;font-size:.7rem;color:rgba(255,255,255,.5);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:.4rem .7rem;font-family:monospace}
 .v-bottom{position:fixed;bottom:0;left:0;right:0;z-index:10;padding:.8rem 1rem 1.2rem;background:linear-gradient(to top,rgba(0,0,0,.9) 70%,transparent);display:flex;flex-direction:column;gap:.5rem;align-items:center}
@@ -173,10 +187,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
 </head>
 <body>
 
-<!-- ════════════════════════════════════════════
-     SHARE VIEW — Recipients see ONLY this
-     Shown when ?card= URL param is detected
-     ════════════════════════════════════════════ -->
+<!-- SHARE VIEW -->
 <div id="share-view">
   <canvas id="sconf-cv"></canvas>
   <div id="s-banner" class="s-banner">
@@ -190,17 +201,17 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
       <button onclick="sCopy()" style="background:linear-gradient(135deg,#f0c040,#e89020);border:none;border-radius:50px;padding:.35rem .85rem;font-size:.75rem;font-weight:700;cursor:pointer;color:#0a0812;flex-shrink:0">📋 Copy</button>
       <button onclick="sShare()" style="background:linear-gradient(135deg,#f472b6,#e11d85);border:none;border-radius:50px;padding:.35rem .85rem;font-size:.75rem;font-weight:700;cursor:pointer;color:#fff;flex-shrink:0">↗ Share</button>
     </div>
-    <div style="font-size:.7rem;color:rgba(255,255,255,.25)">Made with FestivaCard ✨</div>
+    <div style="font-size:.7rem;color:rgba(255,255,255,.25)">Made with FestivaCard Pro ✨</div>
   </div>
 </div>
 
-<!-- ════ MAIN APP ════ -->
+<!-- MAIN APP -->
 <canvas id="bg-canvas"></canvas>
 <div id="root">
   <header>
     <a class="brand" onclick="nav('gallery')">
       <div class="brand-icon">🎊</div>
-      <span class="brand-name">FestivaCard</span>
+      <span class="brand-name">FestivaCard Pro</span>
     </a>
     <nav class="nav-tabs">
       <button class="nav-tab on" data-page="gallery" onclick="nav('gallery')">🌟 Gallery</button>
@@ -212,7 +223,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
   <!-- GALLERY -->
   <main class="page on" id="pg-gallery">
     <div class="hero">
-      <div class="hero-badge">🎉 Share to Any Device — No Login Needed</div>
+      <div class="hero-badge">🎉 NEW: Festival Name Edit • Birthday Alternate • 50+ Emojis</div>
       <h1>Create & Share<br><em>Beautiful Greetings</em></h1>
       <p>Card data travels inside the link — anyone can open it on any phone or computer, no app needed!</p>
       <div class="hero-actions">
@@ -233,31 +244,76 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
     </div>
     <div class="create-layout">
       <div class="form-panel">
+
         <div class="form-row">
           <div class="fld">
             <label>Event Type *</label>
             <select id="f-type" onchange="onTypeChange()">
               <option value="">— Select Event —</option>
-              <optgroup label="Personal">
+              <optgroup label="🎂 Birthday & Milestones">
                 <option value="birthday">🎂 Birthday</option>
+                <option value="birthday_half">🎈 Half Birthday</option>
+                <option value="birthday_surprise">🎁 Surprise Birthday</option>
+                <option value="birthday_milestone">🎖️ Milestone Birthday</option>
+                <option value="first_birthday">👶🎂 First Birthday</option>
+              </optgroup>
+              <optgroup label="💍 Love & Relationships">
                 <option value="wedding">💍 Wedding</option>
                 <option value="marriage">🌸 Marriage</option>
                 <option value="anniversary">💕 Anniversary</option>
-                <option value="graduation">🎓 Graduation</option>
-                <option value="babyshower">👶 Baby Shower</option>
-                <option value="farewell">👋 Farewell</option>
+                <option value="engagement">💎 Engagement</option>
+                <option value="proposal">💝 Proposal</option>
+                <option value="valday">❤️ Valentine's Day</option>
               </optgroup>
-              <optgroup label="Festivals">
+              <optgroup label="🎓 Achievement">
+                <option value="graduation">🎓 Graduation</option>
+                <option value="promotion">🚀 Job Promotion</option>
+                <option value="newjob">💼 New Job</option>
+                <option value="retirement">🌅 Retirement</option>
+                <option value="exam_pass">📚 Exam Success</option>
+              </optgroup>
+              <optgroup label="👶 Family">
+                <option value="babyshower">👶 Baby Shower</option>
+                <option value="newborn">🍼 Newborn Baby</option>
+                <option value="naming">🌷 Naming Ceremony</option>
+                <option value="mothersday">💐 Mother's Day</option>
+                <option value="fathersday">👨‍👧 Father's Day</option>
+              </optgroup>
+              <optgroup label="👋 Social">
+                <option value="farewell">👋 Farewell</option>
+                <option value="welcome">🤗 Welcome</option>
+                <option value="getwell">🌿 Get Well Soon</option>
+                <option value="thankyou">🙏 Thank You</option>
+                <option value="sorry">😔 Sorry / Apology</option>
+              </optgroup>
+              <optgroup label="🪔 Indian Festivals">
                 <option value="diwali">🪔 Diwali</option>
-                <option value="christmas">🎄 Christmas</option>
-                <option value="eid">🌙 Eid</option>
-                <option value="newyear">🎆 New Year</option>
                 <option value="holi">🌈 Holi</option>
                 <option value="pongal">🌾 Pongal</option>
                 <option value="onam">🌺 Onam</option>
                 <option value="navratri">🕺 Navratri</option>
+                <option value="dussehra">🏹 Dussehra</option>
+                <option value="ugadi">🌻 Ugadi</option>
+                <option value="vishu">🌼 Vishu</option>
+                <option value="baisakhi">🌾 Baisakhi</option>
+                <option value="raksha">🪢 Raksha Bandhan</option>
+                <option value="ganesh">🐘 Ganesh Chaturthi</option>
+                <option value="janmashtami">🦚 Janmashtami</option>
+              </optgroup>
+              <optgroup label="🌙 Islamic Festivals">
+                <option value="eid">🌙 Eid ul-Fitr</option>
+                <option value="eid_adha">🐑 Eid ul-Adha</option>
+                <option value="ramadan">☪️ Ramadan Mubarak</option>
+              </optgroup>
+              <optgroup label="🎄 Global Festivals">
+                <option value="christmas">🎄 Christmas</option>
+                <option value="newyear">🎆 New Year</option>
+                <option value="easter">🐣 Easter</option>
+                <option value="halloween">🎃 Halloween</option>
+                <option value="thanksgiving">🦃 Thanksgiving</option>
               </optgroup>
               <option value="general">🎊 General Celebration</option>
+              <option value="custom">⚙️ Custom Event</option>
             </select>
           </div>
           <div class="fld">
@@ -265,10 +321,29 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
             <input type="text" id="f-name" placeholder="e.g. Priya Sharma" maxlength="50" oninput="livePreview()">
           </div>
         </div>
+
+        <!-- ✅ NEW: Festival Name / Event Title Edit -->
+        <div class="festival-name-row" id="festival-name-row">
+          <div class="fld">
+            <label>🎨 Edit Festival / Event Title</label>
+            <div style="display:flex;gap:.6rem;align-items:center">
+              <span class="selected-emoji-preview" id="festival-emoji-preview">🎊</span>
+              <input type="text" id="f-festival-name" placeholder="e.g. Sweet 16, Golden Jubilee..." maxlength="40" oninput="livePreview()" style="flex:1">
+            </div>
+            <div class="festival-hint">This replaces the default event label on the card (e.g. "Birthday" → "Sweet 16")</div>
+          </div>
+          <!-- Emoji Picker for Event Icon -->
+          <div style="margin-top:.8rem">
+            <label style="display:block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:.4rem">Pick Card Emoji / Icon</label>
+            <div class="emoji-grid" id="emoji-grid"></div>
+          </div>
+        </div>
+
         <div class="fld">
           <label>Greeting Message</label>
-          <textarea id="f-msg" placeholder="Write a heartfelt message…" maxlength="220" oninput="livePreview()"></textarea>
+          <textarea id="f-msg" placeholder="Write a heartfelt message…" maxlength="280" oninput="livePreview()"></textarea>
         </div>
+
         <div class="form-row">
           <div class="fld">
             <label>From / Sender</label>
@@ -286,7 +361,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
           </div>
         </div>
 
-        <!-- Dynamic Date/Age row — shown based on event type -->
+        <!-- Dynamic Date/Age row -->
         <div class="form-row" id="date-age-row" style="display:none">
           <div class="fld" id="date-field-wrap" style="display:none">
             <label id="date-label">📅 Event Date</label>
@@ -297,10 +372,26 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
             <input type="number" id="f-age" placeholder="e.g. 25" min="1" max="120" oninput="livePreview()" style="appearance:none;-moz-appearance:textfield">
           </div>
         </div>
+
+        <!-- ✅ NEW: Birthday Alternate Options -->
+        <div id="birthday-alt-row" style="display:none;background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.22);border-radius:var(--r3);padding:1rem">
+          <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:.7rem">🎂 Birthday Alternate Options</div>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+            <label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:.5rem .8rem;font-size:.8rem;font-weight:600;color:var(--text)"><input type="radio" name="bday-alt" value="normal" checked onchange="onBdayAlt()" style="accent-color:var(--gold)"> 🎂 Normal Birthday</label>
+            <label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:.5rem .8rem;font-size:.8rem;font-weight:600;color:var(--text)"><input type="radio" name="bday-alt" value="half" onchange="onBdayAlt()" style="accent-color:var(--gold)"> 🎈 Half Birthday</label>
+            <label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:.5rem .8rem;font-size:.8rem;font-weight:600;color:var(--text)"><input type="radio" name="bday-alt" value="surprise" onchange="onBdayAlt()" style="accent-color:var(--gold)"> 🎁 Surprise Party</label>
+            <label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:.5rem .8rem;font-size:.8rem;font-weight:600;color:var(--text)"><input type="radio" name="bday-alt" value="milestone" onchange="onBdayAlt()" style="accent-color:var(--gold)"> 🎖️ Milestone</label>
+            <label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:.5rem .8rem;font-size:.8rem;font-weight:600;color:var(--text)"><input type="radio" name="bday-alt" value="first" onchange="onBdayAlt()" style="accent-color:var(--gold)"> 👶 First Birthday</label>
+            <label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:.5rem .8rem;font-size:.8rem;font-weight:600;color:var(--text)"><input type="radio" name="bday-alt" value="joint" onchange="onBdayAlt()" style="accent-color:var(--gold)"> 👫 Joint Birthday</label>
+          </div>
+          <div id="bday-alt-hint" style="margin-top:.5rem;font-size:.75rem;color:var(--muted)">Card label & emoji will update automatically</div>
+        </div>
+
         <div class="fld">
           <label>Animation Effect</label>
           <div class="style-grid" id="style-grid"></div>
         </div>
+
         <div class="fld">
           <label>Photo (Optional)</label>
           <div class="upload-zone" onclick="document.getElementById('f-img').click()">
@@ -315,6 +406,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
             <button class="upload-remove" id="img-remove-btn" onclick="removeImg()">✕ Remove</button>
           </div>
         </div>
+
         <div class="fld" id="photo-style-row" style="display:none">
           <label>Photo Shape</label>
           <div style="display:flex;gap:.6rem;flex-wrap:wrap">
@@ -323,16 +415,19 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
             <label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:.5rem .8rem;font-size:.8rem;font-weight:600;color:var(--text)"><input type="radio" name="photo-shape" value="diamond" onchange="livePreview()" style="accent-color:var(--violet)"> 🔷 Diamond</label>
           </div>
         </div>
+
         <div class="fld" style="background:rgba(240,192,64,.05);border:1px solid rgba(240,192,64,.2);border-radius:var(--r3);padding:1rem">
           <label style="color:var(--gold)">🎯 Recipient Name (Personalized Opening)</label>
           <input type="text" id="f-recipient" placeholder="e.g. Aanya, Ravi, Priya..." maxlength="40" oninput="livePreview()">
           <div style="font-size:.75rem;color:var(--muted);margin-top:.4rem">When link opens → "Hey Aanya, you have a special greeting! 🎉"</div>
         </div>
+
         <div style="display:flex;gap:.8rem;flex-wrap:wrap">
           <button class="btn btn-primary" onclick="saveCard()">💾 Save & Get Share Link</button>
           <button class="btn btn-ghost" onclick="clearForm()">↺ Clear</button>
         </div>
       </div>
+
       <div class="preview-sticky">
         <div class="preview-label"><span></span> Live Preview <span></span></div>
         <div id="prev-wrap"></div>
@@ -389,23 +484,14 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
   </main>
 </div>
 
-<!-- ═══════════════════════════════════════
-     INTERNAL VIEW — Card owner sees this
-     URL bar auto-updates to share link ✅
-     ═══════════════════════════════════════ -->
+<!-- INTERNAL VIEW -->
 <div id="view-page">
   <canvas id="vconf-cv"></canvas>
-
-  <!-- TOP: Share URL shown prominently -->
   <div class="v-share-banner">
     <button class="btn btn-ghost btn-xs" onclick="closeView()">← Back</button>
     <div class="v-share-url" id="v-url" title="This is your shareable link"></div>
   </div>
-
-  <!-- CARD -->
   <div id="view-canvas"></div>
-
-  <!-- BOTTOM: Action buttons -->
   <div class="v-bottom">
     <div style="font-size:.72rem;color:rgba(255,255,255,.4);margin-bottom:.2rem">📤 Share this card — link works on ANY device, no app needed</div>
     <div class="v-btn-row">
@@ -425,10 +511,18 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
     <input type="hidden" id="em-id">
     <div style="display:flex;flex-direction:column;gap:1.1rem">
       <div class="form-row">
-        <div class="fld"><label>Event Type</label><select id="em-type"></select></div>
+        <div class="fld"><label>Event Type</label><select id="em-type" onchange="onEditTypeChange()"></select></div>
         <div class="fld"><label>Name *</label><input type="text" id="em-name" maxlength="50"></div>
       </div>
-      <div class="fld"><label>Message</label><textarea id="em-msg" maxlength="220"></textarea></div>
+      <!-- Edit Festival Name -->
+      <div class="festival-name-row" id="em-festival-row">
+        <div class="fld">
+          <label>🎨 Edit Festival / Event Title</label>
+          <input type="text" id="em-festival-name" maxlength="40" placeholder="Custom event title...">
+          <div class="festival-hint">Overrides the default label shown on the card</div>
+        </div>
+      </div>
+      <div class="fld"><label>Message</label><textarea id="em-msg" maxlength="280"></textarea></div>
       <div class="fld"><label>From</label><input type="text" id="em-from" maxlength="70"></div>
       <div class="fld" style="background:rgba(240,192,64,.05);border:1px solid rgba(240,192,64,.2);border-radius:var(--r3);padding:1rem">
         <label style="color:var(--gold)">🎯 Recipient Name</label>
@@ -467,30 +561,128 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
 </div>
 
 <script>
-// ══════════════════════════════════════════
-//  CONFIG
-// ══════════════════════════════════════════
-const SK_DATA='fcv6_data', SK_PWD='fcv6_pwd', SK_SES='fcv6_ses';
+// CONFIG
+const SK_DATA='fcv7_data', SK_PWD='fcv7_pwd', SK_SES='fcv7_ses';
 let cards=[], _imgData=null, _style='confetti', _filter='all', _editId=null, _delId=null;
 let _shareUrl='', _shareRecipient='', _baseUrl='';
+let _selectedEmoji=''; // Custom emoji selected from picker
 
+// ══════════════════════════════════════════
+// EMOJI SETS — Rich emoji palette for each category
+// ══════════════════════════════════════════
+const EMOJI_SETS = {
+  birthday:   ['🎂','🎁','🎈','🎉','🎊','🪅','🍰','🥳','🎀','🕯️','🎆','🎇','🍭','🎠','👑','🌟','💫','✨','🫶','🥂'],
+  birthday_half:['🎈','🍰','🎂','🥳','🎉','🎁','✨','🌟','💫','🎀'],
+  birthday_surprise:['🎁','🎊','🎉','🤫','😱','🎈','🥳','🎀','🎆','🌟'],
+  birthday_milestone:['🎖️','🏆','👑','💎','🌟','⭐','🥇','🎗️','🎊','✨'],
+  first_birthday:['👶','🍰','🎂','🎉','🐣','🌈','🦋','🌸','💕','✨'],
+  wedding:    ['💍','💒','👰','🤵','💐','🥂','💫','🌹','🎊','✨','🕊️','💌','🌸','🏵️','👫'],
+  marriage:   ['🌸','💍','🤵','👰','💐','💖','🌹','🕊️','🥂','✨'],
+  anniversary:['💕','💑','🥂','🌹','💝','🎊','🌟','💫','💌','🎁','💍','❤️','🌸','🫶','💞'],
+  engagement: ['💎','💍','🎊','💕','🥂','🌹','💫','✨','🌸','❤️'],
+  proposal:   ['💝','💍','🌹','💌','❤️','✨','🌟','🎊','🥂','😍'],
+  valday:     ['❤️','💕','💝','🌹','💌','💑','🫶','💖','🥂','🎊'],
+  graduation: ['🎓','📜','🎊','🏆','⭐','🎉','📚','🖊️','🌟','✨','👑','🥇','🎖️','🚀','💪'],
+  promotion:  ['🚀','💼','🏆','⭐','🎊','👑','💫','🌟','🥇','🎉'],
+  newjob:     ['💼','🚀','🎉','🌟','✨','🏆','👏','🎊','💪','⭐'],
+  retirement: ['🌅','🏖️','🎊','🌟','✨','🏆','🎈','🥂','🌺','🌸'],
+  exam_pass:  ['📚','🎓','✨','🌟','🏆','🥇','🎊','💪','⭐','👏'],
+  babyshower: ['👶','🍼','🌸','💕','🎀','🌈','🦋','🌷','✨','💫','🐣','🎊','🌺','🥳','🎁'],
+  newborn:    ['🍼','👶','💕','🌸','🌈','🌷','🎀','✨','💫','🐣'],
+  naming:     ['🌷','💐','✨','🌸','🎊','👶','🕊️','🌟','💫','🎈'],
+  mothersday: ['💐','🌷','🌸','❤️','🫶','🌹','✨','💕','🥰','👑'],
+  fathersday: ['👨‍👧','🏆','❤️','🫶','⭐','🌟','💪','🎊','🥂','👑'],
+  farewell:   ['👋','✈️','🌍','🎊','💌','🌟','🤗','🫶','🥂','🌸'],
+  welcome:    ['🤗','🎊','🌟','✨','🎉','🫶','💐','🌈','👏','🥳'],
+  getwell:    ['🌿','💐','🌸','🍀','💚','🌱','🌼','✨','🤗','🫶'],
+  thankyou:   ['🙏','💐','✨','🌸','❤️','🫶','🌟','💫','🎊','🥰'],
+  sorry:      ['😔','🙏','💐','🌸','💌','❤️','🫶','✨','🌷','🌿'],
+  diwali:     ['🪔','✨','🎆','🎇','🌟','💫','🎊','🏮','🌺','🌸','🌼','⭐','💥','🎉','🌙'],
+  holi:       ['🌈','🎨','🎉','💦','🎊','🌸','🌺','🌼','💫','🥳'],
+  pongal:     ['🌾','🍲','🌻','🌞','🎊','✨','🌟','🐄','🏺','🌽'],
+  onam:       ['🌺','🌼','🎊','🌸','🌿','🏵️','🌟','✨','🦚','🌈'],
+  navratri:   ['🕺','💃','🌟','✨','🎊','🎭','🌸','🌺','💫','🙏'],
+  dussehra:   ['🏹','🎊','✨','🌟','💫','🔥','🎉','🌺','🙏','⭐'],
+  ugadi:      ['🌻','🌿','🎊','✨','🌺','🌼','🌸','🍃','🌟','💫'],
+  vishu:      ['🌼','🌿','🎊','✨','🌺','🌸','🌟','💫','🙏','⭐'],
+  baisakhi:   ['🌾','🎊','💃','🕺','🌟','✨','🎉','🥳','🌻','⭐'],
+  raksha:     ['🪢','❤️','🌸','💕','🎁','✨','🌟','💫','🎊','🙏'],
+  ganesh:     ['🐘','🙏','🎊','✨','🌟','💫','🌺','🌸','🏺','🌼'],
+  janmashtami:['🦚','🎊','🙏','✨','🌟','💫','🌺','🌸','🎆','💛'],
+  eid:        ['🌙','⭐','🕌','✨','🎊','💫','🌟','🥳','🎁','🤲'],
+  eid_adha:   ['🐑','🌙','⭐','🕌','✨','🎊','💫','🙏','🤲','🌟'],
+  ramadan:    ['☪️','🌙','⭐','🕌','✨','🤲','💫','🌟','🙏','🎊'],
+  christmas:  ['🎄','⛄','🎁','🎅','🌟','❄️','🔔','🕯️','✨','🦌','🎊','🍪','🌸','💫','🥂'],
+  newyear:    ['🎆','🎇','🥂','🎊','✨','🌟','💫','🎉','🥳','🎈','⭐','🌙','🌃','🍾','🫧'],
+  easter:     ['🐣','🐰','🌸','🌷','✨','🎊','🌟','💐','🥚','🌺'],
+  halloween:  ['🎃','🦇','🌙','⭐','👻','🕷️','🕸️','🌚','🍬','🔮'],
+  thanksgiving:['🦃','🍂','🍁','🌽','🎊','🌟','✨','🥧','🏡','🍁'],
+  general:    ['🎊','🎉','🎈','🌟','✨','💫','⭐','🏆','🥂','🎆','💐','🌸','🎀','🎁','🪅'],
+  custom:     ['⚙️','✨','🌟','💫','🎊','🎉','🌈','🎆','💐','🎭','🏆','🥂','💡','🌺','🎁'],
+};
+
+// ══════════════════════════════════════════
+// EVENT TYPES — expanded with all new events
+// ══════════════════════════════════════════
 const T={
   birthday:   {label:'Birthday',   icon:'🎂',color:'#f472b6',accent:'#fbbf24',bg:['#2d0a4e','#5b0f7c','#2d0a4e'],msg:"Wishing you a day as magical as you are! May all your dreams come true! 🎉"},
+  birthday_half:{label:'Half Birthday',icon:'🎈',color:'#f472b6',accent:'#fbbf24',bg:['#2d0a4e','#5b0f7c','#2d0a4e'],msg:"Happy Half Birthday! You're halfway to your next big celebration! 🎈"},
+  birthday_surprise:{label:'Surprise Birthday',icon:'🎁',color:'#f472b6',accent:'#fbbf24',bg:['#2d0a4e','#5b0f7c','#2d0a4e'],msg:"Surprise! Wishing you the most amazing birthday full of joy! 🎁"},
+  birthday_milestone:{label:'Milestone Birthday',icon:'🎖️',color:'#f0c040',accent:'#fde68a',bg:['#1e1200','#3d2500','#1e1200'],msg:"What a milestone! You've achieved so much — here's to many more amazing years! 🎖️"},
+  first_birthday:{label:'1st Birthday',icon:'👶🎂',color:'#f9a8d4',accent:'#fbcfe8',bg:['#2a001a','#500032','#2a001a'],msg:"Happy 1st Birthday! Your first year has been a beautiful blessing! 👶🎂"},
   wedding:    {label:'Wedding',    icon:'💍',color:'#f0c040',accent:'#fde68a',bg:['#1a1200','#3d2b00','#1a1200'],msg:"As you begin this beautiful journey, may your love grow stronger every day! 💍"},
   marriage:   {label:'Marriage',   icon:'🌸',color:'#fb7185',accent:'#fda4af',bg:['#2a0020','#550040','#2a0020'],msg:"Two hearts, one soul, a lifetime of beautiful memories! Heartiest congratulations! 🌸"},
   anniversary:{label:'Anniversary',icon:'💕',color:'#f472b6',accent:'#c084fc',bg:['#1e0030','#420055','#1e0030'],msg:"Another year of love, laughter and beautiful memories together! Happy Anniversary! 💕"},
+  engagement: {label:'Engagement', icon:'💎',color:'#a78bfa',accent:'#c4b5fd',bg:['#1e0040','#3a0070','#1e0040'],msg:"You said YES! Wishing you a lifetime of love and happiness together! 💎"},
+  proposal:   {label:'Proposal',   icon:'💝',color:'#f472b6',accent:'#fda4af',bg:['#2a0020','#550040','#2a0020'],msg:"You popped the question! May this be the beginning of forever! 💝"},
+  valday:     {label:"Valentine's",icon:'❤️',color:'#f87171',accent:'#fca5a5',bg:['#2a0010','#550020','#2a0010'],msg:"Happy Valentine's Day! You make every day feel special! ❤️"},
   graduation: {label:'Graduation', icon:'🎓',color:'#a78bfa',accent:'#c4b5fd',bg:['#0e0630','#1e0b60','#0e0630'],msg:"Congratulations Graduate! Your hard work has paid off — the world is yours! 🎓"},
+  promotion:  {label:'Promotion',  icon:'🚀',color:'#38bdf8',accent:'#7dd3fc',bg:['#00071a','#001035','#00071a'],msg:"Congratulations on your well-deserved promotion! Sky's the limit for you! 🚀"},
+  newjob:     {label:'New Job',    icon:'💼',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"Exciting times ahead! Wishing you great success in your new role! 💼"},
+  retirement: {label:'Retirement', icon:'🌅',color:'#f97316',accent:'#fdba74',bg:['#1a0700','#3d1000','#1a0700'],msg:"Congratulations on a wonderful career! May retirement bring you joy and adventure! 🌅"},
+  exam_pass:  {label:'Exam Success',icon:'📚',color:'#a78bfa',accent:'#c4b5fd',bg:['#0e0630','#1e0b60','#0e0630'],msg:"You did it! Congratulations on your brilliant result! 📚"},
   babyshower: {label:'Baby Shower',icon:'👶',color:'#f9a8d4',accent:'#fbcfe8',bg:['#2a001a','#500032','#2a001a'],msg:"A precious little one is on the way! Wishing you a wonderful journey! 👶"},
+  newborn:    {label:'Newborn',    icon:'🍼',color:'#f9a8d4',accent:'#fbcfe8',bg:['#2a001a','#500032','#2a001a'],msg:"Welcome to the world, little one! May your life be filled with love and laughter! 🍼"},
+  naming:     {label:'Naming Ceremony',icon:'🌷',color:'#fb7185',accent:'#fda4af',bg:['#2a0020','#550040','#2a0020'],msg:"A beautiful name for a beautiful soul! Warmest wishes on this special occasion! 🌷"},
+  mothersday: {label:"Mother's Day",icon:'💐',color:'#f472b6',accent:'#fda4af',bg:['#2a0020','#550040','#2a0020'],msg:"To the most wonderful mother — thank you for your endless love and care! Happy Mother's Day! 💐"},
+  fathersday: {label:"Father's Day",icon:'👨‍👧',color:'#38bdf8',accent:'#7dd3fc',bg:['#00071a','#001035','#00071a'],msg:"To the best dad in the world — you are our hero every single day! Happy Father's Day! 👨‍👧"},
   farewell:   {label:'Farewell',   icon:'👋',color:'#94a3b8',accent:'#cbd5e1',bg:['#0a1020','#162040','#0a1020'],msg:"It's not goodbye — it's see you on the next adventure! You'll be missed! 👋"},
+  welcome:    {label:'Welcome',    icon:'🤗',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"Welcome! So happy to have you here — this is just the beginning of great things! 🤗"},
+  getwell:    {label:'Get Well Soon',icon:'🌿',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"Wishing you a speedy recovery! Take rest and be back stronger than ever! 🌿"},
+  thankyou:   {label:'Thank You',  icon:'🙏',color:'#f0c040',accent:'#fde68a',bg:['#1a1200','#3d2b00','#1a1200'],msg:"Thank you from the bottom of my heart! You truly made a difference! 🙏"},
+  sorry:      {label:'Apology',    icon:'😔',color:'#94a3b8',accent:'#cbd5e1',bg:['#0a1020','#162040','#0a1020'],msg:"I'm truly sorry. You mean the world to me and I hope you can forgive me. 😔"},
   diwali:     {label:'Diwali',     icon:'🪔',color:'#f97316',accent:'#fb923c',bg:['#1a0700','#3d1500','#1a0700'],msg:"May the festival of lights bring joy, prosperity and happiness! Happy Diwali! 🪔"},
-  christmas:  {label:'Christmas',  icon:'🎄',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"May the magic of Christmas fill your home with warmth and love! Merry Christmas! 🎄"},
-  eid:        {label:'Eid',        icon:'🌙',color:'#34d399',accent:'#6ee7b7',bg:['#00180e','#003520','#00180e'],msg:"Eid Mubarak! May Allah shower you and your family with endless blessings! 🌙"},
-  newyear:    {label:'New Year',   icon:'🎆',color:'#38bdf8',accent:'#7dd3fc',bg:['#00071a','#001035','#00071a'],msg:"Here's to new beginnings and new blessings! Wishing you an amazing New Year! 🎆"},
   holi:       {label:'Holi',       icon:'🌈',color:'#f472b6',accent:'#a78bfa',bg:['#1a0040','#380080','#1a0040'],msg:"May the vibrant colours of Holi paint your life with happiness! Happy Holi! 🌈"},
   pongal:     {label:'Pongal',     icon:'🌾',color:'#fbbf24',accent:'#fde68a',bg:['#1a1000','#3a2000','#1a1000'],msg:"May the harvest season bring abundance, peace and joy! Happy Pongal! 🌾"},
   onam:       {label:'Onam',       icon:'🌺',color:'#fb923c',accent:'#fde047',bg:['#00180a','#003a14','#00180a'],msg:"May the spirit of Onam fill your home with flowers and laughter! Happy Onam! 🌺"},
   navratri:   {label:'Navratri',   icon:'🕺',color:'#c084fc',accent:'#f472b6',bg:['#200040','#400080','#200040'],msg:"May Maa Durga bless you with strength and endless joy! Jai Mata Di! 🕺"},
+  dussehra:   {label:'Dussehra',   icon:'🏹',color:'#f97316',accent:'#fb923c',bg:['#1a0700','#3d1500','#1a0700'],msg:"May the triumph of good over evil bring light and hope to your life! Happy Dussehra! 🏹"},
+  ugadi:      {label:'Ugadi',      icon:'🌻',color:'#fbbf24',accent:'#fde68a',bg:['#1a1000','#3a2000','#1a1000'],msg:"Wishing you a New Year filled with new beginnings and blessings! Happy Ugadi! 🌻"},
+  vishu:      {label:'Vishu',      icon:'🌼',color:'#fbbf24',accent:'#fde68a',bg:['#00180a','#003a14','#00180a'],msg:"May this Vishu bring you prosperity, happiness and good fortune! Happy Vishu! 🌼"},
+  baisakhi:   {label:'Baisakhi',   icon:'🌾',color:'#fbbf24',accent:'#fde68a',bg:['#1a1000','#3a2000','#1a1000'],msg:"May the harvest festival bring joy and abundance to your life! Happy Baisakhi! 🌾"},
+  raksha:     {label:'Raksha Bandhan',icon:'🪢',color:'#f97316',accent:'#fb923c',bg:['#1a0700','#3d1500','#1a0700'],msg:"The bond of siblings is the most precious bond in the world! Happy Raksha Bandhan! 🪢"},
+  ganesh:     {label:'Ganesh Chaturthi',icon:'🐘',color:'#f0c040',accent:'#fde68a',bg:['#1a1200','#3d2b00','#1a1200'],msg:"May Lord Ganesha remove all obstacles and fill your life with success! Ganpati Bappa Morya! 🐘"},
+  janmashtami:{label:'Janmashtami',icon:'🦚',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"May Lord Krishna's blessings fill your heart with joy and peace! Happy Janmashtami! 🦚"},
+  eid:        {label:'Eid ul-Fitr',icon:'🌙',color:'#34d399',accent:'#6ee7b7',bg:['#00180e','#003520','#00180e'],msg:"Eid Mubarak! May Allah shower you and your family with endless blessings! 🌙"},
+  eid_adha:   {label:'Eid ul-Adha',icon:'🐑',color:'#34d399',accent:'#6ee7b7',bg:['#00180e','#003520','#00180e'],msg:"Eid ul-Adha Mubarak! May the spirit of sacrifice bring peace and joy! 🐑"},
+  ramadan:    {label:'Ramadan',    icon:'☪️',color:'#34d399',accent:'#6ee7b7',bg:['#00180e','#003520','#00180e'],msg:"Ramadan Mubarak! May this holy month bring peace, blessings and spiritual growth! ☪️"},
+  christmas:  {label:'Christmas',  icon:'🎄',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"May the magic of Christmas fill your home with warmth and love! Merry Christmas! 🎄"},
+  newyear:    {label:'New Year',   icon:'🎆',color:'#38bdf8',accent:'#7dd3fc',bg:['#00071a','#001035','#00071a'],msg:"Here's to new beginnings and new blessings! Wishing you an amazing New Year! 🎆"},
+  easter:     {label:'Easter',     icon:'🐣',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"Wishing you a joyful Easter filled with hope, love and new beginnings! 🐣"},
+  halloween:  {label:'Halloween',  icon:'🎃',color:'#f97316',accent:'#fb923c',bg:['#1a0700','#3d1500','#1a0700'],msg:"Have a spooktacular Halloween! May your night be full of treats and no tricks! 🎃"},
+  thanksgiving:{label:'Thanksgiving',icon:'🦃',color:'#f97316',accent:'#fb923c',bg:['#1a0700','#3d1500','#1a0700'],msg:"Wishing you a wonderful Thanksgiving filled with gratitude, family and warmth! 🦃"},
   general:    {label:'Celebration',icon:'🎊',color:'#f0c040',accent:'#a78bfa',bg:['#0d0b1e','#1e1840','#0d0b1e'],msg:"Congratulations and warmest wishes on this wonderful occasion! 🎊"},
+  custom:     {label:'Special Event',icon:'⚙️',color:'#a78bfa',accent:'#c4b5fd',bg:['#0e0630','#1e0b60','#0e0630'],msg:"Warmest wishes on this very special occasion! 🎊"},
+};
+
+// Birthday alternates config
+const BDAY_ALTS = {
+  normal:    {label:'Birthday',        icon:'🎂', msg:"Wishing you a day as magical as you are! May all your dreams come true! 🎉"},
+  half:      {label:'Half Birthday',   icon:'🎈', msg:"Happy Half Birthday! You're halfway to your next big celebration! 🎈"},
+  surprise:  {label:'Surprise Party',  icon:'🎁', msg:"Surprise! Wishing you the most amazing birthday full of joy and happiness! 🎁"},
+  milestone: {label:'Milestone Birthday',icon:'🎖️',msg:"What a milestone! Here's to celebrating all that you've achieved! 🎖️"},
+  first:     {label:'1st Birthday',    icon:'👶', msg:"Happy 1st Birthday, little star! You've brought so much joy to our lives! 👶"},
+  joint:     {label:'Joint Birthday',  icon:'👫', msg:"Celebrating you both together! Wishing you double the joy and double the fun! 👫"},
 };
 
 const EFFECTS=[
@@ -509,26 +701,20 @@ const TPLS={
   floral:{nameSz:'2rem',msgSz:'.92rem',nameFont:"'Great Vibes',cursive",divider:true},
 };
 
-// ══════════════════════════════════════════
-//  URL ENCODE / DECODE — Card data in URL
-//  This is the KEY mechanism for sharing
-// ══════════════════════════════════════════
+// URL ENCODE / DECODE
 function encodeCard(card){
   const d={
     t:card.type, n:card.name, m:card.msg,
     f:card.from, tp:card.tpl, e:card.effect,
     ps:card.photoShape, r:card.recipient||'',
-    dt:card.date||'', ag:card.age||''
+    dt:card.date||'', ag:card.age||'',
+    fn:card.festivalName||'', fe:card.festivalEmoji||''
   };
-  // ✅ IMAGE FIX: Strip "data:image/xxx;base64," prefix, encode raw bytes only
-  // This avoids the / characters in the prefix from corrupting URL-safe encoding
   if(card.imgData && card.imgData.length < 200000){
     const raw = card.imgData.replace(/^data:image\/[^;]+;base64,/,'');
-    // URL-safe encode the raw image base64
     d.i = raw.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
   }
   try{
-    // URL-safe base64 encode the whole JSON
     const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(d))));
     return b64.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
   }catch(ex){return null;}
@@ -536,11 +722,9 @@ function encodeCard(card){
 
 function decodeCard(str){
   try{
-    // Restore URL-safe → standard base64, re-pad
     const b64 = str.replace(/-/g,'+').replace(/_/g,'/');
     const padded = b64 + '=='.slice(0,(4 - b64.length % 4) % 4);
     const d = JSON.parse(decodeURIComponent(escape(atob(padded))));
-    // ✅ IMAGE FIX: Restore image — re-add data URI prefix and standard base64
     let imgData = null;
     if(d.i){
       const rawB64 = d.i.replace(/-/g,'+').replace(/_/g,'/');
@@ -552,31 +736,25 @@ function decodeCard(str){
       from:d.f||'', tpl:d.tp||'classic', effect:d.e||'confetti',
       photoShape:d.ps||'circle', recipient:d.r||'',
       date:d.dt||'', age:d.ag||'',
+      festivalName:d.fn||'', festivalEmoji:d.fe||'',
       imgData
     };
   }catch(ex){return null;}
 }
 
-// ✅ Safe URL param reader — handles + signs that URLSearchParams converts to spaces
 function safeGetCardParam(){
   const raw = new URLSearchParams(location.search).get('card');
   if(!raw) return null;
-  return raw.replace(/ /g,'+'); // Restore spaces → + from URLSearchParams quirk
+  return raw.replace(/ /g,'+');
 }
 
-// ══════════════════════════════════════════
-//  KEY FIX: makeShareUrl uses base URL
-//  so it works even when app is open
-// ══════════════════════════════════════════
 function makeShareUrl(card){
   const enc = encodeCard(card);
   if(!enc) return _baseUrl;
   return _baseUrl + '?card=' + enc;
 }
 
-// ══════════════════════════════════════════
-//  PASSWORD / SESSION
-// ══════════════════════════════════════════
+// PASSWORD / SESSION
 const getPwd=()=>localStorage.getItem(SK_PWD)||'admin123';
 const setPwd=p=>localStorage.setItem(SK_PWD,p);
 const isSes=()=>sessionStorage.getItem(SK_SES)==='1';
@@ -585,79 +763,42 @@ const setSes=v=>v?sessionStorage.setItem(SK_SES,'1'):sessionStorage.removeItem(S
 function tryLogin(){
   const el=document.getElementById('admin-pwd');
   const err=document.getElementById('admin-err');
-  if(el.value===getPwd()){
-    setSes(true);el.value='';err.style.display='none';showAdminPanel();
-  }else{
-    err.style.display='block';el.value='';
-    el.style.animation='none';void el.offsetWidth;el.style.animation='shake .4s ease';
-  }
+  if(el.value===getPwd()){setSes(true);el.value='';err.style.display='none';showAdminPanel();}
+  else{err.style.display='block';el.value='';el.style.animation='none';void el.offsetWidth;el.style.animation='shake .4s ease';}
 }
-
-function doLogout(){
-  setSes(false);
-  document.getElementById('admin-panel').style.display='none';
-  document.getElementById('admin-login-section').style.display='block';
-  toast('👋 Logged out');
-}
-
+function doLogout(){setSes(false);document.getElementById('admin-panel').style.display='none';document.getElementById('admin-login-section').style.display='block';toast('👋 Logged out');}
 function changePwd(){
-  const c=document.getElementById('pc').value;
-  const n=document.getElementById('pn').value;
-  const f=document.getElementById('pf').value;
+  const c=document.getElementById('pc').value,n=document.getElementById('pn').value,f=document.getElementById('pf').value;
   const m=document.getElementById('pwd-msg');
   const show=(t,col)=>{m.textContent=t;m.style.color=col;m.style.display='block';setTimeout(()=>m.style.display='none',3000);};
   if(c!==getPwd()){show('❌ Current password incorrect','#f87171');return;}
   if(n.length<6){show('❌ Minimum 6 characters required','#f87171');return;}
   if(n!==f){show('❌ Passwords do not match','#f87171');return;}
   setPwd(n);['pc','pn','pf'].forEach(id=>document.getElementById(id).value='');
-  show('✅ Password changed successfully!','#4ade80');
+  show('✅ Password changed!','#4ade80');
 }
+function toggleEye(id,btn){const i=document.getElementById(id);i.type=i.type==='password'?'text':'password';btn.textContent=i.type==='password'?'👁':'🙈';}
 
-function toggleEye(id,btn){
-  const i=document.getElementById(id);
-  i.type=i.type==='password'?'text':'password';
-  btn.textContent=i.type==='password'?'👁':'🙈';
-}
-
-// ══════════════════════════════════════════
-//  STORAGE
-// ══════════════════════════════════════════
+// STORAGE
 function load(){try{const d=localStorage.getItem(SK_DATA);if(d)cards=JSON.parse(d);}catch(e){cards=[];}}
 function save(){localStorage.setItem(SK_DATA,JSON.stringify(cards));}
 
-// ══════════════════════════════════════════
-//  BG ANIMATION
-// ══════════════════════════════════════════
+// BG ANIMATION
 function initBG(){
   const cv=document.getElementById('bg-canvas');if(!cv)return;
   cv.width=window.innerWidth;cv.height=window.innerHeight;
   const cx=cv.getContext('2d');let t=0;
   const orbs=[{x:.2,y:.3,r:.35,h:280,s:.6,sp:.0008},{x:.7,y:.6,r:.40,h:320,s:.5,sp:.0006},{x:.5,y:.8,r:.30,h:260,s:.55,sp:.001},{x:.1,y:.7,r:.25,h:200,s:.45,sp:.0007}];
-  (function draw(){
-    cv.clearRect(0,0,cv.width,cv.height);
-    orbs.forEach(o=>{
-      const x=cv.width*(o.x+Math.sin(t*o.sp)*0.15);
-      const y=cv.height*(o.y+Math.cos(t*o.sp*1.3)*0.1);
-      const r=Math.min(cv.width,cv.height)*o.r;
-      const g=cx.createRadialGradient(x,y,0,x,y,r);
-      const hs=`hsla(${o.h+Math.sin(t*0.001)*20},${o.s*100}%,50%,`;
-      g.addColorStop(0,hs+'0.18)');g.addColorStop(1,hs+'0)');
-      cx.fillStyle=g;cx.fillRect(0,0,cv.width,cv.height);
-    });
-    t++;requestAnimationFrame(draw);
-  })();
+  (function draw(){cv.clearRect(0,0,cv.width,cv.height);orbs.forEach(o=>{const x=cv.width*(o.x+Math.sin(t*o.sp)*0.15);const y=cv.height*(o.y+Math.cos(t*o.sp*1.3)*0.1);const r=Math.min(cv.width,cv.height)*o.r;const g=cx.createRadialGradient(x,y,0,x,y,r);const hs=`hsla(${o.h+Math.sin(t*0.001)*20},${o.s*100}%,50%,`;g.addColorStop(0,hs+'0.18)');g.addColorStop(1,hs+'0)');cx.fillStyle=g;cx.fillRect(0,0,cv.width,cv.height);});t++;requestAnimationFrame(draw);})();
   window.addEventListener('resize',()=>{cv.width=window.innerWidth;cv.height=window.innerHeight;});
 }
 
-// ══════════════════════════════════════════
-//  NAV
-// ══════════════════════════════════════════
+// NAV
 function nav(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('on'));
   document.getElementById('pg-'+id).classList.add('on');
   document.querySelector(`[data-page="${id}"]`).classList.add('on');
-  // Restore clean URL when navigating
   try{history.replaceState({},'',_baseUrl);}catch(e){}
   if(id==='gallery')renderGallery();
   if(id==='create')setupCreate();
@@ -666,14 +807,47 @@ function nav(id){
 }
 
 // ══════════════════════════════════════════
-//  BUILD CARD HTML
+// EMOJI PICKER — build emoji grid for type
 // ══════════════════════════════════════════
+function buildEmojiPicker(type){
+  const emojis = EMOJI_SETS[type] || EMOJI_SETS.general;
+  const grid = document.getElementById('emoji-grid');
+  if(!grid) return;
+  grid.innerHTML = emojis.map(e =>
+    `<button class="ep-btn${_selectedEmoji===e?' on':''}" onclick="selectEmoji('${e}')" title="${e}">${e}</button>`
+  ).join('');
+}
+
+function selectEmoji(em){
+  _selectedEmoji = em;
+  const prev = document.getElementById('festival-emoji-preview');
+  if(prev) prev.textContent = em;
+  // Update all emoji buttons
+  document.querySelectorAll('.ep-btn').forEach(b=>{
+    b.classList.toggle('on', b.textContent === em);
+  });
+  livePreview();
+}
+
+// Get effective icon for card (custom emoji > default)
+function getEffectiveIcon(card){
+  if(card.festivalEmoji) return card.festivalEmoji;
+  const th = T[card.type]||T.general;
+  return th.icon;
+}
+
+// Get effective label for card (custom festival name > default)
+function getEffectiveLabel(card){
+  if(card.festivalName && card.festivalName.trim()) return card.festivalName.trim();
+  const th = T[card.type]||T.general;
+  return th.label;
+}
+
+// BUILD CARD HTML
 function formatDate(dateStr){
   if(!dateStr) return '';
-  try{
-    const d=new Date(dateStr+'T00:00:00');
-    return d.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
-  }catch(e){return dateStr;}
+  try{const d=new Date(dateStr+'T00:00:00');return d.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});}
+  catch(e){return dateStr;}
 }
 
 function buildCard(c,full=false){
@@ -685,6 +859,10 @@ function buildCard(c,full=false){
   const iconSz=full?'5.5rem':'3.2rem';
   const pts=getParticles(c.effect||'confetti',full);
 
+  // Custom emoji or default icon
+  const displayIcon = getEffectiveIcon(c);
+  const displayLabel = getEffectiveLabel(c);
+
   let ph='';
   if(c.imgData){
     const s=c.photoShape||'circle';
@@ -695,20 +873,18 @@ function buildCard(c,full=false){
       :`clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%)`;
     ph=`<img src="${c.imgData}" style="width:${pSz};height:${pSz};object-fit:cover;${css};display:block;margin:0 auto ${full?'1rem':'.5rem'}">`;
   }else{
-    ph=`<div style="font-size:${iconSz};margin-bottom:${full?'.7rem':'.3rem'};animation:floatUp 3s ease-in-out infinite;text-align:center">${th.icon}</div>`;
+    ph=`<div style="font-size:${iconSz};margin-bottom:${full?'.7rem':'.3rem'};animation:floatUp 3s ease-in-out infinite;text-align:center">${displayIcon}</div>`;
   }
 
   const div=tpl.divider?`<div style="width:${full?'60px':'36px'};height:${full?'2px':'1.5px'};background:linear-gradient(90deg,transparent,${th.color},transparent);margin:${full?'.6rem':'.3rem'} auto;border-radius:2px"></div>`:'';
   const frm=c.from?`<div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:${full?'.88rem':'.65rem'};margin-top:${full?'.5rem':'.3rem'};opacity:.5">${c.from}</div>`:'';
 
-  // Age badge — Birthday & Anniversary
   let ageBadge='';
-  if(c.age && (c.type==='birthday'||c.type==='anniversary')){
-    const label=c.type==='birthday'?`Turning ${c.age} 🎂`:`${c.age} Years Together 💕`;
+  if(c.age && (c.type==='birthday'||c.type==='anniversary'||c.type==='birthday_milestone'||c.type==='birthday_half'||c.type==='first_birthday')){
+    const label=c.type==='anniversary'?`${c.age} Years Together 💕`:`Turning ${c.age} ${displayIcon}`;
     ageBadge=`<div style="display:inline-block;background:linear-gradient(135deg,${th.color}44,${th.accent}33);border:1.5px solid ${th.color}88;border-radius:50px;padding:${full?'.35rem .9rem':'.2rem .55rem'};font-size:${full?'.82rem':'.6rem'};font-weight:800;letter-spacing:.5px;margin:${full?'.5rem 0 .4rem':'0.25rem 0'};color:${th.accent}">${label}</div>`;
   }
 
-  // Date display
   let dateLine='';
   if(c.date){
     const fmtDate=formatDate(c.date);
@@ -720,7 +896,7 @@ function buildCard(c,full=false){
 <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,${th.color}18,transparent)"></div>
 <div style="position:relative;z-index:2;text-align:center;padding:${full?'1.8rem 2.5rem':'1rem 1.2rem'};width:100%;color:#fff">
 ${ph}
-<div style="font-size:${full?'.65rem':'.5rem'};font-weight:900;letter-spacing:3px;text-transform:uppercase;opacity:.6;margin-bottom:${full?'.4rem':'.2rem'};color:${th.accent}">${th.label}</div>
+<div style="font-size:${full?'.65rem':'.5rem'};font-weight:900;letter-spacing:3px;text-transform:uppercase;opacity:.6;margin-bottom:${full?'.4rem':'.2rem'};color:${th.accent}">${displayLabel}</div>
 ${div}
 ${ageBadge}
 <div style="font-family:${tpl.nameFont};font-size:${nameSz};font-weight:700;line-height:1.2;margin:${full?'.2rem 0 .5rem':'0.15rem 0 .25rem'};text-shadow:0 2px 20px rgba(0,0,0,.4);color:#fff">${c.name||'Your Name'}</div>
@@ -741,54 +917,33 @@ function getParticles(eff,full){
     const x=Math.random()*100,y=Math.random()*100;
     const sz=full?(0.8+Math.random()*1.6):(0.5+Math.random()*.9);
     const dur=2+Math.random()*5,del=Math.random()*4;
-    const anim=(eff==='snow'||eff==='leaves'||eff==='confetti')
-      ?`animation:fallPart ${dur}s ease-in-out infinite ${del}s`
-      :`animation:risePart ${dur}s ease-in-out infinite ${del}s`;
+    const anim=(eff==='snow'||eff==='leaves'||eff==='confetti')?`animation:fallPart ${dur}s ease-in-out infinite ${del}s`:`animation:risePart ${dur}s ease-in-out infinite ${del}s`;
     out+=`<div style="position:absolute;left:${x}%;top:${y}%;font-size:${sz}rem;${anim};opacity:${.3+Math.random()*.5}">${p[i%p.length]}</div>`;
   }
   return out;
 }
 
-// ══════════════════════════════════════════
-//  SHARE VIEW — Recipients see ONLY card
-//  Triggered by ?card= URL param
-// ══════════════════════════════════════════
+// SHARE VIEW
 function showShareView(card){
   const th=T[card.type]||T.general;
-  // Hide everything except share view
   document.getElementById('root').style.display='none';
   document.getElementById('bg-canvas').style.display='none';
-
   const sv=document.getElementById('share-view');
   sv.style.background=`linear-gradient(160deg,${th.bg[0]},${th.bg[1]},${th.bg[2]})`;
-
-  if(card.recipient){
-    document.getElementById('s-banner-name').textContent=`Hey ${card.recipient}, you have a special greeting! 🎉`;
-    document.getElementById('s-banner').style.display='block';
-  }
-
+  if(card.recipient){document.getElementById('s-banner-name').textContent=`Hey ${card.recipient}, you have a special greeting! 🎉`;document.getElementById('s-banner').style.display='block';}
   document.getElementById('s-card-inner').innerHTML=buildCard(card,true);
-
-  _shareUrl=location.href;
-  _shareRecipient=card.recipient||'';
+  _shareUrl=location.href;_shareRecipient=card.recipient||'';
   document.getElementById('s-url-txt').textContent=location.href;
   sv.classList.add('on');
-
-  setTimeout(()=>{
-    const cv=document.getElementById('sconf-cv');
-    cv.width=window.innerWidth;cv.height=window.innerHeight;
-    runEffect(card.effect||'confetti',cv);
-  },500);
+  setTimeout(()=>{const cv=document.getElementById('sconf-cv');cv.width=window.innerWidth;cv.height=window.innerHeight;runEffect(card.effect||'confetti',cv);},500);
 }
 
 function sCopy(){
   cpToClipboard(_shareUrl);
-  const t=document.createElement('div');
-  t.textContent='📋 Copied!';
+  const t=document.createElement('div');t.textContent='📋 Copied!';
   t.style.cssText='position:fixed;bottom:6rem;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.15);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.2);border-radius:50px;padding:.6rem 1.4rem;font-size:.85rem;font-weight:700;color:#fff;z-index:9999;pointer-events:none';
   document.body.appendChild(t);setTimeout(()=>t.remove(),2000);
 }
-
 function sShare(){
   const title=_shareRecipient?`A greeting for ${_shareRecipient}!`:'FestivaCard Greeting';
   const text=_shareRecipient?`Hey ${_shareRecipient}, you have a special greeting! 🎉`:'Check out this greeting card!';
@@ -796,143 +951,68 @@ function sShare(){
   else sCopy();
 }
 
-// ══════════════════════════════════════════
-//  INTERNAL VIEW — Card owner's preview
-//  KEY FIX: URL bar updates to share link!
-// ══════════════════════════════════════════
+// INTERNAL VIEW
 function viewCard(id){
   const c=cards.find(x=>x.id===id);if(!c)return;
   const th=T[c.type]||T.general;
-
   document.getElementById('view-canvas').innerHTML=buildCard(c,true);
   document.getElementById('view-page').style.background=`linear-gradient(160deg,${th.bg[0]},${th.bg[1]},${th.bg[2]})`;
-
-  _shareUrl=makeShareUrl(c);
-  _shareRecipient=c.recipient||'';
-
-  // Show share URL in banner
+  _shareUrl=makeShareUrl(c);_shareRecipient=c.recipient||'';
   document.getElementById('v-url').textContent=_shareUrl;
-
-  // ✅ KEY FIX: Update browser address bar to the share URL
-  // Now: Copy from address bar = correct share link!
   try{history.pushState({cardId:id},'',_shareUrl);}catch(e){}
-
   document.getElementById('view-page').classList.add('on');
   document.body.style.overflow='hidden';
-
-  setTimeout(()=>{
-    const cv=document.getElementById('vconf-cv');
-    cv.width=window.innerWidth;cv.height=window.innerHeight;
-    runEffect(c.effect||'confetti',cv);
-  },400);
+  setTimeout(()=>{const cv=document.getElementById('vconf-cv');cv.width=window.innerWidth;cv.height=window.innerHeight;runEffect(c.effect||'confetti',cv);},400);
 }
 
 function closeView(){
   document.getElementById('view-page').classList.remove('on');
-  document.body.style.overflow='';
-  stopFX();
-  // ✅ Restore clean URL when closing
+  document.body.style.overflow='';stopFX();
   try{history.pushState({},'',_baseUrl);}catch(e){}
 }
-
-function vCopy(){
-  cpToClipboard(_shareUrl);
-  toast('📋 Link copied! Share via WhatsApp, SMS, Email — opens card on any device ✨');
-}
-
-function vShare(){
-  const title=_shareRecipient?`A greeting for ${_shareRecipient}!`:'FestivaCard';
-  const text=_shareRecipient?`Hey ${_shareRecipient}, you have a special greeting! 🎉`:'Check this greeting!';
-  if(navigator.share)navigator.share({title,text,url:_shareUrl}).catch(()=>vCopy());
-  else vCopy();
-}
-
-function vWhatsApp(){
-  const text=encodeURIComponent((_shareRecipient?`Hey ${_shareRecipient}, you have a special greeting! 🎉 `:'Check this greeting card! 🎊 ')+_shareUrl);
-  window.open('https://wa.me/?text='+text,'_blank');
-}
-
-function cpToClipboard(txt){
-  if(navigator.clipboard)navigator.clipboard.writeText(txt).catch(()=>legacyCopy(txt));
-  else legacyCopy(txt);
-}
+function vCopy(){cpToClipboard(_shareUrl);toast('📋 Link copied! Share via WhatsApp, SMS, Email — opens card on any device ✨');}
+function vShare(){const title=_shareRecipient?`A greeting for ${_shareRecipient}!`:'FestivaCard';const text=_shareRecipient?`Hey ${_shareRecipient}, you have a special greeting! 🎉`:'Check this greeting!';if(navigator.share)navigator.share({title,text,url:_shareUrl}).catch(()=>vCopy());else vCopy();}
+function vWhatsApp(){const text=encodeURIComponent((_shareRecipient?`Hey ${_shareRecipient}, you have a special greeting! 🎉 `:'Check this greeting card! 🎊 ')+_shareUrl);window.open('https://wa.me/?text='+text,'_blank');}
+function cpToClipboard(txt){if(navigator.clipboard)navigator.clipboard.writeText(txt).catch(()=>legacyCopy(txt));else legacyCopy(txt);}
 function legacyCopy(txt){const t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();}
 
-// ══════════════════════════════════════════
-//  EFFECTS
-// ══════════════════════════════════════════
+// EFFECTS
 let _fx=null;
 function stopFX(){if(_fx){_fx();_fx=null;}}
-
 function runEffect(eff,cv){
   stopFX();
   if(typeof confetti!=='undefined'){
-    if(eff==='confetti'){
-      let f,t=0;
-      (function s(){
-        if(t<300){
-          confetti({particleCount:6,angle:60,spread:55,origin:{x:0,y:.7},colors:['#f0c040','#f472b6','#a78bfa','#fff']});
-          confetti({particleCount:6,angle:120,spread:55,origin:{x:1,y:.7},colors:['#f0c040','#f472b6','#a78bfa','#fff']});
-        }t++;f=requestAnimationFrame(s);
-      })();
-      _fx=()=>{cancelAnimationFrame(f);confetti.reset()};return;
-    }
-    if(eff==='firework'){
-      let f,t=0;
-      (function s(){
-        if(t%30===0&&t<360)confetti({particleCount:35,spread:360,startVelocity:20,decay:.88,origin:{x:.1+Math.random()*.8,y:.1+Math.random()*.5},colors:['#f0c040','#f472b6','#fff','#38bdf8']});
-        t++;f=requestAnimationFrame(s);
-      })();
-      _fx=()=>{cancelAnimationFrame(f);confetti.reset()};return;
-    }
-    if(eff==='hearts'){
-      const h=confetti.shapeFromText({text:'❤',scalar:2});let f,t=0;
-      (function s(){
-        if(t<300)confetti({particleCount:4,spread:60,origin:{x:Math.random(),y:-.1},shapes:[h],scalar:1.5,colors:['#f472b6','#fb7185','#fff']});
-        t++;f=requestAnimationFrame(s);
-      })();
-      _fx=()=>{cancelAnimationFrame(f);confetti.reset()};return;
-    }
+    if(eff==='confetti'){let f,t=0;(function s(){if(t<300){confetti({particleCount:6,angle:60,spread:55,origin:{x:0,y:.7},colors:['#f0c040','#f472b6','#a78bfa','#fff']});confetti({particleCount:6,angle:120,spread:55,origin:{x:1,y:.7},colors:['#f0c040','#f472b6','#a78bfa','#fff']});}t++;f=requestAnimationFrame(s);})();_fx=()=>{cancelAnimationFrame(f);confetti.reset()};return;}
+    if(eff==='firework'){let f,t=0;(function s(){if(t%30===0&&t<360)confetti({particleCount:35,spread:360,startVelocity:20,decay:.88,origin:{x:.1+Math.random()*.8,y:.1+Math.random()*.5},colors:['#f0c040','#f472b6','#fff','#38bdf8']});t++;f=requestAnimationFrame(s);})();_fx=()=>{cancelAnimationFrame(f);confetti.reset()};return;}
+    if(eff==='hearts'){const h=confetti.shapeFromText({text:'❤',scalar:2});let f,t=0;(function s(){if(t<300)confetti({particleCount:4,spread:60,origin:{x:Math.random(),y:-.1},shapes:[h],scalar:1.5,colors:['#f472b6','#fb7185','#fff']});t++;f=requestAnimationFrame(s);})();_fx=()=>{cancelAnimationFrame(f);confetti.reset()};return;}
   }
-  // Canvas fallback
-  const ctx=cv.getContext('2d');
-  const C=['#f0c040','#f472b6','#a78bfa','#38bdf8','#4ade80'];
+  const ctx=cv.getContext('2d');const C=['#f0c040','#f472b6','#a78bfa','#38bdf8','#4ade80'];
   const pts=Array.from({length:60},()=>({x:Math.random()*cv.width,y:Math.random()*cv.height,vx:(Math.random()-.5)*1.5,vy:-.5-Math.random()*1.5,r:2+Math.random()*4,col:C[Math.floor(Math.random()*C.length)],life:1}));
-  let rf,t=0;
-  (function tick(){
-    ctx.clearRect(0,0,cv.width,cv.height);
-    pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.03;p.life-=.004;if(p.y>cv.height||p.life<=0){p.x=Math.random()*cv.width;p.y=cv.height+10;p.vy=-(1+Math.random()*2);p.life=1;}ctx.globalAlpha=p.life;ctx.fillStyle=p.col;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();});
-    ctx.globalAlpha=1;t++;if(t<400)rf=requestAnimationFrame(tick);
-  })();
+  let rf,t=0;(function tick(){ctx.clearRect(0,0,cv.width,cv.height);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.03;p.life-=.004;if(p.y>cv.height||p.life<=0){p.x=Math.random()*cv.width;p.y=cv.height+10;p.vy=-(1+Math.random()*2);p.life=1;}ctx.globalAlpha=p.life;ctx.fillStyle=p.col;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();});ctx.globalAlpha=1;t++;if(t<400)rf=requestAnimationFrame(tick);})();
   _fx=()=>{cancelAnimationFrame(rf);ctx.clearRect(0,0,cv.width,cv.height);};
 }
 
-// ══════════════════════════════════════════
-//  GALLERY
-// ══════════════════════════════════════════
+// GALLERY
 function renderGallery(){
   const tc=cards.reduce((a,c)=>{a[c.type]=(a[c.type]||0)+1;return a;},{});
   document.getElementById('stats-row').innerHTML=
     `<div class="stat"><b>${cards.length}</b> Cards</div>`+
     Object.entries(tc).slice(0,5).map(([t,n])=>`<div class="stat"><b>${n}</b> ${T[t]?.label||t}</div>`).join('');
-
   const types=[...new Set(cards.map(c=>c.type))];
   document.getElementById('filter-row').innerHTML=
     `<button class="filter-pill${_filter==='all'?' on':''}" onclick="setFilter('all',this)">All</button>`+
     types.map(t=>`<button class="filter-pill${_filter===t?' on':''}" onclick="setFilter('${t}',this)">${T[t]?.icon||'🎊'} ${T[t]?.label||t}</button>`).join('');
-
   const fl=_filter==='all'?cards:cards.filter(c=>c.type===_filter);
   const g=document.getElementById('gallery-grid');
-  if(!fl.length){
-    g.innerHTML=`<div class="empty"><div class="empty-icon">🌟</div><h3>${cards.length?'No cards of this type':'No cards yet'}</h3><br><button class="btn btn-primary" onclick="nav('create')" style="margin-top:.8rem">✨ Create Card</button></div>`;
-    return;
-  }
+  if(!fl.length){g.innerHTML=`<div class="empty"><div class="empty-icon">🌟</div><h3>${cards.length?'No cards of this type':'No cards yet'}</h3><br><button class="btn btn-primary" onclick="nav('create')" style="margin-top:.8rem">✨ Create Card</button></div>`;return;}
   g.innerHTML=fl.map(c=>{
     const th=T[c.type]||T.general;
+    const lbl=getEffectiveLabel(c);
+    const icon=getEffectiveIcon(c);
     return `<div class="gtile">
 <div class="gtile-thumb" style="background:linear-gradient(160deg,${th.bg[0]},${th.bg[1]})" onclick="viewCard('${c.id}')">
-${c.imgData?`<img src="${c.imgData}" alt="${c.name}">`:`<div class="gtile-no-img">${th.icon}</div>`}
-<div class="gtile-badge" style="color:${th.color};border-color:${th.color}33">${th.label}</div>
+${c.imgData?`<img src="${c.imgData}" alt="${c.name}">`:`<div class="gtile-no-img">${icon}</div>`}
+<div class="gtile-badge" style="color:${th.color};border-color:${th.color}33">${lbl}</div>
 </div>
 <div class="gtile-body" onclick="viewCard('${c.id}')">
 <div class="gtile-name">${c.name}</div>
@@ -949,10 +1029,8 @@ ${c.recipient?`<div style="margin-top:.4rem;font-size:.72rem;background:rgba(240
 
 function setFilter(f,el){_filter=f;document.querySelectorAll('.filter-pill').forEach(p=>p.classList.remove('on'));el.classList.add('on');renderGallery();}
 
-// ══════════════════════════════════════════
-//  CREATE PAGE
-// ══════════════════════════════════════════
-function setupCreate(){buildStyleGrid();livePreview();}
+// CREATE PAGE
+function setupCreate(){buildStyleGrid();_selectedEmoji='';livePreview();}
 
 function buildStyleGrid(){
   document.getElementById('style-grid').innerHTML=EFFECTS.map(e=>
@@ -962,42 +1040,85 @@ function buildStyleGrid(){
 
 function pickStyle(id,el){_style=id;document.querySelectorAll('.style-tile').forEach(t=>t.classList.remove('on'));el.classList.add('on');livePreview();}
 
+// ══════════════════════════════════════════
+// ON TYPE CHANGE — Show festival name edit
+// ══════════════════════════════════════════
 function onTypeChange(){
   const t=document.getElementById('f-type').value;
-  if(t&&T[t]&&!document.getElementById('f-msg').value) document.getElementById('f-msg').value=T[t].msg;
+  if(t && T[t] && !document.getElementById('f-msg').value) document.getElementById('f-msg').value=T[t].msg;
 
-  // Show/hide date & age fields based on type
+  // Show festival name edit row for ALL types
+  const fnRow=document.getElementById('festival-name-row');
+  if(t){
+    fnRow.classList.add('show');
+    // Set default festival name placeholder
+    const fnInput=document.getElementById('f-festival-name');
+    if(!fnInput.value) fnInput.placeholder=T[t]?T[t].label:'Custom Event';
+    // Set default emoji preview
+    const defaultEmoji = T[t]?.icon || '🎊';
+    if(!_selectedEmoji){
+      document.getElementById('festival-emoji-preview').textContent=defaultEmoji;
+    }
+    buildEmojiPicker(t);
+  } else {
+    fnRow.classList.remove('show');
+  }
+
+  // Show/hide birthday alternate options
+  const bdayAlt=document.getElementById('birthday-alt-row');
+  if(t==='birthday'){bdayAlt.style.display='block';}
+  else{bdayAlt.style.display='none';document.querySelector('input[name="bday-alt"][value="normal"]').checked=true;}
+
+  // Show/hide date & age fields
   const row=document.getElementById('date-age-row');
   const dateWrap=document.getElementById('date-field-wrap');
   const ageWrap=document.getElementById('age-field-wrap');
   const dateLabel=document.getElementById('date-label');
   const ageLabel=document.getElementById('age-label');
-
-  // Reset
   dateWrap.style.display='none'; ageWrap.style.display='none'; row.style.display='none';
 
-  if(t==='birthday'){
-    row.style.display='grid';
-    dateWrap.style.display='block'; dateLabel.textContent='🎂 Date of Birth';
-    ageWrap.style.display='block';  ageLabel.textContent='🎂 Turning Age';
-  } else if(t==='wedding'||t==='marriage'){
-    row.style.display='grid';
-    dateWrap.style.display='block'; dateLabel.textContent='💍 Wedding Date';
+  if(t==='birthday'||t==='birthday_half'||t==='birthday_surprise'||t==='birthday_milestone'||t==='first_birthday'){
+    row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='🎂 Date of Birth';ageWrap.style.display='block';ageLabel.textContent='🎂 Turning Age';
+  } else if(t==='wedding'||t==='marriage'||t==='engagement'||t==='proposal'){
+    row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='💍 Event Date';
   } else if(t==='anniversary'){
-    row.style.display='grid';
-    dateWrap.style.display='block'; dateLabel.textContent='💕 Anniversary Date';
-    ageWrap.style.display='block';  ageLabel.textContent='💕 Years Together';
-  } else if(t==='graduation'){
-    row.style.display='grid';
-    dateWrap.style.display='block'; dateLabel.textContent='🎓 Graduation Date';
-  } else if(['diwali','christmas','eid','newyear','holi','pongal','onam','navratri'].includes(t)){
-    row.style.display='grid';
-    dateWrap.style.display='block'; dateLabel.textContent='📅 Festival Date';
+    row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='💕 Anniversary Date';ageWrap.style.display='block';ageLabel.textContent='💕 Years Together';
+  } else if(t==='graduation'||t==='promotion'||t==='newjob'||t==='retirement'||t==='exam_pass'){
+    row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='📅 Event Date';
+  } else if(['diwali','christmas','eid','eid_adha','newyear','holi','pongal','onam','navratri','dussehra','ugadi','vishu','baisakhi','raksha','ganesh','janmashtami','ramadan','easter','halloween','thanksgiving'].includes(t)){
+    row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='📅 Festival Date';
   } else if(t){
-    row.style.display='grid';
-    dateWrap.style.display='block'; dateLabel.textContent='📅 Event Date';
+    row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='📅 Event Date';
   }
+  livePreview();
+}
 
+// ══════════════════════════════════════════
+// BIRTHDAY ALTERNATE HANDLER
+// ══════════════════════════════════════════
+function onBdayAlt(){
+  const val=document.querySelector('input[name="bday-alt"]:checked')?.value||'normal';
+  const alt=BDAY_ALTS[val];
+  const hints={
+    normal:'Standard birthday card with classic styling',
+    half:'Perfect for celebrating the 6-month mark!',
+    surprise:'Shhh! Great for surprise party invites',
+    milestone:'Perfect for 18th, 21st, 25th, 50th, etc.',
+    first:'Adorable first birthday celebration card',
+    joint:'Two names, double the celebration!'
+  };
+  document.getElementById('bday-alt-hint').textContent=hints[val]||'';
+  // Auto-fill festival name and emoji from alternate
+  const fnInput=document.getElementById('f-festival-name');
+  fnInput.value=alt.label;
+  _selectedEmoji=alt.icon;
+  document.getElementById('festival-emoji-preview').textContent=alt.icon;
+  document.querySelectorAll('.ep-btn').forEach(b=>{b.classList.toggle('on', b.textContent===alt.icon);});
+  // Auto-update message
+  const msgEl=document.getElementById('f-msg');
+  if(!msgEl.value || Object.values(BDAY_ALTS).some(a=>a.msg===msgEl.value)){
+    msgEl.value=alt.msg;
+  }
   livePreview();
 }
 
@@ -1007,27 +1128,19 @@ function onImgChange(inp){
   r.onload=e=>{
     img.onload=()=>{
       const c=document.createElement('canvas');
-      // Compress to 280px max, quality 0.60 — keeps URL short enough for sharing
       const M=280;let w=img.width,h=img.height;
       if(w>M||h>M){if(w>h){h=Math.round(h*M/w);w=M;}else{w=Math.round(w*M/h);h=M;}}
       c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);
       _imgData=c.toDataURL('image/jpeg',0.60);
-
       const th=document.getElementById('img-prev-thumb');
       th.src=_imgData;th.style.display='block';
       document.getElementById('img-prev-name').textContent=inp.files[0].name+' (compressed ✓)';
       document.getElementById('img-remove-btn').style.display='inline-block';
       document.getElementById('photo-style-row').style.display='block';
-
-      // Warn if image might be too large for URL
-      const warn=document.getElementById('img-warn');
-      warn.style.display=_imgData.length>160000?'block':'none';
-
+      const warn=document.getElementById('img-warn');warn.style.display=_imgData.length>160000?'block':'none';
       livePreview();
-    };
-    img.src=e.target.result;
-  };
-  r.readAsDataURL(inp.files[0]);
+    };img.src=e.target.result;
+  };r.readAsDataURL(inp.files[0]);
 }
 
 function removeImg(){
@@ -1050,8 +1163,10 @@ function livePreview(){
 }
 
 function getFormCard(){
+  const type=document.getElementById('f-type')?.value||'general';
+  const th=T[type]||T.general;
   return {
-    type:document.getElementById('f-type')?.value||'general',
+    type,
     name:document.getElementById('f-name')?.value||'Your Name',
     msg:document.getElementById('f-msg')?.value||'',
     from:document.getElementById('f-from')?.value||'',
@@ -1060,16 +1175,21 @@ function getFormCard(){
     recipient:document.getElementById('f-recipient')?.value||'',
     date:document.getElementById('f-date')?.value||'',
     age:document.getElementById('f-age')?.value||'',
+    festivalName:document.getElementById('f-festival-name')?.value||'',
+    festivalEmoji:_selectedEmoji||'',
   };
 }
 
 function clearForm(){
-  ['f-type','f-name','f-msg','f-from','f-recipient','f-date','f-age'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+  ['f-type','f-name','f-msg','f-from','f-recipient','f-date','f-age','f-festival-name'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
   document.getElementById('f-tpl').value='classic';
   document.getElementById('date-age-row').style.display='none';
   document.getElementById('date-field-wrap').style.display='none';
   document.getElementById('age-field-wrap').style.display='none';
-  removeImg();_style='confetti';buildStyleGrid();livePreview();
+  document.getElementById('festival-name-row').classList.remove('show');
+  document.getElementById('birthday-alt-row').style.display='none';
+  const eprev=document.getElementById('festival-emoji-preview');if(eprev)eprev.textContent='🎊';
+  removeImg();_style='confetti';_selectedEmoji='';buildStyleGrid();livePreview();
 }
 
 function saveCard(){
@@ -1077,10 +1197,7 @@ function saveCard(){
   const name=document.getElementById('f-name').value.trim();
   if(!type){toast('⚠️ Please select an event type');return;}
   if(!name){toast('⚠️ Please enter a name');return;}
-  const c={
-    id:'fc_'+Date.now()+'_'+Math.random().toString(36).slice(2,6),
-    ...getFormCard(),name,type,created:new Date().toISOString()
-  };
+  const c={id:'fc_'+Date.now()+'_'+Math.random().toString(36).slice(2,6),...getFormCard(),name,type,created:new Date().toISOString()};
   cards.unshift(c);save();
   toast('🎉 Card saved! Opening preview...');
   nav('gallery');
@@ -1088,37 +1205,27 @@ function saveCard(){
   clearForm();
 }
 
-// ══════════════════════════════════════════
-//  ADMIN PANEL
-// ══════════════════════════════════════════
-function showAdminPanel(){
-  document.getElementById('admin-login-section').style.display='none';
-  document.getElementById('admin-panel').style.display='block';
-  renderAdmin();
-}
+// ADMIN PANEL
+function showAdminPanel(){document.getElementById('admin-login-section').style.display='none';document.getElementById('admin-panel').style.display='block';renderAdmin();}
 
 function renderAdmin(){
   const tc=cards.reduce((a,c)=>{a[c.type]=(a[c.type]||0)+1;return a;},{});
-  document.getElementById('admin-stats').innerHTML=
-    `<div class="stat"><b>${cards.length}</b> Total Cards</div>`+
-    Object.entries(tc).slice(0,5).map(([t,n])=>`<div class="stat"><b>${n}</b> ${T[t]?.label||t}</div>`).join('');
-
+  document.getElementById('admin-stats').innerHTML=`<div class="stat"><b>${cards.length}</b> Total Cards</div>`+Object.entries(tc).slice(0,5).map(([t,n])=>`<div class="stat"><b>${n}</b> ${T[t]?.label||t}</div>`).join('');
   const w=document.getElementById('admin-tbl');
-  if(!cards.length){
-    w.innerHTML=`<div class="empty"><div class="empty-icon">📋</div><h3>No cards yet</h3><br><button class="btn btn-primary" onclick="nav('create')" style="margin-top:.8rem">+ Create New</button></div>`;
-    return;
-  }
+  if(!cards.length){w.innerHTML=`<div class="empty"><div class="empty-icon">📋</div><h3>No cards yet</h3><br><button class="btn btn-primary" onclick="nav('create')" style="margin-top:.8rem">+ Create New</button></div>`;return;}
   w.innerHTML=`<div class="tbl-wrap"><table class="atbl">
 <thead><tr><th>Card</th><th>Type</th><th>For</th><th>Effect</th><th>Created</th><th>Actions</th></tr></thead>
 <tbody>${cards.map(c=>{
   const th=T[c.type]||T.general;
+  const lbl=getEffectiveLabel(c);
+  const icon=getEffectiveIcon(c);
   return `<tr>
 <td><div style="display:flex;align-items:center;gap:.8rem">
 <div style="width:46px;height:46px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,${th.bg[0]},${th.bg[1]});flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.4rem">
-${c.imgData?`<img src="${c.imgData}" style="width:46px;height:46px;object-fit:cover">`:`${th.icon}`}</div>
+${c.imgData?`<img src="${c.imgData}" style="width:46px;height:46px;object-fit:cover">`:`${icon}`}</div>
 <div><div style="font-weight:700">${c.name}</div><div style="font-size:.75rem;color:var(--muted);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${(c.msg||'').slice(0,45)}…</div></div>
 </div></td>
-<td><span class="tbadge" style="background:${th.color}22;color:${th.color}">${th.label}</span></td>
+<td><span class="tbadge" style="background:${th.color}22;color:${th.color}">${lbl}</span></td>
 <td>${c.recipient?`<span style="background:rgba(240,192,64,.1);color:var(--gold);border-radius:50px;padding:.2rem .6rem;font-size:.75rem">🎯 ${c.recipient}</span>`:'<span style="color:var(--muted);font-size:.8rem">—</span>'}</td>
 <td style="color:var(--muted);font-size:.82rem">${c.effect||'confetti'}</td>
 <td style="color:var(--muted);font-size:.8rem;white-space:nowrap">${new Date(c.created).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</td>
@@ -1131,9 +1238,15 @@ ${c.imgData?`<img src="${c.imgData}" style="width:46px;height:46px;object-fit:co
 }).join('')}</tbody></table></div>`;
 }
 
-// ══════════════════════════════════════════
-//  EDIT / DELETE
-// ══════════════════════════════════════════
+// EDIT / DELETE
+function onEditTypeChange(){
+  const t=document.getElementById('em-type').value;
+  const emFestRow=document.getElementById('em-festival-row');
+  if(t) emFestRow.classList.add('show'); else emFestRow.classList.remove('show');
+  const showAge=['birthday','anniversary','birthday_milestone','birthday_half','first_birthday'].includes(t);
+  document.getElementById('em-age-wrap').style.display=showAge?'block':'none';
+}
+
 function openEdit(id){
   const c=cards.find(x=>x.id===id);if(!c)return;
   _editId=id;
@@ -1144,9 +1257,10 @@ function openEdit(id){
   document.getElementById('em-recipient').value=c.recipient||'';
   document.getElementById('em-date').value=c.date||'';
   document.getElementById('em-age').value=c.age||'';
-  // Show/hide age based on type
-  const showAge=['birthday','anniversary'].includes(c.type);
+  document.getElementById('em-festival-name').value=c.festivalName||'';
+  const showAge=['birthday','anniversary','birthday_milestone','birthday_half','first_birthday'].includes(c.type);
   document.getElementById('em-age-wrap').style.display=showAge?'block':'none';
+  document.getElementById('em-festival-row').classList.add('show');
   openModal('edit-modal');
 }
 
@@ -1160,6 +1274,7 @@ function confirmEdit(){
   c.recipient=document.getElementById('em-recipient').value;
   c.date=document.getElementById('em-date').value;
   c.age=document.getElementById('em-age').value;
+  c.festivalName=document.getElementById('em-festival-name').value;
   save();closeModal('edit-modal');toast('✅ Card updated!');
   if(isSes())renderAdmin();
   renderGallery();
@@ -1167,69 +1282,42 @@ function confirmEdit(){
 
 function promptDel(id){_delId=id;openModal('del-modal');}
 function confirmDel(){cards=cards.filter(c=>c.id!==_delId);save();closeModal('del-modal');toast('🗑️ Deleted');renderAdmin();renderGallery();}
-
 function openModal(id){document.getElementById(id).classList.add('on');}
 function closeModal(id){document.getElementById(id).classList.remove('on');}
 
-// ══════════════════════════════════════════
-//  TOAST
-// ══════════════════════════════════════════
-function toast(msg){
-  document.querySelectorAll('.toast').forEach(t=>t.remove());
-  const t=document.createElement('div');t.className='toast';t.innerHTML=msg;
-  document.body.appendChild(t);setTimeout(()=>t.remove(),3200);
-}
+// TOAST
+function toast(msg){document.querySelectorAll('.toast').forEach(t=>t.remove());const t=document.createElement('div');t.className='toast';t.innerHTML=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),3200);}
 
-// ══════════════════════════════════════════
-//  SEED DATA
-// ══════════════════════════════════════════
+// SEED DATA
 function seed(){
   if(cards.length)return;
   cards=[
-    {id:'s1',type:'birthday',name:'Aanya Kapoor',msg:"Wishing you a day as magical as you are! 🎂",from:'With love, your family',tpl:'royal',effect:'confetti',imgData:null,photoShape:'circle',recipient:'Aanya',created:new Date().toISOString()},
-    {id:'s2',type:'diwali',name:'The Sharma Family',msg:"May the festival of lights bring joy! Happy Diwali! 🪔",from:'Warm wishes',tpl:'classic',effect:'firework',imgData:null,photoShape:'circle',recipient:'',created:new Date(Date.now()-86400000).toISOString()},
-    {id:'s3',type:'wedding',name:'Rahul & Priya',msg:"May your love grow stronger each day! 💍",from:'With blessings',tpl:'minimal',effect:'hearts',imgData:null,photoShape:'circle',recipient:'Priya',created:new Date(Date.now()-172800000).toISOString()},
+    {id:'s1',type:'birthday',name:'Aanya Kapoor',msg:"Wishing you a day as magical as you are! 🎂",from:'With love, your family',tpl:'royal',effect:'confetti',imgData:null,photoShape:'circle',recipient:'Aanya',created:new Date().toISOString(),festivalName:'Sweet 16',festivalEmoji:'🎂'},
+    {id:'s2',type:'diwali',name:'The Sharma Family',msg:"May the festival of lights bring joy! Happy Diwali! 🪔",from:'Warm wishes',tpl:'classic',effect:'firework',imgData:null,photoShape:'circle',recipient:'',created:new Date(Date.now()-86400000).toISOString(),festivalName:'',festivalEmoji:''},
+    {id:'s3',type:'wedding',name:'Rahul & Priya',msg:"May your love grow stronger each day! 💍",from:'With blessings',tpl:'minimal',effect:'hearts',imgData:null,photoShape:'circle',recipient:'Priya',created:new Date(Date.now()-172800000).toISOString(),festivalName:'',festivalEmoji:''},
+    {id:'s4',type:'birthday_half',name:'Little Aryan',msg:"Happy Half Birthday! 🎈 You're halfway there, champ!",from:'Mom & Dad',tpl:'classic',effect:'confetti',imgData:null,photoShape:'circle',recipient:'Aryan',created:new Date(Date.now()-259200000).toISOString(),festivalName:'Half Birthday',festivalEmoji:'🎈'},
   ];
   save();
 }
 
-// ══════════════════════════════════════════
-//  INIT — Check ?card= BEFORE app load
-// ══════════════════════════════════════════
+// INIT
 window.addEventListener('load',()=>{
-  // Save the clean base URL (without any ?card= param)
   _baseUrl = location.href.split('?')[0].split('#')[0];
-
   load();seed();
-
-  // ✅ Check for share link — safeGetCardParam fixes the + sign URL bug
   const cardParam = safeGetCardParam();
-
   if(cardParam){
     const card = decodeCard(cardParam);
-    if(card){
-      showShareView(card);
-      return; // Stop here — show only card to recipient
-    }
-    // If decode failed, clean URL and show app
+    if(card){showShareView(card);return;}
     try{history.replaceState({},'',_baseUrl);}catch(e){}
   }
-
-  // Normal app init
   initBG();
   renderGallery();
 });
 
-// Handle browser back button when card view is open
 window.addEventListener('popstate',()=>{
   const vp=document.getElementById('view-page');
-  if(vp.classList.contains('on')){
-    vp.classList.remove('on');
-    document.body.style.overflow='';
-    stopFX();
-  }
+  if(vp.classList.contains('on')){vp.classList.remove('on');document.body.style.overflow='';stopFX();}
 });
-
 window.addEventListener('keydown',e=>{if(e.key==='Escape')closeView();});
 </script>
 </body>
