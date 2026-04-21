@@ -88,7 +88,6 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
 .festival-name-row.show{display:block}
 .festival-name-row label{color:var(--violet)!important}
 .festival-hint{font-size:.73rem;color:var(--muted);margin-top:.35rem}
-.emoji-picker-wrap{position:relative}
 .emoji-grid{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem;background:var(--panel);border:1px solid var(--border2);border-radius:var(--r3);padding:.6rem;max-height:120px;overflow-y:auto}
 .ep-btn{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.3rem .5rem;font-size:1.2rem;cursor:pointer;transition:all .15s;line-height:1}
 .ep-btn:hover{background:rgba(167,139,250,.15);border-color:var(--violet);transform:scale(1.15)}
@@ -134,6 +133,22 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
 .pwd-row{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:.8rem;align-items:end}
 @media(max-width:700px){.pwd-row{grid-template-columns:1fr}}
 
+/* ── BG COLOR PICKER ── */
+.bg-color-section{background:rgba(240,192,64,.05);border:1px solid rgba(240,192,64,.22);border-radius:var(--r3);padding:1rem}
+.bg-color-section label{color:var(--gold)!important}
+.bg-presets{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.8rem}
+.bg-preset-btn{width:38px;height:38px;border-radius:10px;border:2px solid transparent;cursor:pointer;transition:transform .15s,border-color .15s;flex-shrink:0;position:relative}
+.bg-preset-btn:hover{transform:scale(1.12)}
+.bg-preset-btn.on{border-color:#fff;box-shadow:0 0 0 3px rgba(167,139,250,.6)}
+.bg-preset-btn.on::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#fff;font-weight:900;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.bg-custom-row{display:flex;gap:.8rem;align-items:center;margin-top:.7rem;flex-wrap:wrap}
+.color-input-wrap{display:flex;align-items:center;gap:.5rem}
+.color-input-wrap label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:0;white-space:nowrap}
+.color-input-wrap input[type="color"]{width:38px;height:38px;border-radius:8px;border:1px solid var(--border2);background:none;cursor:pointer;padding:2px}
+.bg-dir-select{background:var(--panel);border:1px solid var(--border);border-radius:var(--r3);padding:.4rem .7rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.8rem;outline:none;cursor:pointer}
+.bg-reset-btn{background:transparent;border:1px solid rgba(248,113,113,.35);color:#f87171;border-radius:50px;padding:.3rem .8rem;font-size:.75rem;cursor:pointer;font-family:'Outfit',sans-serif;font-weight:600;transition:all .2s}
+.bg-reset-btn:hover{background:rgba(248,113,113,.12)}
+
 /* SHORT LINK BOX */
 .short-link-box{background:linear-gradient(135deg,rgba(167,139,250,.12),rgba(240,192,64,.08));border:1px solid rgba(167,139,250,.35);border-radius:var(--r3);padding:1rem 1.1rem;margin-top:.6rem}
 .short-link-label{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--violet);margin-bottom:.4rem;display:flex;align-items:center;gap:.4rem}
@@ -146,10 +161,8 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
 #share-view.on{display:flex}
 #sconf-cv{position:fixed;inset:0;z-index:1;pointer-events:none}
 .s-card-wrap{position:relative;z-index:2;width:100%;max-width:480px;border-radius:24px;overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.8)}
-/* ── Header banner inside share-view ── */
 .s-banner{display:none;animation:slideDown .6s ease;z-index:3;width:100%;max-width:480px;padding:.9rem 1.5rem;text-align:center;background:rgba(0,0,0,.55);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.1);border-radius:16px;margin-bottom:.8rem}
 .s-banner-name{font-family:'Great Vibes',cursive;font-size:2rem;background:linear-gradient(90deg,#f0c040,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-/* ── Card-for label (top chip) ── */
 .s-card-for-chip{z-index:3;display:none;animation:slideDown .5s ease .1s both;width:100%;max-width:480px;margin-bottom:.5rem}
 .s-card-for-chip-inner{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,0,0,.55);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);border-radius:50px;padding:.35rem .9rem;font-size:.78rem;font-weight:700;color:rgba(255,255,255,.8)}
 .s-card-for-chip-inner .chip-name{color:var(--gold);font-size:.9rem}
@@ -163,11 +176,9 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
 #vconf-cv{position:fixed;inset:0;z-index:1;pointer-events:none}
 #view-canvas{width:100%;max-width:480px;border-radius:var(--r2);overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.8);position:relative;z-index:2}
 .v-share-banner{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;align-items:center;gap:.6rem;padding:.7rem 1.2rem;background:rgba(0,0,0,.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.1)}
-/* card-for label inside view-page top bar */
 .v-card-for{display:flex;align-items:center;gap:.4rem;flex:1;overflow:hidden}
 .v-card-for-name{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;color:var(--gold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .v-card-for-sub{font-size:.7rem;color:rgba(255,255,255,.4);white-space:nowrap}
-/* short link row in view-page */
 .v-link-pill{display:flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:.35rem .7rem;cursor:pointer;transition:background .2s;max-width:240px;overflow:hidden}
 .v-link-pill:hover{background:rgba(240,192,64,.1);border-color:rgba(240,192,64,.3)}
 .v-link-pill-txt{font-family:monospace;font-size:.67rem;color:rgba(255,255,255,.5);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
@@ -218,24 +229,21 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
   <button class="btn btn-primary" onclick="goHome()">🏠 Create Your Own Card</button>
 </div>
 
-<!-- SHARE VIEW — card-only, no app chrome -->
+<!-- SHARE VIEW -->
 <div id="share-view">
   <canvas id="sconf-cv"></canvas>
-  <!-- Card-for chip (top) -->
   <div class="s-card-for-chip" id="s-card-for-chip">
     <div class="s-card-for-chip-inner">
       <span>🎁 Card for</span>
       <span class="chip-name" id="s-chip-name"></span>
     </div>
   </div>
-  <!-- Recipient banner -->
   <div id="s-banner" class="s-banner">
     <div class="s-banner-name" id="s-banner-name"></div>
     <div style="font-size:.78rem;color:rgba(255,255,255,.5);margin-top:.2rem">Someone special sent this just for you ✨</div>
   </div>
   <div class="s-card-wrap" id="s-card-inner"></div>
   <div class="s-bottom">
-    <!-- Short link row -->
     <div class="s-copy-row">
       <span class="s-url" id="s-url-txt"></span>
       <button onclick="sCopy()" style="background:linear-gradient(135deg,#f0c040,#e89020);border:none;border-radius:50px;padding:.35rem .85rem;font-size:.75rem;font-weight:700;cursor:pointer;color:#0a0812;flex-shrink:0">📋 Copy</button>
@@ -263,9 +271,9 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
   <!-- GALLERY -->
   <main class="page on" id="pg-gallery">
     <div class="hero">
-      <div class="hero-badge">🔗 NEW: Short Share Links • Card-Only View • 50+ Emojis</div>
+      <div class="hero-badge">🎨 NEW: Custom Background Colors • Short Links • 50+ Emojis</div>
       <h1>Create & Share<br><em>Beautiful Greetings</em></h1>
-      <p>Short link for same-device sharing. Copy Full Link to share across any phone or computer!</p>
+      <p>Pick any background color! Short link for same-device sharing. Full Link works on any phone worldwide!</p>
       <div class="hero-actions">
         <button class="btn btn-primary" onclick="nav('create')">✨ Create New Card</button>
         <button class="btn btn-ghost"   onclick="nav('admin')">⚙️ Admin Panel</button>
@@ -431,1504 +439,38 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
           <div class="style-grid" id="style-grid"></div>
         </div>
 
-        <div class="fld">
-          <label>Photo (Optional)</label>
-          <div class="upload-zone" onclick="document.getElementById('f-img').click()">
-            <div style="font-size:2rem">📸</div>
-            <div style="font-weight:700;margin:.3rem 0">Click to add photo</div>
-            <div style="color:var(--muted);font-size:.82rem">JPG · PNG · WebP — auto-compressed</div>
-            <input type="file" id="f-img" accept="image/*" onchange="onImgChange(this)">
-          </div>
-          <div class="upload-preview">
-            <img class="upload-img-prev" id="img-prev-thumb">
-            <div style="flex:1"><div id="img-prev-name" style="font-size:.82rem;font-weight:600;color:var(--muted)"></div><div id="img-warn" style="font-size:.76rem;color:#fb923c;margin-top:.2rem;display:none">⚠️ Large photo — use Full Link for cross-device sharing.</div></div>
-            <button class="upload-remove" id="img-remove-btn" onclick="removeImg()">✕ Remove</button>
-          </div>
-        </div>
-
-        <div class="fld" id="photo-style-row" style="display:none">
-          <label>Photo Shape</label>
-          <div style="display:flex;gap:.6rem;flex-wrap:wrap">
-            <label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:.5rem .8rem;font-size:.8rem;font-weight:600;color:var(--text)"><input type="radio" name="photo-shape" value="circle" checked onchange="livePreview()" style="accent-color:var(--violet)"> ⭕ Circle</label>
-            <label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:.5rem .8rem;font-size:.8rem;font-weight:600;color:var(--text)"><input type="radio" name="photo-shape" value="rect" onchange="livePreview()" style="accent-color:var(--violet)"> 🔲 Square</label>
-            <label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:.5rem .8rem;font-size:.8rem;font-weight:600;color:var(--text)"><input type="radio" name="photo-shape" value="diamond" onchange="livePreview()" style="accent-color:var(--violet)"> 🔷 Diamond</label>
-          </div>
-        </div>
-
-        <div class="fld" style="background:rgba(240,192,64,.05);border:1px solid rgba(240,192,64,.2);border-radius:var(--r3);padding:1rem">
-          <label style="color:var(--gold)">🎯 Recipient Name (Personalized Opening)</label>
-          <input type="text" id="f-recipient" placeholder="e.g. Aanya, Ravi, Priya..." maxlength="40" oninput="livePreview()">
-          <div style="font-size:.75rem;color:var(--muted);margin-top:.4rem">Shown in "Card for [Name]" label on the share view</div>
-        </div>
-
-        <div style="display:flex;gap:.8rem;flex-wrap:wrap">
-          <button class="btn btn-primary" onclick="saveCard()">💾 Save & Get Share Link</button>
-          <button class="btn btn-ghost" onclick="clearForm()">↺ Clear</button>
-        </div>
-      </div>
-
-      <div class="preview-sticky">
-        <div class="preview-label"><span></span> Live Preview <span></span></div>
-        <div id="prev-wrap"></div>
-        <div class="how-box">
-          <b>🔗 Two ways to share:</b><br>
-          <b style="color:var(--gold)">Short Link</b> — works instantly on the same device (opens card-only view).<br>
-          <b style="color:var(--violet)">Full Link</b> — works on any phone worldwide. Use this for WhatsApp / SMS sharing.
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <!-- ADMIN -->
-  <main class="page" id="pg-admin">
-    <div id="admin-login-section">
-      <div class="admin-login-wrap">
-        <div class="admin-login-box">
-          <div style="font-size:3.5rem;margin-bottom:1rem">🔐</div>
-          <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;margin-bottom:.4rem">Admin Access</div>
-          <div style="color:var(--muted);font-size:.88rem;margin-bottom:1.8rem">Password enter பண்ணி login பண்ணுங்க</div>
-          <div class="pwd-wrap">
-            <input type="password" id="admin-pwd" placeholder="Enter password" onkeydown="if(event.key==='Enter')tryLogin()">
-            <button class="eye-btn" onclick="toggleEye('admin-pwd',this)">👁</button>
-          </div>
-          <div class="admin-err" id="admin-err">❌ Incorrect password. Try again.</div>
-          <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="tryLogin()">🔓 Login</button>
-          <div style="margin-top:1rem;font-size:.75rem;color:var(--muted)">Default password: <b style="color:var(--gold)">admin123</b></div>
-        </div>
-      </div>
-    </div>
-    <div id="admin-panel" style="display:none">
-      <div class="admin-hbar">
-        <div style="display:flex;align-items:center;gap:.8rem">
-          <div class="admin-av">👑</div>
-          <div><div style="font-weight:700;font-size:.95rem">Admin Panel</div><div class="admin-badge">🔓 Logged In</div></div>
-        </div>
-        <div style="display:flex;gap:.6rem;flex-wrap:wrap">
-          <button class="btn btn-primary btn-sm" onclick="nav('create')">+ Create New</button>
-          <button class="btn btn-ghost btn-sm" onclick="doLogout()">🚪 Logout</button>
-        </div>
-      </div>
-      <div class="stats-row" id="admin-stats"></div>
-      <div id="admin-tbl"></div>
-      <div class="pwd-chg">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;margin-bottom:1rem">🔑 Change Admin Password</div>
-        <div class="pwd-row">
-          <div class="fld"><label>Current</label><div class="pwd-wrap" style="margin:0"><input type="password" id="pc" placeholder="Current"><button class="eye-btn" onclick="toggleEye('pc',this)">👁</button></div></div>
-          <div class="fld"><label>New (min 6)</label><div class="pwd-wrap" style="margin:0"><input type="password" id="pn" placeholder="New password"><button class="eye-btn" onclick="toggleEye('pn',this)">👁</button></div></div>
-          <div class="fld"><label>Confirm New</label><div class="pwd-wrap" style="margin:0"><input type="password" id="pf" placeholder="Confirm"><button class="eye-btn" onclick="toggleEye('pf',this)">👁</button></div></div>
-          <div class="fld"><label>&nbsp;</label><button class="btn btn-green btn-sm" onclick="changePwd()">✅ Change</button></div>
-        </div>
-        <div id="pwd-msg" style="margin-top:.6rem;font-size:.82rem;display:none"></div>
-      </div>
-    </div>
-  </main>
-</div>
-
-<!-- INTERNAL VIEW -->
-<div id="view-page">
-  <canvas id="vconf-cv"></canvas>
-
-  <!-- Top bar: Back + Card-for name + short link pill -->
-  <div class="v-share-banner">
-    <button class="btn btn-ghost btn-xs" onclick="closeView()">← Back</button>
-    <div class="v-card-for" id="v-card-for">
-      <div>
-        <div class="v-card-for-name" id="v-card-for-name"></div>
-        <div class="v-card-for-sub" id="v-card-for-sub"></div>
-      </div>
-    </div>
-    <!-- Short link pill — click to copy -->
-    <div class="v-link-pill" onclick="vCopyShort()" title="Copy short link">
-      <span class="v-link-pill-badge">SHORT</span>
-      <span class="v-link-pill-txt" id="v-short-url-txt"></span>
-    </div>
-  </div>
-
-  <div id="view-canvas"></div>
-
-  <div class="v-bottom">
-    <div style="font-size:.72rem;color:rgba(255,255,255,.4);margin-bottom:.2rem">📤 Share this card</div>
-    <div class="v-btn-row">
-      <!-- Short link (same device) -->
-      <button class="btn btn-primary" onclick="vCopyShort()">🔗 Copy Short Link</button>
-      <!-- Full encoded link (any device) -->
-      <button class="btn btn-violet" onclick="vCopyFull()">🌐 Copy Full Link</button>
-      <button class="btn btn-rose btn-sm" onclick="vShare()">↗ Share</button>
-      <button class="btn btn-ghost btn-sm" onclick="vWhatsApp()">💬 WhatsApp</button>
-    </div>
-    <div style="font-size:.68rem;color:rgba(255,255,255,.25);margin-top:.2rem">
-      Short Link = same device only &nbsp;|&nbsp; Full Link = works on any phone worldwide
-    </div>
-  </div>
-</div>
-
-<!-- EDIT MODAL -->
-<div class="modal-wrap" id="edit-modal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('edit-modal')">✕</button>
-    <div class="modal-title">✏️ Edit Greeting</div>
-    <div class="modal-sub">Update card details.</div>
-    <input type="hidden" id="em-id">
-    <div style="display:flex;flex-direction:column;gap:1.1rem">
-      <div class="form-row">
-        <div class="fld"><label>Event Type</label><select id="em-type" onchange="onEditTypeChange()"></select></div>
-        <div class="fld"><label>Name *</label><input type="text" id="em-name" maxlength="50"></div>
-      </div>
-      <div class="festival-name-row" id="em-festival-row">
-        <div class="fld">
-          <label>🎨 Edit Festival / Event Title</label>
-          <input type="text" id="em-festival-name" maxlength="40" placeholder="Custom event title...">
-          <div class="festival-hint">Overrides the default label shown on the card</div>
-        </div>
-      </div>
-      <div class="fld"><label>Message</label><textarea id="em-msg" maxlength="280"></textarea></div>
-      <div class="fld"><label>From</label><input type="text" id="em-from" maxlength="70"></div>
-      <div class="fld" style="background:rgba(240,192,64,.05);border:1px solid rgba(240,192,64,.2);border-radius:var(--r3);padding:1rem">
-        <label style="color:var(--gold)">🎯 Recipient Name</label>
-        <input type="text" id="em-recipient" maxlength="40" placeholder="Who will receive this?">
-      </div>
-      <div class="form-row">
-        <div class="fld">
-          <label id="em-date-label">📅 Event Date</label>
-          <input type="date" id="em-date">
-        </div>
-        <div class="fld" id="em-age-wrap">
-          <label id="em-age-label">🎂 Age / Years</label>
-          <input type="number" id="em-age" placeholder="e.g. 25" min="1" max="120" style="appearance:none;-moz-appearance:textfield">
-        </div>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-primary" onclick="confirmEdit()">💾 Save</button>
-      <button class="btn btn-ghost" onclick="closeModal('edit-modal')">Cancel</button>
-    </div>
-  </div>
-</div>
-
-<!-- DELETE MODAL -->
-<div class="modal-wrap" id="del-modal">
-  <div class="modal-box" style="max-width:360px;text-align:center">
-    <button class="modal-close" onclick="closeModal('del-modal')">✕</button>
-    <div style="font-size:3.5rem;margin:1rem 0">🗑️</div>
-    <div class="modal-title">Delete this card?</div>
-    <div class="modal-sub">This cannot be undone.</div>
-    <div class="modal-footer" style="justify-content:center">
-      <button class="btn btn-red" onclick="confirmDel()">Yes, Delete</button>
-      <button class="btn btn-ghost" onclick="closeModal('del-modal')">Cancel</button>
-    </div>
-  </div>
-</div>
-
-<script>
-// ═══════════════════════════════════════════════
-// CONFIG & STATE
-// ═══════════════════════════════════════════════
-const SK_DATA='fcv7_data', SK_PWD='fcv7_pwd', SK_SES='fcv7_ses';
-let cards=[], _imgData=null, _style='confetti', _filter='all', _editId=null, _delId=null;
-let _shortUrl='', _fullUrl='', _shareRecipient='', _baseUrl='';
-let _selectedEmoji='';
-let _currentCard=null; // card being viewed (for share)
-
-// ═══════════════════════════════════════════════
-// EMOJI SETS
-// ═══════════════════════════════════════════════
-const EMOJI_SETS = {
-  birthday:   ['🎂','🎁','🎈','🎉','🎊','🪅','🍰','🥳','🎀','🕯️','🎆','🎇','🍭','🎠','👑','🌟','💫','✨','🫶','🥂'],
-  birthday_half:['🎈','🍰','🎂','🥳','🎉','🎁','✨','🌟','💫','🎀'],
-  birthday_surprise:['🎁','🎊','🎉','🤫','😱','🎈','🥳','🎀','🎆','🌟'],
-  birthday_milestone:['🎖️','🏆','👑','💎','🌟','⭐','🥇','🎗️','🎊','✨'],
-  first_birthday:['👶','🍰','🎂','🎉','🐣','🌈','🦋','🌸','💕','✨'],
-  wedding:    ['💍','💒','👰','🤵','💐','🥂','💫','🌹','🎊','✨','🕊️','💌','🌸','🏵️','👫'],
-  marriage:   ['🌸','💍','🤵','👰','💐','💖','🌹','🕊️','🥂','✨'],
-  anniversary:['💕','💑','🥂','🌹','💝','🎊','🌟','💫','💌','🎁','💍','❤️','🌸','🫶','💞'],
-  engagement: ['💎','💍','🎊','💕','🥂','🌹','💫','✨','🌸','❤️'],
-  proposal:   ['💝','💍','🌹','💌','❤️','✨','🌟','🎊','🥂','😍'],
-  valday:     ['❤️','💕','💝','🌹','💌','💑','🫶','💖','🥂','🎊'],
-  graduation: ['🎓','📜','🎊','🏆','⭐','🎉','📚','🖊️','🌟','✨','👑','🥇','🎖️','🚀','💪'],
-  promotion:  ['🚀','💼','🏆','⭐','🎊','👑','💫','🌟','🥇','🎉'],
-  newjob:     ['💼','🚀','🎉','🌟','✨','🏆','👏','🎊','💪','⭐'],
-  retirement: ['🌅','🏖️','🎊','🌟','✨','🏆','🎈','🥂','🌺','🌸'],
-  exam_pass:  ['📚','🎓','✨','🌟','🏆','🥇','🎊','💪','⭐','👏'],
-  babyshower: ['👶','🍼','🌸','💕','🎀','🌈','🦋','🌷','✨','💫','🐣','🎊','🌺','🥳','🎁'],
-  newborn:    ['🍼','👶','💕','🌸','🌈','🌷','🎀','✨','💫','🐣'],
-  naming:     ['🌷','💐','✨','🌸','🎊','👶','🕊️','🌟','💫','🎈'],
-  mothersday: ['💐','🌷','🌸','❤️','🫶','🌹','✨','💕','🥰','👑'],
-  fathersday: ['👨‍👧','🏆','❤️','🫶','⭐','🌟','💪','🎊','🥂','👑'],
-  farewell:   ['👋','✈️','🌍','🎊','💌','🌟','🤗','🫶','🥂','🌸'],
-  welcome:    ['🤗','🎊','🌟','✨','🎉','🫶','💐','🌈','👏','🥳'],
-  getwell:    ['🌿','💐','🌸','🍀','💚','🌱','🌼','✨','🤗','🫶'],
-  thankyou:   ['🙏','💐','✨','🌸','❤️','🫶','🌟','💫','🎊','🥰'],
-  sorry:      ['😔','🙏','💐','🌸','💌','❤️','🫶','✨','🌷','🌿'],
-  diwali:     ['🪔','✨','🎆','🎇','🌟','💫','🎊','🏮','🌺','🌸','🌼','⭐','💥','🎉','🌙'],
-  holi:       ['🌈','🎨','🎉','💦','🎊','🌸','🌺','🌼','💫','🥳'],
-  pongal:     ['🌾','🍲','🌻','🌞','🎊','✨','🌟','🐄','🏺','🌽'],
-  onam:       ['🌺','🌼','🎊','🌸','🌿','🏵️','🌟','✨','🦚','🌈'],
-  navratri:   ['🕺','💃','🌟','✨','🎊','🎭','🌸','🌺','💫','🙏'],
-  dussehra:   ['🏹','🎊','✨','🌟','💫','🔥','🎉','🌺','🙏','⭐'],
-  ugadi:      ['🌻','🌿','🎊','✨','🌺','🌼','🌸','🍃','🌟','💫'],
-  vishu:      ['🌼','🌿','🎊','✨','🌺','🌸','🌟','💫','🙏','⭐'],
-  baisakhi:   ['🌾','🎊','💃','🕺','🌟','✨','🎉','🥳','🌻','⭐'],
-  raksha:     ['🪢','❤️','🌸','💕','🎁','✨','🌟','💫','🎊','🙏'],
-  ganesh:     ['🐘','🙏','🎊','✨','🌟','💫','🌺','🌸','🏺','🌼'],
-  janmashtami:['🦚','🎊','🙏','✨','🌟','💫','🌺','🌸','🎆','💛'],
-  eid:        ['🌙','⭐','🕌','✨','🎊','💫','🌟','🥳','🎁','🤲'],
-  eid_adha:   ['🐑','🌙','⭐','🕌','✨','🎊','💫','🙏','🤲','🌟'],
-  ramadan:    ['☪️','🌙','⭐','🕌','✨','🤲','💫','🌟','🙏','🎊'],
-  christmas:  ['🎄','⛄','🎁','🎅','🌟','❄️','🔔','🕯️','✨','🦌','🎊','🍪','🌸','💫','🥂'],
-  newyear:    ['🎆','🎇','🥂','🎊','✨','🌟','💫','🎉','🥳','🎈','⭐','🌙','🌃','🍾','🫧'],
-  easter:     ['🐣','🐰','🌸','🌷','✨','🎊','🌟','💐','🥚','🌺'],
-  halloween:  ['🎃','🦇','🌙','⭐','👻','🕷️','🕸️','🌚','🍬','🔮'],
-  thanksgiving:['🦃','🍂','🍁','🌽','🎊','🌟','✨','🥧','🏡','🍁'],
-  general:    ['🎊','🎉','🎈','🌟','✨','💫','⭐','🏆','🥂','🎆','💐','🌸','🎀','🎁','🪅'],
-  custom:     ['⚙️','✨','🌟','💫','🎊','🎉','🌈','🎆','💐','🎭','🏆','🥂','💡','🌺','🎁'],
-};
-
-// ═══════════════════════════════════════════════
-// EVENT TYPES
-// ═══════════════════════════════════════════════
-const T={
-  birthday:   {label:'Birthday',icon:'🎂',color:'#f472b6',accent:'#fbbf24',bg:['#2d0a4e','#5b0f7c','#2d0a4e'],msg:"Wishing you a day as magical as you are! May all your dreams come true! 🎉"},
-  birthday_half:{label:'Half Birthday',icon:'🎈',color:'#f472b6',accent:'#fbbf24',bg:['#2d0a4e','#5b0f7c','#2d0a4e'],msg:"Happy Half Birthday! You're halfway to your next big celebration! 🎈"},
-  birthday_surprise:{label:'Surprise Birthday',icon:'🎁',color:'#f472b6',accent:'#fbbf24',bg:['#2d0a4e','#5b0f7c','#2d0a4e'],msg:"Surprise! Wishing you the most amazing birthday full of joy! 🎁"},
-  birthday_milestone:{label:'Milestone Birthday',icon:'🎖️',color:'#f0c040',accent:'#fde68a',bg:['#1e1200','#3d2500','#1e1200'],msg:"What a milestone! You've achieved so much — here's to many more amazing years! 🎖️"},
-  first_birthday:{label:'1st Birthday',icon:'👶🎂',color:'#f9a8d4',accent:'#fbcfe8',bg:['#2a001a','#500032','#2a001a'],msg:"Happy 1st Birthday! Your first year has been a beautiful blessing! 👶🎂"},
-  wedding:    {label:'Wedding',icon:'💍',color:'#f0c040',accent:'#fde68a',bg:['#1a1200','#3d2b00','#1a1200'],msg:"As you begin this beautiful journey, may your love grow stronger every day! 💍"},
-  marriage:   {label:'Marriage',icon:'🌸',color:'#fb7185',accent:'#fda4af',bg:['#2a0020','#550040','#2a0020'],msg:"Two hearts, one soul, a lifetime of beautiful memories! Heartiest congratulations! 🌸"},
-  anniversary:{label:'Anniversary',icon:'💕',color:'#f472b6',accent:'#c084fc',bg:['#1e0030','#420055','#1e0030'],msg:"Another year of love, laughter and beautiful memories together! Happy Anniversary! 💕"},
-  engagement: {label:'Engagement',icon:'💎',color:'#a78bfa',accent:'#c4b5fd',bg:['#1e0040','#3a0070','#1e0040'],msg:"You said YES! Wishing you a lifetime of love and happiness together! 💎"},
-  proposal:   {label:'Proposal',icon:'💝',color:'#f472b6',accent:'#fda4af',bg:['#2a0020','#550040','#2a0020'],msg:"You popped the question! May this be the beginning of forever! 💝"},
-  valday:     {label:"Valentine's",icon:'❤️',color:'#f87171',accent:'#fca5a5',bg:['#2a0010','#550020','#2a0010'],msg:"Happy Valentine's Day! You make every day feel special! ❤️"},
-  graduation: {label:'Graduation',icon:'🎓',color:'#a78bfa',accent:'#c4b5fd',bg:['#0e0630','#1e0b60','#0e0630'],msg:"Congratulations Graduate! Your hard work has paid off — the world is yours! 🎓"},
-  promotion:  {label:'Promotion',icon:'🚀',color:'#38bdf8',accent:'#7dd3fc',bg:['#00071a','#001035','#00071a'],msg:"Congratulations on your well-deserved promotion! Sky's the limit for you! 🚀"},
-  newjob:     {label:'New Job',icon:'💼',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"Exciting times ahead! Wishing you great success in your new role! 💼"},
-  retirement: {label:'Retirement',icon:'🌅',color:'#f97316',accent:'#fdba74',bg:['#1a0700','#3d1000','#1a0700'],msg:"Congratulations on a wonderful career! May retirement bring you joy and adventure! 🌅"},
-  exam_pass:  {label:'Exam Success',icon:'📚',color:'#a78bfa',accent:'#c4b5fd',bg:['#0e0630','#1e0b60','#0e0630'],msg:"You did it! Congratulations on your brilliant result! 📚"},
-  babyshower: {label:'Baby Shower',icon:'👶',color:'#f9a8d4',accent:'#fbcfe8',bg:['#2a001a','#500032','#2a001a'],msg:"A precious little one is on the way! Wishing you a wonderful journey! 👶"},
-  newborn:    {label:'Newborn',icon:'🍼',color:'#f9a8d4',accent:'#fbcfe8',bg:['#2a001a','#500032','#2a001a'],msg:"Welcome to the world, little one! May your life be filled with love and laughter! 🍼"},
-  naming:     {label:'Naming Ceremony',icon:'🌷',color:'#fb7185',accent:'#fda4af',bg:['#2a0020','#550040','#2a0020'],msg:"A beautiful name for a beautiful soul! Warmest wishes on this special occasion! 🌷"},
-  mothersday: {label:"Mother's Day",icon:'💐',color:'#f472b6',accent:'#fda4af',bg:['#2a0020','#550040','#2a0020'],msg:"To the most wonderful mother — thank you for your endless love and care! 💐"},
-  fathersday: {label:"Father's Day",icon:'👨‍👧',color:'#38bdf8',accent:'#7dd3fc',bg:['#00071a','#001035','#00071a'],msg:"To the best dad in the world — you are our hero every single day! 👨‍👧"},
-  farewell:   {label:'Farewell',icon:'👋',color:'#94a3b8',accent:'#cbd5e1',bg:['#0a1020','#162040','#0a1020'],msg:"It's not goodbye — it's see you on the next adventure! You'll be missed! 👋"},
-  welcome:    {label:'Welcome',icon:'🤗',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"Welcome! So happy to have you here — this is just the beginning of great things! 🤗"},
-  getwell:    {label:'Get Well Soon',icon:'🌿',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"Wishing you a speedy recovery! Take rest and be back stronger than ever! 🌿"},
-  thankyou:   {label:'Thank You',icon:'🙏',color:'#f0c040',accent:'#fde68a',bg:['#1a1200','#3d2b00','#1a1200'],msg:"Thank you from the bottom of my heart! You truly made a difference! 🙏"},
-  sorry:      {label:'Apology',icon:'😔',color:'#94a3b8',accent:'#cbd5e1',bg:['#0a1020','#162040','#0a1020'],msg:"I'm truly sorry. You mean the world to me and I hope you can forgive me. 😔"},
-  diwali:     {label:'Diwali',icon:'🪔',color:'#f97316',accent:'#fb923c',bg:['#1a0700','#3d1500','#1a0700'],msg:"May the festival of lights bring joy, prosperity and happiness! Happy Diwali! 🪔"},
-  holi:       {label:'Holi',icon:'🌈',color:'#f472b6',accent:'#a78bfa',bg:['#1a0040','#380080','#1a0040'],msg:"May the vibrant colours of Holi paint your life with happiness! Happy Holi! 🌈"},
-  pongal:     {label:'Pongal',icon:'🌾',color:'#fbbf24',accent:'#fde68a',bg:['#1a1000','#3a2000','#1a1000'],msg:"May the harvest season bring abundance, peace and joy! Happy Pongal! 🌾"},
-  onam:       {label:'Onam',icon:'🌺',color:'#fb923c',accent:'#fde047',bg:['#00180a','#003a14','#00180a'],msg:"May the spirit of Onam fill your home with flowers and laughter! Happy Onam! 🌺"},
-  navratri:   {label:'Navratri',icon:'🕺',color:'#c084fc',accent:'#f472b6',bg:['#200040','#400080','#200040'],msg:"May Maa Durga bless you with strength and endless joy! Jai Mata Di! 🕺"},
-  dussehra:   {label:'Dussehra',icon:'🏹',color:'#f97316',accent:'#fb923c',bg:['#1a0700','#3d1500','#1a0700'],msg:"May the triumph of good over evil bring light and hope to your life! Happy Dussehra! 🏹"},
-  ugadi:      {label:'Ugadi',icon:'🌻',color:'#fbbf24',accent:'#fde68a',bg:['#1a1000','#3a2000','#1a1000'],msg:"Wishing you a New Year filled with new beginnings and blessings! Happy Ugadi! 🌻"},
-  vishu:      {label:'Vishu',icon:'🌼',color:'#fbbf24',accent:'#fde68a',bg:['#00180a','#003a14','#00180a'],msg:"May this Vishu bring you prosperity, happiness and good fortune! Happy Vishu! 🌼"},
-  baisakhi:   {label:'Baisakhi',icon:'🌾',color:'#fbbf24',accent:'#fde68a',bg:['#1a1000','#3a2000','#1a1000'],msg:"May the harvest festival bring joy and abundance to your life! Happy Baisakhi! 🌾"},
-  raksha:     {label:'Raksha Bandhan',icon:'🪢',color:'#f97316',accent:'#fb923c',bg:['#1a0700','#3d1500','#1a0700'],msg:"The bond of siblings is the most precious bond in the world! Happy Raksha Bandhan! 🪢"},
-  ganesh:     {label:'Ganesh Chaturthi',icon:'🐘',color:'#f0c040',accent:'#fde68a',bg:['#1a1200','#3d2b00','#1a1200'],msg:"May Lord Ganesha remove all obstacles and fill your life with success! Ganpati Bappa Morya! 🐘"},
-  janmashtami:{label:'Janmashtami',icon:'🦚',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"May Lord Krishna's blessings fill your heart with joy and peace! Happy Janmashtami! 🦚"},
-  eid:        {label:'Eid ul-Fitr',icon:'🌙',color:'#34d399',accent:'#6ee7b7',bg:['#00180e','#003520','#00180e'],msg:"Eid Mubarak! May Allah shower you and your family with endless blessings! 🌙"},
-  eid_adha:   {label:'Eid ul-Adha',icon:'🐑',color:'#34d399',accent:'#6ee7b7',bg:['#00180e','#003520','#00180e'],msg:"Eid ul-Adha Mubarak! May the spirit of sacrifice bring peace and joy! 🐑"},
-  ramadan:    {label:'Ramadan',icon:'☪️',color:'#34d399',accent:'#6ee7b7',bg:['#00180e','#003520','#00180e'],msg:"Ramadan Mubarak! May this holy month bring peace, blessings and spiritual growth! ☪️"},
-  christmas:  {label:'Christmas',icon:'🎄',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"May the magic of Christmas fill your home with warmth and love! Merry Christmas! 🎄"},
-  newyear:    {label:'New Year',icon:'🎆',color:'#38bdf8',accent:'#7dd3fc',bg:['#00071a','#001035','#00071a'],msg:"Here's to new beginnings and new blessings! Wishing you an amazing New Year! 🎆"},
-  easter:     {label:'Easter',icon:'🐣',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"Wishing you a joyful Easter filled with hope, love and new beginnings! 🐣"},
-  halloween:  {label:'Halloween',icon:'🎃',color:'#f97316',accent:'#fb923c',bg:['#1a0700','#3d1500','#1a0700'],msg:"Have a spooktacular Halloween! May your night be full of treats and no tricks! 🎃"},
-  thanksgiving:{label:'Thanksgiving',icon:'🦃',color:'#f97316',accent:'#fb923c',bg:['#1a0700','#3d1500','#1a0700'],msg:"Wishing you a wonderful Thanksgiving filled with gratitude, family and warmth! 🦃"},
-  general:    {label:'Celebration',icon:'🎊',color:'#f0c040',accent:'#a78bfa',bg:['#0d0b1e','#1e1840','#0d0b1e'],msg:"Congratulations and warmest wishes on this wonderful occasion! 🎊"},
-  custom:     {label:'Special Event',icon:'⚙️',color:'#a78bfa',accent:'#c4b5fd',bg:['#0e0630','#1e0b60','#0e0630'],msg:"Warmest wishes on this very special occasion! 🎊"},
-};
-
-const BDAY_ALTS = {
-  normal:    {label:'Birthday',icon:'🎂',msg:"Wishing you a day as magical as you are! May all your dreams come true! 🎉"},
-  half:      {label:'Half Birthday',icon:'🎈',msg:"Happy Half Birthday! You're halfway to your next big celebration! 🎈"},
-  surprise:  {label:'Surprise Party',icon:'🎁',msg:"Surprise! Wishing you the most amazing birthday full of joy and happiness! 🎁"},
-  milestone: {label:'Milestone Birthday',icon:'🎖️',msg:"What a milestone! Here's to celebrating all that you've achieved! 🎖️"},
-  first:     {label:'1st Birthday',icon:'👶',msg:"Happy 1st Birthday, little star! You've brought so much joy to our lives! 👶"},
-  joint:     {label:'Joint Birthday',icon:'👫',msg:"Celebrating you both together! Wishing you double the joy and double the fun! 👫"},
-};
-
-const EFFECTS=[
-  {id:'confetti',label:'Confetti',icon:'🎊'},{id:'firework',label:'Fireworks',icon:'🎆'},
-  {id:'hearts',label:'Hearts',icon:'💖'},{id:'sparkle',label:'Sparkle',icon:'✨'},
-  {id:'snow',label:'Snow',icon:'❄️'},{id:'flowers',label:'Flowers',icon:'🌸'},
-  {id:'stars',label:'Stars',icon:'⭐'},{id:'bubbles',label:'Bubbles',icon:'🫧'},
-  {id:'leaves',label:'Leaves',icon:'🍂'},{id:'gold',label:'Gold Rain',icon:'✦'},
-];
-
-const TPLS={
-  classic:{nameSz:'2rem',msgSz:'1rem',nameFont:"'Cormorant Garamond',serif",divider:true},
-  modern:{nameSz:'2.2rem',msgSz:'.95rem',nameFont:"'Cinzel',serif",divider:false},
-  minimal:{nameSz:'1.8rem',msgSz:'.92rem',nameFont:"'Great Vibes',cursive",divider:true},
-  royal:{nameSz:'2.1rem',msgSz:'.95rem',nameFont:"'Cinzel',serif",divider:true},
-  floral:{nameSz:'2rem',msgSz:'.92rem',nameFont:"'Great Vibes',cursive",divider:true},
-};
-
-// ═══════════════════════════════════════════════
-// URL — SHORT LINK (ID-based) + FULL LINK (encoded)
-// ═══════════════════════════════════════════════
-function makeShortUrl(card){
-  // Short: ?id=CARD_ID — works on same device (localStorage)
-  return _baseUrl + '?id=' + encodeURIComponent(card.id);
-}
-
-function makeFullUrl(card){
-  // Full: ?card=BASE64 — works on any device (self-contained)
-  const enc = encodeCard(card);
-  if(!enc) return _baseUrl;
-  return _baseUrl + '?card=' + enc;
-}
-
-function encodeCard(card){
-  const d={
-    t:card.type, n:card.name, m:card.msg,
-    f:card.from, tp:card.tpl, e:card.effect,
-    ps:card.photoShape, r:card.recipient||'',
-    dt:card.date||'', ag:card.age||'',
-    fn:card.festivalName||'', fe:card.festivalEmoji||''
-  };
-  if(card.imgData && card.imgData.length < 200000){
-    const raw = card.imgData.replace(/^data:image\/[^;]+;base64,/,'');
-    d.i = raw.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-  }
-  try{
-    const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(d))));
-    return b64.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-  }catch(ex){return null;}
-}
-
-function decodeCard(str){
-  try{
-    const b64 = str.replace(/-/g,'+').replace(/_/g,'/');
-    const padded = b64 + '=='.slice(0,(4 - b64.length % 4) % 4);
-    const d = JSON.parse(decodeURIComponent(escape(atob(padded))));
-    let imgData = null;
-    if(d.i){
-      const rawB64 = d.i.replace(/-/g,'+').replace(/_/g,'/');
-      const rawPad = rawB64 + '=='.slice(0,(4 - rawB64.length % 4) % 4);
-      imgData = 'data:image/jpeg;base64,' + rawPad;
-    }
-    return {
-      type:d.t||'general', name:d.n||'', msg:d.m||'',
-      from:d.f||'', tpl:d.tp||'classic', effect:d.e||'confetti',
-      photoShape:d.ps||'circle', recipient:d.r||'',
-      date:d.dt||'', age:d.ag||'',
-      festivalName:d.fn||'', festivalEmoji:d.fe||'',
-      imgData
-    };
-  }catch(ex){return null;}
-}
-
-// ═══════════════════════════════════════════════
-// PASSWORD / SESSION
-// ═══════════════════════════════════════════════
-const getPwd=()=>localStorage.getItem(SK_PWD)||'admin123';
-const setPwd=p=>localStorage.setItem(SK_PWD,p);
-const isSes=()=>sessionStorage.getItem(SK_SES)==='1';
-const setSes=v=>v?sessionStorage.setItem(SK_SES,'1'):sessionStorage.removeItem(SK_SES);
-
-function tryLogin(){
-  const el=document.getElementById('admin-pwd');
-  const err=document.getElementById('admin-err');
-  if(el.value===getPwd()){setSes(true);el.value='';err.style.display='none';showAdminPanel();}
-  else{err.style.display='block';el.value='';el.style.animation='none';void el.offsetWidth;el.style.animation='shake .4s ease';}
-}
-function doLogout(){setSes(false);document.getElementById('admin-panel').style.display='none';document.getElementById('admin-login-section').style.display='block';toast('👋 Logged out');}
-function changePwd(){
-  const c=document.getElementById('pc').value,n=document.getElementById('pn').value,f=document.getElementById('pf').value;
-  const m=document.getElementById('pwd-msg');
-  const show=(t,col)=>{m.textContent=t;m.style.color=col;m.style.display='block';setTimeout(()=>m.style.display='none',3000);};
-  if(c!==getPwd()){show('❌ Current password incorrect','#f87171');return;}
-  if(n.length<6){show('❌ Minimum 6 characters required','#f87171');return;}
-  if(n!==f){show('❌ Passwords do not match','#f87171');return;}
-  setPwd(n);['pc','pn','pf'].forEach(id=>document.getElementById(id).value='');
-  show('✅ Password changed!','#4ade80');
-}
-function toggleEye(id,btn){const i=document.getElementById(id);i.type=i.type==='password'?'text':'password';btn.textContent=i.type==='password'?'👁':'🙈';}
-
-// ═══════════════════════════════════════════════
-// STORAGE
-// ═══════════════════════════════════════════════
-function load(){try{const d=localStorage.getItem(SK_DATA);if(d)cards=JSON.parse(d);}catch(e){cards=[];}}
-function save(){localStorage.setItem(SK_DATA,JSON.stringify(cards));}
-
-// ═══════════════════════════════════════════════
-// BG ANIMATION
-// ═══════════════════════════════════════════════
-function initBG(){
-  const cv=document.getElementById('bg-canvas');if(!cv)return;
-  cv.width=window.innerWidth;cv.height=window.innerHeight;
-  const cx=cv.getContext('2d');let t=0;
-  const orbs=[{x:.2,y:.3,r:.35,h:280,s:.6,sp:.0008},{x:.7,y:.6,r:.40,h:320,s:.5,sp:.0006},{x:.5,y:.8,r:.30,h:260,s:.55,sp:.001},{x:.1,y:.7,r:.25,h:200,s:.45,sp:.0007}];
-  (function draw(){cv.clearRect(0,0,cv.width,cv.height);orbs.forEach(o=>{const x=cv.width*(o.x+Math.sin(t*o.sp)*0.15);const y=cv.height*(o.y+Math.cos(t*o.sp*1.3)*0.1);const r=Math.min(cv.width,cv.height)*o.r;const g=cx.createRadialGradient(x,y,0,x,y,r);const hs=`hsla(${o.h+Math.sin(t*0.001)*20},${o.s*100}%,50%,`;g.addColorStop(0,hs+'0.18)');g.addColorStop(1,hs+'0)');cx.fillStyle=g;cx.fillRect(0,0,cv.width,cv.height);});t++;requestAnimationFrame(draw);})();
-  window.addEventListener('resize',()=>{cv.width=window.innerWidth;cv.height=window.innerHeight;});
-}
-
-// ═══════════════════════════════════════════════
-// NAV
-// ═══════════════════════════════════════════════
-function nav(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
-  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('on'));
-  document.getElementById('pg-'+id).classList.add('on');
-  document.querySelector(`[data-page="${id}"]`).classList.add('on');
-  try{history.replaceState({},'',_baseUrl);}catch(e){}
-  if(id==='gallery')renderGallery();
-  if(id==='create')setupCreate();
-  if(id==='admin'&&isSes())showAdminPanel();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function goHome(){
-  document.getElementById('not-found-view').classList.remove('on');
-  try{history.replaceState({},'',_baseUrl);}catch(e){}
-  initBG();renderGallery();
-}
-
-// ═══════════════════════════════════════════════
-// NOT FOUND VIEW
-// ═══════════════════════════════════════════════
-function showCardNotFound(){
-  document.getElementById('root').style.display='none';
-  document.getElementById('bg-canvas').style.display='none';
-  document.getElementById('not-found-view').classList.add('on');
-}
-
-// ═══════════════════════════════════════════════
-// EMOJI PICKER
-// ═══════════════════════════════════════════════
-function buildEmojiPicker(type){
-  const emojis = EMOJI_SETS[type] || EMOJI_SETS.general;
-  const grid = document.getElementById('emoji-grid');
-  if(!grid) return;
-  grid.innerHTML = emojis.map(e =>
-    `<button class="ep-btn${_selectedEmoji===e?' on':''}" onclick="selectEmoji('${e}')" title="${e}">${e}</button>`
-  ).join('');
-}
-
-function selectEmoji(em){
-  _selectedEmoji = em;
-  const prev = document.getElementById('festival-emoji-preview');
-  if(prev) prev.textContent = em;
-  document.querySelectorAll('.ep-btn').forEach(b=>{
-    b.classList.toggle('on', b.textContent === em);
-  });
-  livePreview();
-}
-
-function getEffectiveIcon(card){
-  if(card.festivalEmoji) return card.festivalEmoji;
-  return (T[card.type]||T.general).icon;
-}
-
-function getEffectiveLabel(card){
-  if(card.festivalName && card.festivalName.trim()) return card.festivalName.trim();
-  return (T[card.type]||T.general).label;
-}
-
-// ═══════════════════════════════════════════════
-// BUILD CARD HTML
-// ═══════════════════════════════════════════════
-function formatDate(dateStr){
-  if(!dateStr) return '';
-  try{const d=new Date(dateStr+'T00:00:00');return d.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});}
-  catch(e){return dateStr;}
-}
-
-function buildCard(c,full=false){
-  const th=T[c.type]||T.general, tpl=TPLS[c.tpl]||TPLS.classic;
-  const bg=`linear-gradient(160deg,${th.bg[0]},${th.bg[1]},${th.bg[2]})`;
-  const h=full?'540px':'340px', pSz=full?'120px':'75px';
-  const nameSz=full?tpl.nameSz:parseFloat(tpl.nameSz)*.7+'rem';
-  const msgSz=full?tpl.msgSz:parseFloat(tpl.msgSz)*.82+'rem';
-  const iconSz=full?'5.5rem':'3.2rem';
-  const pts=getParticles(c.effect||'confetti',full);
-  const displayIcon = getEffectiveIcon(c);
-  const displayLabel = getEffectiveLabel(c);
-
-  let ph='';
-  if(c.imgData){
-    const s=c.photoShape||'circle';
-    const css=s==='circle'
-      ?`border-radius:50%;border:4px solid rgba(255,255,255,.35);box-shadow:0 0 40px ${th.color}66`
-      :s==='rect'
-      ?`border-radius:14px;border:3px solid rgba(255,255,255,.3);box-shadow:0 8px 30px rgba(0,0,0,.6)`
-      :`clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%)`;
-    ph=`<img src="${c.imgData}" style="width:${pSz};height:${pSz};object-fit:cover;${css};display:block;margin:0 auto ${full?'1rem':'.5rem'}">`;
-  }else{
-    ph=`<div style="font-size:${iconSz};margin-bottom:${full?'.7rem':'.3rem'};animation:floatUp 3s ease-in-out infinite;text-align:center">${displayIcon}</div>`;
-  }
-
-  const div=tpl.divider?`<div style="width:${full?'60px':'36px'};height:${full?'2px':'1.5px'};background:linear-gradient(90deg,transparent,${th.color},transparent);margin:${full?'.6rem':'.3rem'} auto;border-radius:2px"></div>`:'';
-  const frm=c.from?`<div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:${full?'.88rem':'.65rem'};margin-top:${full?'.5rem':'.3rem'};opacity:.5">${c.from}</div>`:'';
-
-  let ageBadge='';
-  if(c.age && (c.type==='birthday'||c.type==='anniversary'||c.type==='birthday_milestone'||c.type==='birthday_half'||c.type==='first_birthday')){
-    const label=c.type==='anniversary'?`${c.age} Years Together 💕`:`Turning ${c.age} ${displayIcon}`;
-    ageBadge=`<div style="display:inline-block;background:linear-gradient(135deg,${th.color}44,${th.accent}33);border:1.5px solid ${th.color}88;border-radius:50px;padding:${full?'.35rem .9rem':'.2rem .55rem'};font-size:${full?'.82rem':'.6rem'};font-weight:800;letter-spacing:.5px;margin:${full?'.5rem 0 .4rem':'0.25rem 0'};color:${th.accent}">${label}</div>`;
-  }
-
-  let dateLine='';
-  if(c.date){
-    const fmtDate=formatDate(c.date);
-    dateLine=`<div style="display:flex;align-items:center;justify-content:center;gap:.3rem;margin-top:${full?'.5rem':'.3rem'};font-size:${full?'.78rem':'.58rem'};opacity:.65;font-weight:600">📅 ${fmtDate}</div>`;
-  }
-
-  return `<div style="width:100%;min-height:${h};background:${bg};position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif">
-<div style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none">${pts}</div>
-<div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,${th.color}18,transparent)"></div>
-<div style="position:relative;z-index:2;text-align:center;padding:${full?'1.8rem 2.5rem':'1rem 1.2rem'};width:100%;color:#fff">
-${ph}
-<div style="font-size:${full?'.65rem':'.5rem'};font-weight:900;letter-spacing:3px;text-transform:uppercase;opacity:.6;margin-bottom:${full?'.4rem':'.2rem'};color:${th.accent}">${displayLabel}</div>
-${div}
-${ageBadge}
-<div style="font-family:${tpl.nameFont};font-size:${nameSz};font-weight:700;line-height:1.2;margin:${full?'.2rem 0 .5rem':'0.15rem 0 .25rem'};text-shadow:0 2px 20px rgba(0,0,0,.4);color:#fff">${c.name||'Your Name'}</div>
-${div}
-<div style="font-size:${msgSz};line-height:1.6;opacity:.88;max-width:${full?'380px':'240px'};margin:0 auto;font-weight:500">${c.msg||(th.msg)}</div>
-${dateLine}
-${frm}
-</div>
-<div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,${th.color},${th.accent},${th.color},transparent);z-index:3"></div>
-</div>`;
-}
-
-function getParticles(eff,full){
-  const cnt=full?50:20;
-  const MAP={confetti:['🎊','🎉','🎈','🎀','🎁'],firework:['✦','★','✸','✹','✺'],hearts:['❤️','💖','💕','💗','💓'],sparkle:['✨','💫','⭐','🌟','✦'],snow:['❄️','🌨️','✦','❋','❊'],flowers:['🌸','🌺','🌼','🌻','🌹'],stars:['⭐','🌟','💫','✨','☆'],bubbles:['○','◌','◦','•','●'],leaves:['🍂','🍁','🍃','🌿','☘️'],gold:['✦','✧','◆','◇','❖']};
-  const p=MAP[eff]||MAP.sparkle;let out='';
-  for(let i=0;i<cnt;i++){
-    const x=Math.random()*100,y=Math.random()*100;
-    const sz=full?(0.8+Math.random()*1.6):(0.5+Math.random()*.9);
-    const dur=2+Math.random()*5,del=Math.random()*4;
-    const anim=(eff==='snow'||eff==='leaves'||eff==='confetti')?`animation:fallPart ${dur}s ease-in-out infinite ${del}s`:`animation:risePart ${dur}s ease-in-out infinite ${del}s`;
-    out+=`<div style="position:absolute;left:${x}%;top:${y}%;font-size:${sz}rem;${anim};opacity:${.3+Math.random()*.5}">${p[i%p.length]}</div>`;
-  }
-  return out;
-}
-
-// ═══════════════════════════════════════════════
-// SHARE VIEW — card-only, opened via ?id= or ?card=
-// ═══════════════════════════════════════════════
-function showShareView(card, shortUrl, fullUrl){
-  const th=T[card.type]||T.general;
-  _currentCard = card;
-  document.getElementById('root').style.display='none';
-  document.getElementById('bg-canvas').style.display='none';
-  const sv=document.getElementById('share-view');
-  sv.style.background=`linear-gradient(160deg,${th.bg[0]},${th.bg[1]},${th.bg[2]})`;
-
-  // Show "Card for [Name]" chip at top
-  const displayName = card.recipient || card.name;
-  if(displayName){
-    document.getElementById('s-chip-name').textContent = displayName;
-    document.getElementById('s-card-for-chip').style.display='flex';
-  }
-
-  // Recipient personal banner
-  if(card.recipient){
-    document.getElementById('s-banner-name').textContent=`Hey ${card.recipient}, you have a special greeting! 🎉`;
-    document.getElementById('s-banner').style.display='block';
-  }
-
-  document.getElementById('s-card-inner').innerHTML=buildCard(card,true);
-
-  // Show short link in the URL bar
-  _shortUrl = shortUrl || _baseUrl;
-  _fullUrl  = fullUrl  || _baseUrl;
-  _shareRecipient = card.recipient||'';
-
-  // Display the short URL in the copy row
-  document.getElementById('s-url-txt').textContent = _shortUrl;
-  sv.classList.add('on');
-
-  setTimeout(()=>{
-    const cv=document.getElementById('sconf-cv');
-    cv.width=window.innerWidth;cv.height=window.innerHeight;
-    runEffect(card.effect||'confetti',cv);
-  },500);
-}
-
-function sCopy(){
-  cpToClipboard(_shortUrl);
-  showFloatMsg('🔗 Short link copied!');
-}
-function sShare(){
-  const name = _currentCard ? (_currentCard.recipient || _currentCard.name) : '';
-  const title=name?`A greeting for ${name}!`:'FestivaCard Greeting';
-  const text=name?`Hey ${name}, you have a special greeting! 🎉`:'Check out this greeting card!';
-  if(navigator.share)navigator.share({title,text,url:_shortUrl}).catch(()=>sCopy());
-  else sCopy();
-}
-function showFloatMsg(msg){
-  const t=document.createElement('div');t.textContent=msg;
-  t.style.cssText='position:fixed;bottom:6rem;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.15);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.2);border-radius:50px;padding:.6rem 1.4rem;font-size:.85rem;font-weight:700;color:#fff;z-index:9999;pointer-events:none';
-  document.body.appendChild(t);setTimeout(()=>t.remove(),2000);
-}
-
-// ═══════════════════════════════════════════════
-// INTERNAL VIEW (from gallery / admin)
-// ═══════════════════════════════════════════════
-function viewCard(id){
-  const c=cards.find(x=>x.id===id);if(!c)return;
-  const th=T[c.type]||T.general;
-  _currentCard = c;
-
-  document.getElementById('view-canvas').innerHTML=buildCard(c,true);
-  document.getElementById('view-page').style.background=`linear-gradient(160deg,${th.bg[0]},${th.bg[1]},${th.bg[2]})`;
-
-  // Build both URLs
-  _shortUrl = makeShortUrl(c);
-  _fullUrl  = makeFullUrl(c);
-  _shareRecipient = c.recipient||'';
-
-  // Top bar: Card for [name] + event label
-  const displayName = c.name;
-  const displayLabel = getEffectiveLabel(c);
-  const displayIcon = getEffectiveIcon(c);
-  document.getElementById('v-card-for-name').textContent = `${displayIcon} ${displayName}`;
-  document.getElementById('v-card-for-sub').textContent  = `${displayLabel}${c.recipient ? ' · For: '+c.recipient : ''}`;
-
-  // Short link pill
-  document.getElementById('v-short-url-txt').textContent = _shortUrl;
-
-  // Push short URL to browser bar
-  try{history.pushState({cardId:id},'',_shortUrl);}catch(e){}
-
-  document.getElementById('view-page').classList.add('on');
-  document.body.style.overflow='hidden';
-
-  setTimeout(()=>{
-    const cv=document.getElementById('vconf-cv');
-    cv.width=window.innerWidth;cv.height=window.innerHeight;
-    runEffect(c.effect||'confetti',cv);
-  },400);
-}
-
-function closeView(){
-  document.getElementById('view-page').classList.remove('on');
-  document.body.style.overflow='';stopFX();
-  try{history.pushState({},'',_baseUrl);}catch(e){}
-}
-
-// Short link — same device (localStorage lookup)
-function vCopyShort(){
-  cpToClipboard(_shortUrl);
-  toast('🔗 Short link copied! Works instantly on this device.');
-}
-// Full encoded link — cross-device
-function vCopyFull(){
-  cpToClipboard(_fullUrl);
-  toast('🌐 Full link copied! Share via WhatsApp, SMS, Email — opens on any phone ✨');
-}
-function vShare(){
-  const name = _currentCard ? (_currentCard.recipient || _currentCard.name) : '';
-  const title=name?`A greeting for ${name}!`:'FestivaCard';
-  const text=name?`Hey ${name}, you have a special greeting! 🎉`:'Check this greeting!';
-  // Share the full URL so it works on any device
-  if(navigator.share)navigator.share({title,text,url:_fullUrl}).catch(()=>vCopyFull());
-  else vCopyFull();
-}
-function vWhatsApp(){
-  const name = _currentCard ? (_currentCard.recipient || _currentCard.name) : '';
-  const text=encodeURIComponent((name?`Hey ${name}, you have a special greeting! 🎉 `:'Check this greeting card! 🎊 ')+_fullUrl);
-  window.open('https://wa.me/?text='+text,'_blank');
-}
-function cpToClipboard(txt){if(navigator.clipboard)navigator.clipboard.writeText(txt).catch(()=>legacyCopy(txt));else legacyCopy(txt);}
-function legacyCopy(txt){const t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();}
-
-// ═══════════════════════════════════════════════
-// EFFECTS
-// ═══════════════════════════════════════════════
-let _fx=null;
-function stopFX(){if(_fx){_fx();_fx=null;}}
-function runEffect(eff,cv){
-  stopFX();
-  if(typeof confetti!=='undefined'){
-    if(eff==='confetti'){let f,t=0;(function s(){if(t<300){confetti({particleCount:6,angle:60,spread:55,origin:{x:0,y:.7},colors:['#f0c040','#f472b6','#a78bfa','#fff']});confetti({particleCount:6,angle:120,spread:55,origin:{x:1,y:.7},colors:['#f0c040','#f472b6','#a78bfa','#fff']});}t++;f=requestAnimationFrame(s);})();_fx=()=>{cancelAnimationFrame(f);confetti.reset()};return;}
-    if(eff==='firework'){let f,t=0;(function s(){if(t%30===0&&t<360)confetti({particleCount:35,spread:360,startVelocity:20,decay:.88,origin:{x:.1+Math.random()*.8,y:.1+Math.random()*.5},colors:['#f0c040','#f472b6','#fff','#38bdf8']});t++;f=requestAnimationFrame(s);})();_fx=()=>{cancelAnimationFrame(f);confetti.reset()};return;}
-    if(eff==='hearts'){const h=confetti.shapeFromText({text:'❤',scalar:2});let f,t=0;(function s(){if(t<300)confetti({particleCount:4,spread:60,origin:{x:Math.random(),y:-.1},shapes:[h],scalar:1.5,colors:['#f472b6','#fb7185','#fff']});t++;f=requestAnimationFrame(s);})();_fx=()=>{cancelAnimationFrame(f);confetti.reset()};return;}
-  }
-  const ctx=cv.getContext('2d');const C=['#f0c040','#f472b6','#a78bfa','#38bdf8','#4ade80'];
-  const pts=Array.from({length:60},()=>({x:Math.random()*cv.width,y:Math.random()*cv.height,vx:(Math.random()-.5)*1.5,vy:-.5-Math.random()*1.5,r:2+Math.random()*4,col:C[Math.floor(Math.random()*C.length)],life:1}));
-  let rf,t=0;(function tick(){ctx.clearRect(0,0,cv.width,cv.height);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.03;p.life-=.004;if(p.y>cv.height||p.life<=0){p.x=Math.random()*cv.width;p.y=cv.height+10;p.vy=-(1+Math.random()*2);p.life=1;}ctx.globalAlpha=p.life;ctx.fillStyle=p.col;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();});ctx.globalAlpha=1;t++;if(t<400)rf=requestAnimationFrame(tick);})();
-  _fx=()=>{cancelAnimationFrame(rf);ctx.clearRect(0,0,cv.width,cv.height);};
-}
-
-// ═══════════════════════════════════════════════
-// GALLERY
-// ═══════════════════════════════════════════════
-function renderGallery(){
-  const tc=cards.reduce((a,c)=>{a[c.type]=(a[c.type]||0)+1;return a;},{});
-  document.getElementById('stats-row').innerHTML=
-    `<div class="stat"><b>${cards.length}</b> Cards</div>`+
-    Object.entries(tc).slice(0,5).map(([t,n])=>`<div class="stat"><b>${n}</b> ${T[t]?.label||t}</div>`).join('');
-  const types=[...new Set(cards.map(c=>c.type))];
-  document.getElementById('filter-row').innerHTML=
-    `<button class="filter-pill${_filter==='all'?' on':''}" onclick="setFilter('all',this)">All</button>`+
-    types.map(t=>`<button class="filter-pill${_filter===t?' on':''}" onclick="setFilter('${t}',this)">${T[t]?.icon||'🎊'} ${T[t]?.label||t}</button>`).join('');
-  const fl=_filter==='all'?cards:cards.filter(c=>c.type===_filter);
-  const g=document.getElementById('gallery-grid');
-  if(!fl.length){g.innerHTML=`<div class="empty"><div class="empty-icon">🌟</div><h3>${cards.length?'No cards of this type':'No cards yet'}</h3><br><button class="btn btn-primary" onclick="nav('create')" style="margin-top:.8rem">✨ Create Card</button></div>`;return;}
-  g.innerHTML=fl.map(c=>{
-    const th=T[c.type]||T.general;
-    const lbl=getEffectiveLabel(c);
-    const icon=getEffectiveIcon(c);
-    const shortLink=makeShortUrl(c);
-    return `<div class="gtile">
-<div class="gtile-thumb" style="background:linear-gradient(160deg,${th.bg[0]},${th.bg[1]})" onclick="viewCard('${c.id}')">
-${c.imgData?`<img src="${c.imgData}" alt="${c.name}">`:`<div class="gtile-no-img">${icon}</div>`}
-<div class="gtile-badge" style="color:${th.color};border-color:${th.color}33">${lbl}</div>
-</div>
-<div class="gtile-body" onclick="viewCard('${c.id}')">
-<div class="gtile-name">${c.name}</div>
-<div class="gtile-date">${new Date(c.created).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</div>
-${c.recipient?`<div style="margin-top:.4rem;font-size:.72rem;background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.25);color:var(--gold);border-radius:50px;padding:.2rem .6rem;display:inline-block">🎯 For: ${c.recipient}</div>`:''}
-</div>
-<div class="gtile-actions">
-<button class="btn btn-primary btn-sm" style="flex:1" onclick="viewCard('${c.id}')">👁 View & Share</button>
-<button class="btn btn-ghost btn-sm" onclick="openEdit('${c.id}')">✏️</button>
-</div>
-</div>`;
-  }).join('');
-}
-
-function setFilter(f,el){_filter=f;document.querySelectorAll('.filter-pill').forEach(p=>p.classList.remove('on'));el.classList.add('on');renderGallery();}
-
-// ═══════════════════════════════════════════════
-// CREATE PAGE
-// ═══════════════════════════════════════════════
-function setupCreate(){buildStyleGrid();_selectedEmoji='';livePreview();}
-
-function buildStyleGrid(){
-  document.getElementById('style-grid').innerHTML=EFFECTS.map(e=>
-    `<div class="style-tile${_style===e.id?' on':''}" onclick="pickStyle('${e.id}',this)"><div class="st-icon">${e.icon}</div><div class="st-name">${e.label}</div></div>`
-  ).join('');
-}
-
-function pickStyle(id,el){_style=id;document.querySelectorAll('.style-tile').forEach(t=>t.classList.remove('on'));el.classList.add('on');livePreview();}
-
-function onTypeChange(){
-  const t=document.getElementById('f-type').value;
-  if(t && T[t] && !document.getElementById('f-msg').value) document.getElementById('f-msg').value=T[t].msg;
-  const fnRow=document.getElementById('festival-name-row');
-  if(t){
-    fnRow.classList.add('show');
-    const fnInput=document.getElementById('f-festival-name');
-    if(!fnInput.value) fnInput.placeholder=T[t]?T[t].label:'Custom Event';
-    const defaultEmoji = T[t]?.icon || '🎊';
-    if(!_selectedEmoji) document.getElementById('festival-emoji-preview').textContent=defaultEmoji;
-    buildEmojiPicker(t);
-  } else {
-    fnRow.classList.remove('show');
-  }
-  const bdayAlt=document.getElementById('birthday-alt-row');
-  if(t==='birthday'){bdayAlt.style.display='block';}
-  else{bdayAlt.style.display='none';document.querySelector('input[name="bday-alt"][value="normal"]').checked=true;}
-  const row=document.getElementById('date-age-row');
-  const dateWrap=document.getElementById('date-field-wrap');
-  const ageWrap=document.getElementById('age-field-wrap');
-  const dateLabel=document.getElementById('date-label');
-  const ageLabel=document.getElementById('age-label');
-  dateWrap.style.display='none'; ageWrap.style.display='none'; row.style.display='none';
-  if(t==='birthday'||t==='birthday_half'||t==='birthday_surprise'||t==='birthday_milestone'||t==='first_birthday'){
-    row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='🎂 Date of Birth';ageWrap.style.display='block';ageLabel.textContent='🎂 Turning Age';
-  } else if(t==='wedding'||t==='marriage'||t==='engagement'||t==='proposal'){
-    row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='💍 Event Date';
-  } else if(t==='anniversary'){
-    row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='💕 Anniversary Date';ageWrap.style.display='block';ageLabel.textContent='💕 Years Together';
-  } else if(t==='graduation'||t==='promotion'||t==='newjob'||t==='retirement'||t==='exam_pass'){
-    row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='📅 Event Date';
-  } else if(['diwali','christmas','eid','eid_adha','newyear','holi','pongal','onam','navratri','dussehra','ugadi','vishu','baisakhi','raksha','ganesh','janmashtami','ramadan','easter','halloween','thanksgiving'].includes(t)){
-    row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='📅 Festival Date';
-  } else if(t){
-    row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='📅 Event Date';
-  }
-  livePreview();
-}
-
-function onBdayAlt(){
-  const val=document.querySelector('input[name="bday-alt"]:checked')?.value||'normal';
-  const alt=BDAY_ALTS[val];
-  const hints={normal:'Standard birthday card',half:'Perfect for celebrating the 6-month mark!',surprise:'Shhh! Great for surprise party invites',milestone:'Perfect for 18th, 21st, 50th, etc.',first:'Adorable first birthday celebration card',joint:'Two names, double the celebration!'};
-  document.getElementById('bday-alt-hint').textContent=hints[val]||'';
-  const fnInput=document.getElementById('f-festival-name');
-  fnInput.value=alt.label;
-  _selectedEmoji=alt.icon;
-  document.getElementById('festival-emoji-preview').textContent=alt.icon;
-  document.querySelectorAll('.ep-btn').forEach(b=>{b.classList.toggle('on', b.textContent===alt.icon);});
-  const msgEl=document.getElementById('f-msg');
-  if(!msgEl.value || Object.values(BDAY_ALTS).some(a=>a.msg===msgEl.value)) msgEl.value=alt.msg;
-  livePreview();
-}
-
-function onImgChange(inp){
-  if(!inp.files||!inp.files[0])return;
-  const img=new Image(), r=new FileReader();
-  r.onload=e=>{
-    img.onload=()=>{
-      const c=document.createElement('canvas');
-      const M=280;let w=img.width,h=img.height;
-      if(w>M||h>M){if(w>h){h=Math.round(h*M/w);w=M;}else{w=Math.round(w*M/h);h=M;}}
-      c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);
-      _imgData=c.toDataURL('image/jpeg',0.60);
-      const th=document.getElementById('img-prev-thumb');
-      th.src=_imgData;th.style.display='block';
-      document.getElementById('img-prev-name').textContent=inp.files[0].name+' (compressed ✓)';
-      document.getElementById('img-remove-btn').style.display='inline-block';
-      document.getElementById('photo-style-row').style.display='block';
-      const warn=document.getElementById('img-warn');warn.style.display=_imgData.length>160000?'block':'none';
-      livePreview();
-    };img.src=e.target.result;
-  };r.readAsDataURL(inp.files[0]);
-}
-
-function removeImg(){
-  _imgData=null;
-  document.getElementById('img-prev-thumb').style.display='none';
-  document.getElementById('img-prev-name').textContent='';
-  document.getElementById('img-remove-btn').style.display='none';
-  document.getElementById('img-warn').style.display='none';
-  document.getElementById('photo-style-row').style.display='none';
-  document.getElementById('f-img').value='';
-  livePreview();
-}
-
-function getShape(){const r=document.querySelector('input[name="photo-shape"]:checked');return r?r.value:'circle';}
-
-function livePreview(){
-  const pw=document.getElementById('prev-wrap');
-  if(!pw)return;
-  pw.innerHTML=buildCard(getFormCard(),false);
-}
-
-function getFormCard(){
-  const type=document.getElementById('f-type')?.value||'general';
-  return {
-    type,
-    name:document.getElementById('f-name')?.value||'Your Name',
-    msg:document.getElementById('f-msg')?.value||'',
-    from:document.getElementById('f-from')?.value||'',
-    tpl:document.getElementById('f-tpl')?.value||'classic',
-    effect:_style, imgData:_imgData, photoShape:getShape(),
-    recipient:document.getElementById('f-recipient')?.value||'',
-    date:document.getElementById('f-date')?.value||'',
-    age:document.getElementById('f-age')?.value||'',
-    festivalName:document.getElementById('f-festival-name')?.value||'',
-    festivalEmoji:_selectedEmoji||'',
-  };
-}
-
-function clearForm(){
-  ['f-type','f-name','f-msg','f-from','f-recipient','f-date','f-age','f-festival-name'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
-  document.getElementById('f-tpl').value='classic';
-  document.getElementById('date-age-row').style.display='none';
-  document.getElementById('date-field-wrap').style.display='none';
-  document.getElementById('age-field-wrap').style.display='none';
-  document.getElementById('festival-name-row').classList.remove('show');
-  document.getElementById('birthday-alt-row').style.display='none';
-  const eprev=document.getElementById('festival-emoji-preview');if(eprev)eprev.textContent='🎊';
-  removeImg();_style='confetti';_selectedEmoji='';buildStyleGrid();livePreview();
-}
-
-function saveCard(){
-  const type=document.getElementById('f-type').value;
-  const name=document.getElementById('f-name').value.trim();
-  if(!type){toast('⚠️ Please select an event type');return;}
-  if(!name){toast('⚠️ Please enter a name');return;}
-  const c={id:'fc_'+Date.now()+'_'+Math.random().toString(36).slice(2,6),...getFormCard(),name,type,created:new Date().toISOString()};
-  cards.unshift(c);save();
-  toast('🎉 Card saved! Opening preview...');
-  nav('gallery');
-  setTimeout(()=>viewCard(c.id),300);
-  clearForm();
-}
-
-// ═══════════════════════════════════════════════
-// ADMIN PANEL
-// ═══════════════════════════════════════════════
-function showAdminPanel(){document.getElementById('admin-login-section').style.display='none';document.getElementById('admin-panel').style.display='block';renderAdmin();}
-
-function renderAdmin(){
-  const tc=cards.reduce((a,c)=>{a[c.type]=(a[c.type]||0)+1;return a;},{});
-  document.getElementById('admin-stats').innerHTML=`<div class="stat"><b>${cards.length}</b> Total Cards</div>`+Object.entries(tc).slice(0,5).map(([t,n])=>`<div class="stat"><b>${n}</b> ${T[t]?.label||t}</div>`).join('');
-  const w=document.getElementById('admin-tbl');
-  if(!cards.length){w.innerHTML=`<div class="empty"><div class="empty-icon">📋</div><h3>No cards yet</h3><br><button class="btn btn-primary" onclick="nav('create')" style="margin-top:.8rem">+ Create New</button></div>`;return;}
-  w.innerHTML=`<div class="tbl-wrap"><table class="atbl">
-<thead><tr><th>Card</th><th>Type</th><th>For</th><th>Short Link</th><th>Created</th><th>Actions</th></tr></thead>
-<tbody>${cards.map(c=>{
-  const th=T[c.type]||T.general;
-  const lbl=getEffectiveLabel(c);
-  const icon=getEffectiveIcon(c);
-  const sLink=makeShortUrl(c);
-  return `<tr>
-<td><div style="display:flex;align-items:center;gap:.8rem">
-<div style="width:46px;height:46px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,${th.bg[0]},${th.bg[1]});flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.4rem">
-${c.imgData?`<img src="${c.imgData}" style="width:46px;height:46px;object-fit:cover">`:`${icon}`}</div>
-<div><div style="font-weight:700">${c.name}</div><div style="font-size:.75rem;color:var(--muted);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${(c.msg||'').slice(0,45)}…</div></div>
-</div></td>
-<td><span class="tbadge" style="background:${th.color}22;color:${th.color}">${lbl}</span></td>
-<td>${c.recipient?`<span style="background:rgba(240,192,64,.1);color:var(--gold);border-radius:50px;padding:.2rem .6rem;font-size:.75rem">🎯 ${c.recipient}</span>`:'<span style="color:var(--muted);font-size:.8rem">—</span>'}</td>
-<td><div style="font-family:monospace;font-size:.7rem;color:var(--violet);cursor:pointer;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" onclick="navigator.clipboard&&navigator.clipboard.writeText('${sLink}')" title="Click to copy">${sLink}</div></td>
-<td style="color:var(--muted);font-size:.8rem;white-space:nowrap">${new Date(c.created).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</td>
-<td><div style="display:flex;gap:.4rem">
-<button class="btn btn-primary btn-xs" onclick="viewCard('${c.id}')">👁</button>
-<button class="btn btn-ghost btn-xs" onclick="openEdit('${c.id}')">✏️</button>
-<button class="btn btn-red btn-xs" onclick="promptDel('${c.id}')">🗑️</button>
-</div></td>
-</tr>`;
-}).join('')}</tbody></table></div>`;
-}
-
-// ═══════════════════════════════════════════════
-// EDIT / DELETE
-// ═══════════════════════════════════════════════
-function onEditTypeChange(){
-  const t=document.getElementById('em-type').value;
-  const emFestRow=document.getElementById('em-festival-row');
-  if(t) emFestRow.classList.add('show'); else emFestRow.classList.remove('show');
-  const showAge=['birthday','anniversary','birthday_milestone','birthday_half','first_birthday'].includes(t);
-  document.getElementById('em-age-wrap').style.display=showAge?'block':'none';
-}
-
-function openEdit(id){
-  const c=cards.find(x=>x.id===id);if(!c)return;
-  _editId=id;
-  document.getElementById('em-type').innerHTML=Object.keys(T).map(k=>`<option value="${k}"${k===c.type?' selected':''}>${T[k].icon} ${T[k].label}</option>`).join('');
-  document.getElementById('em-name').value=c.name||'';
-  document.getElementById('em-msg').value=c.msg||'';
-  document.getElementById('em-from').value=c.from||'';
-  document.getElementById('em-recipient').value=c.recipient||'';
-  document.getElementById('em-date').value=c.date||'';
-  document.getElementById('em-age').value=c.age||'';
-  document.getElementById('em-festival-name').value=c.festivalName||'';
-  const showAge=['birthday','anniversary','birthday_milestone','birthday_half','first_birthday'].includes(c.type);
-  document.getElementById('em-age-wrap').style.display=showAge?'block':'none';
-  document.getElementById('em-festival-row').classList.add('show');
-  openModal('edit-modal');
-}
-
-function confirmEdit(){
-  const c=cards.find(x=>x.id===_editId);if(!c)return;
-  const name=document.getElementById('em-name').value.trim();
-  if(!name){toast('⚠️ Name required');return;}
-  c.type=document.getElementById('em-type').value;
-  c.name=name;c.msg=document.getElementById('em-msg').value;
-  c.from=document.getElementById('em-from').value;
-  c.recipient=document.getElementById('em-recipient').value;
-  c.date=document.getElementById('em-date').value;
-  c.age=document.getElementById('em-age').value;
-  c.festivalName=document.getElementById('em-festival-name').value;
-  save();closeModal('edit-modal');toast('✅ Card updated!');
-  if(isSes())renderAdmin();
-  renderGallery();
-}
-
-function promptDel(id){_delId=id;openModal('del-modal');}
-function confirmDel(){cards=cards.filter(c=>c.id!==_delId);save();closeModal('del-modal');toast('🗑️ Deleted');renderAdmin();renderGallery();}
-function openModal(id){document.getElementById(id).classList.add('on');}
-function closeModal(id){document.getElementById(id).classList.remove('on');}
-
-// ═══════════════════════════════════════════════
-// TOAST
-// ═══════════════════════════════════════════════
-function toast(msg){document.querySelectorAll('.toast').forEach(t=>t.remove());const t=document.createElement('div');t.className='toast';t.innerHTML=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),3200);}
-
-// ═══════════════════════════════════════════════
-// SEED DATA
-// ═══════════════════════════════════════════════
-function seed(){
-  if(cards.length)return;
-  cards=[
-    {id:'s1',type:'birthday',name:'Aanya Kapoor',msg:"Wishing you a day as magical as you are! 🎂",from:'With love, your family',tpl:'royal',effect:'confetti',imgData:null,photoShape:'circle',recipient:'Aanya',created:new Date().toISOString(),festivalName:'Sweet 16',festivalEmoji:'🎂'},
-    {id:'s2',type:'diwali',name:'The Sharma Family',msg:"May the festival of lights bring joy! Happy Diwali! 🪔",from:'Warm wishes',tpl:'classic',effect:'firework',imgData:null,photoShape:'circle',recipient:'',created:new Date(Date.now()-86400000).toISOString(),festivalName:'',festivalEmoji:''},
-    {id:'s3',type:'wedding',name:'Rahul & Priya',msg:"May your love grow stronger each day! 💍",from:'With blessings',tpl:'minimal',effect:'hearts',imgData:null,photoShape:'circle',recipient:'Priya',created:new Date(Date.now()-172800000).toISOString(),festivalName:'',festivalEmoji:''},
-    {id:'s4',type:'birthday_half',name:'Little Aryan',msg:"Happy Half Birthday! 🎈 You're halfway there, champ!",from:'Mom & Dad',tpl:'classic',effect:'confetti',imgData:null,photoShape:'circle',recipient:'Aryan',created:new Date(Date.now()-259200000).toISOString(),festivalName:'Half Birthday',festivalEmoji:'🎈'},
-  ];
-  save();
-}
-
-// ═══════════════════════════════════════════════
-// INIT — handles ?id= (short), ?card= (full encoded), or home
-// ═══════════════════════════════════════════════
-window.addEventListener('load',()=>{
-  _baseUrl = location.href.split('?')[0].split('#')[0];
-  load();
-  seed();
-
-  const params = new URLSearchParams(location.search);
-
-  // ── SHORT LINK: ?id=CARD_ID ──────────────────
-  const idParam = params.get('id');
-  if(idParam){
-    const card = cards.find(c => c.id === decodeURIComponent(idParam));
-    if(card){
-      // Found in localStorage → show card-only view (no home)
-      const short = makeShortUrl(card);
-      const full  = makeFullUrl(card);
-      showShareView(card, short, full);
-      return;
-    } else {
-      // Not found — show helpful "not found" screen, NOT home
-      showCardNotFound();
-      return;
-    }
-  }
-
-  // ── FULL LINK: ?card=BASE64 (backward compat / cross-device) ──
-  const rawCard = params.get('card');
-  if(rawCard){
-    const safeParam = rawCard.replace(/ /g,'+');
-    const card = decodeCard(safeParam);
-    if(card){
-      // For full links the "short" url is same as full (no ID)
-      const full = location.href;
-      showShareView(card, full, full);
-      return;
-    }
-    try{history.replaceState({},'',_baseUrl);}catch(e){}
-  }
-
-  // ── HOME ──────────────────────────────────────
-  initBG();
-  renderGallery();
-});
-
-window.addEventListener('popstate',()=>{
-  const vp=document.getElementById('view-page');
-  if(vp.classList.contains('on')){vp.classList.remove('on');document.body.style.overflow='';stopFX();}
-});
-window.addEventListener('keydown',e=>{if(e.key==='Escape')closeView();});
-</script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>FestivaCard Pro</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;600;700;800;900&family=Great+Vibes&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.browser.min.js"></script>
-<style>
-:root{
-  --ink:#0a0812;--surface:#120f24;--card:#1a1535;--panel:#201c3a;
-  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.14);
-  --gold:#f0c040;--rose:#f472b6;--violet:#a78bfa;
-  --text:#f0ebff;--muted:#8b82b0;--subtle:#4a4470;
-  --r:16px;--r2:24px;--r3:10px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min-height:100vh;overflow-x:hidden}
-#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35}
-#root{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
-header{display:flex;align-items:center;justify-content:space-between;padding:.9rem 2rem;background:rgba(10,8,18,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;gap:1rem}
-.brand{display:flex;align-items:center;gap:.6rem;cursor:pointer;text-decoration:none}
-.brand-icon{width:36px;height:36px;background:linear-gradient(135deg,#f0c040,#f472b6);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
-.brand-name{font-family:'Great Vibes',cursive;font-size:1.7rem;background:linear-gradient(90deg,#f0c040,#f472b6,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.nav-tabs{display:flex;gap:.3rem;background:var(--surface);border-radius:50px;padding:.3rem;border:1px solid var(--border)}
-.nav-tab{background:transparent;border:none;color:var(--muted);padding:.45rem 1.1rem;border-radius:50px;cursor:pointer;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;transition:all .22s;white-space:nowrap}
-.nav-tab:hover{color:var(--text)}
-.nav-tab.on{background:linear-gradient(135deg,#2a2050,#1e1840);color:var(--text);border:1px solid var(--border2)}
-.admin-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(240,192,64,.12);border:1px solid rgba(240,192,64,.3);color:var(--gold);border-radius:50px;padding:.3rem .8rem;font-size:.75rem;font-weight:700}
-.page{display:none;flex:1;padding:2rem;max-width:1400px;margin:0 auto;width:100%}
-.page.on{display:block}
-@media(max-width:600px){.page{padding:1.2rem}}
-.hero{text-align:center;padding:3rem 1rem 2.5rem}
-.hero-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(240,192,64,.1);border:1px solid rgba(240,192,64,.3);color:var(--gold);border-radius:50px;padding:.4rem 1rem;font-size:.78rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:1.2rem}
-.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,6vw,5rem);font-weight:700;line-height:1.1;margin-bottom:1rem}
-.hero h1 em{font-style:italic;background:linear-gradient(120deg,#f0c040,#f472b6,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero p{color:var(--muted);font-size:1.05rem;max-width:520px;margin:0 auto 2rem;line-height:1.7}
-.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.6rem;border-radius:50px;border:none;font-family:'Outfit',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .22s;text-decoration:none;white-space:nowrap}
-.btn-primary{background:linear-gradient(135deg,#f0c040,#e89020);color:#0a0812}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(240,192,64,.35)}
-.btn-rose{background:linear-gradient(135deg,#f472b6,#e11d85);color:#fff}
-.btn-ghost{background:transparent;border:1px solid var(--border2);color:var(--text)}
-.btn-ghost:hover{background:var(--panel);border-color:var(--muted)}
-.btn-red{background:linear-gradient(135deg,#f87171,#dc2626);color:#fff}
-.btn-red:hover{transform:translateY(-2px)}
-.btn-green{background:linear-gradient(135deg,#4ade80,#16a34a);color:#0a0812}
-.btn-violet{background:linear-gradient(135deg,#a78bfa,#7c3aed);color:#fff}
-.btn-sm{padding:.45rem 1rem;font-size:.8rem}
-.btn-xs{padding:.3rem .75rem;font-size:.75rem}
-.btn:active{transform:scale(.97)}
-.s-head{margin-bottom:1.8rem}
-.s-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;margin-bottom:.3rem}
-.s-sub{color:var(--muted);font-size:.92rem}
-.filter-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.8rem;align-items:center}
-.filter-pill{background:transparent;border:1px solid var(--border);color:var(--muted);padding:.35rem .9rem;border-radius:50px;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Outfit',sans-serif}
-.filter-pill:hover,.filter-pill.on{background:var(--panel);border-color:var(--violet);color:var(--violet)}
-.stats-row{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:1.8rem}
-.stat{background:var(--card);border:1px solid var(--border);border-radius:50px;padding:.4rem 1rem;font-size:.82rem;font-weight:700}
-.stat b{color:var(--gold)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem}
-.gtile{background:var(--card);border-radius:var(--r2);border:1px solid var(--border);overflow:hidden;display:flex;flex-direction:column;transition:transform .22s,box-shadow .22s}
-.gtile:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.6)}
-.gtile-thumb{height:190px;position:relative;overflow:hidden;flex-shrink:0;cursor:pointer}
-.gtile-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-.gtile:hover .gtile-thumb img{transform:scale(1.05)}
-.gtile-no-img{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:4.5rem}
-.gtile-badge{position:absolute;top:.6rem;left:.6rem;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);border-radius:50px;padding:.25rem .65rem;font-size:.68rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(255,255,255,.12)}
-.gtile-body{padding:1rem 1.1rem;flex:1;cursor:pointer}
-.gtile-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:.3rem}
-.gtile-date{font-size:.75rem;color:var(--muted)}
-.gtile-actions{display:flex;gap:.5rem;padding:.8rem 1rem;border-top:1px solid var(--border)}
-.empty{text-align:center;padding:5rem 2rem;color:var(--muted);grid-column:1/-1}
-.empty-icon{font-size:4rem;margin-bottom:1rem;filter:grayscale(1);opacity:.35}
-.empty h3{font-size:1.2rem;color:var(--text);opacity:.5;margin-bottom:.5rem}
-.create-layout{display:grid;grid-template-columns:1fr 380px;gap:2rem;align-items:start}
-@media(max-width:1000px){.create-layout{grid-template-columns:1fr}}
-.form-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:1.8rem;display:flex;flex-direction:column;gap:1.4rem}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
-@media(max-width:600px){.form-row{grid-template-columns:1fr}}
-.fld label{display:block;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:.5rem}
-.fld input,.fld select,.fld textarea{width:100%;background:var(--panel);border:1px solid var(--border);border-radius:var(--r3);padding:.75rem 1rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.95rem;outline:none;transition:border-color .2s}
-.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--violet)}
-.fld select option{background:var(--panel)}
-.fld textarea{resize:vertical;min-height:90px;line-height:1.6}
-.festival-name-row{background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.25);border-radius:var(--r3);padding:1rem;display:none}
-.festival-name-row.show{display:block}
-.festival-name-row label{color:var(--violet)!important}
-.festival-hint{font-size:.73rem;color:var(--muted);margin-top:.35rem}
-.emoji-picker-wrap{position:relative}
-.emoji-grid{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem;background:var(--panel);border:1px solid var(--border2);border-radius:var(--r3);padding:.6rem;max-height:120px;overflow-y:auto}
-.ep-btn{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.3rem .5rem;font-size:1.2rem;cursor:pointer;transition:all .15s;line-height:1}
-.ep-btn:hover{background:rgba(167,139,250,.15);border-color:var(--violet);transform:scale(1.15)}
-.ep-btn.on{background:rgba(167,139,250,.2);border-color:var(--violet);box-shadow:0 0 0 2px rgba(167,139,250,.3)}
-.selected-emoji-preview{font-size:2rem;display:inline-block;vertical-align:middle;margin-right:.5rem}
-.style-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:.7rem}
-.style-tile{background:var(--panel);border:2px solid var(--border);border-radius:var(--r3);padding:.75rem .5rem;cursor:pointer;text-align:center;transition:all .2s;position:relative;overflow:hidden}
-.style-tile:hover{border-color:var(--violet);background:rgba(167,139,250,.07)}
-.style-tile.on{border-color:var(--violet);background:rgba(167,139,250,.12)}
-.style-tile.on::after{content:'✓';position:absolute;top:.3rem;right:.4rem;font-size:.7rem;color:var(--violet);font-weight:900}
-.style-tile .st-icon{font-size:2rem;margin-bottom:.3rem}
-.style-tile .st-name{font-size:.72rem;font-weight:700;color:var(--muted)}
-.style-tile.on .st-name{color:var(--violet)}
-.upload-zone{border:2px dashed rgba(167,139,250,.3);border-radius:var(--r3);padding:1.5rem;text-align:center;cursor:pointer;transition:all .2s;background:rgba(167,139,250,.04)}
-.upload-zone:hover{border-color:var(--violet);background:rgba(167,139,250,.08)}
-.upload-zone input{display:none}
-.upload-preview{display:flex;align-items:center;gap:1rem;margin-top:.8rem}
-.upload-img-prev{width:70px;height:70px;border-radius:50%;object-fit:cover;border:3px solid var(--violet);display:none}
-.upload-remove{background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);color:#f87171;border-radius:50px;padding:.3rem .8rem;font-size:.75rem;cursor:pointer;font-family:'Outfit',sans-serif;font-weight:600;display:none}
-.preview-sticky{position:sticky;top:90px}
-.preview-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
-.preview-label span{width:20px;height:1px;background:var(--muted);display:inline-block}
-#prev-wrap{border-radius:var(--r2);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-.how-box{background:rgba(167,139,250,.07);border:1px solid rgba(167,139,250,.2);border-radius:var(--r3);padding:1rem;margin-top:.8rem;font-size:.8rem;color:var(--muted);line-height:1.7}
-.how-box b{color:var(--violet)}
-.admin-login-wrap{display:flex;align-items:center;justify-content:center;min-height:60vh}
-.admin-login-box{background:var(--card);border:1px solid var(--border2);border-radius:var(--r2);padding:2.5rem;max-width:380px;width:100%;text-align:center}
-.pwd-wrap{position:relative;margin-bottom:1rem}
-.pwd-wrap input{width:100%;background:var(--panel);border:1px solid var(--border);border-radius:var(--r3);padding:.8rem 3rem .8rem 1rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:1rem;outline:none;transition:border-color .2s;text-align:center;letter-spacing:3px}
-.pwd-wrap input:focus{border-color:var(--violet)}
-.eye-btn{position:absolute;right:.9rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--muted);font-size:1.1rem;padding:.2rem}
-.admin-err{color:#f87171;font-size:.83rem;margin-bottom:.8rem;display:none}
-.admin-hbar{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:1rem 1.5rem;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem}
-.admin-av{width:40px;height:40px;background:linear-gradient(135deg,#f0c040,#f472b6);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
-.tbl-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;overflow-x:auto}
-.atbl{width:100%;border-collapse:collapse;min-width:640px}
-.atbl th{padding:.8rem 1rem;text-align:left;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);background:var(--panel);border-bottom:1px solid var(--border)}
-.atbl td{padding:.9rem 1rem;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle;font-size:.88rem}
-.atbl tr:last-child td{border-bottom:none}
-.atbl tr:hover td{background:rgba(255,255,255,.02)}
-.tbadge{display:inline-block;padding:.2rem .65rem;border-radius:50px;font-size:.7rem;font-weight:800;text-transform:uppercase}
-.pwd-chg{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:1.5rem;margin-top:1.5rem}
-.pwd-row{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:.8rem;align-items:end}
-@media(max-width:700px){.pwd-row{grid-template-columns:1fr}}
-
-/* SHORT LINK BOX */
-.short-link-box{background:linear-gradient(135deg,rgba(167,139,250,.12),rgba(240,192,64,.08));border:1px solid rgba(167,139,250,.35);border-radius:var(--r3);padding:1rem 1.1rem;margin-top:.6rem}
-.short-link-label{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--violet);margin-bottom:.4rem;display:flex;align-items:center;gap:.4rem}
-.short-link-url{font-family:monospace;font-size:.82rem;color:var(--gold);word-break:break-all;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:.45rem .7rem;margin-bottom:.5rem;cursor:pointer;transition:background .2s}
-.short-link-url:hover{background:rgba(240,192,64,.08)}
-.short-link-actions{display:flex;gap:.5rem;flex-wrap:wrap}
-
-/* SHARE VIEW */
-#share-view{display:none;position:fixed;inset:0;z-index:9999;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:1rem}
-#share-view.on{display:flex}
-#sconf-cv{position:fixed;inset:0;z-index:1;pointer-events:none}
-.s-card-wrap{position:relative;z-index:2;width:100%;max-width:480px;border-radius:24px;overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.8)}
-/* ── Header banner inside share-view ── */
-.s-banner{display:none;animation:slideDown .6s ease;z-index:3;width:100%;max-width:480px;padding:.9rem 1.5rem;text-align:center;background:rgba(0,0,0,.55);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.1);border-radius:16px;margin-bottom:.8rem}
-.s-banner-name{font-family:'Great Vibes',cursive;font-size:2rem;background:linear-gradient(90deg,#f0c040,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-/* ── Card-for label (top chip) ── */
-.s-card-for-chip{z-index:3;display:none;animation:slideDown .5s ease .1s both;width:100%;max-width:480px;margin-bottom:.5rem}
-.s-card-for-chip-inner{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,0,0,.55);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);border-radius:50px;padding:.35rem .9rem;font-size:.78rem;font-weight:700;color:rgba(255,255,255,.8)}
-.s-card-for-chip-inner .chip-name{color:var(--gold);font-size:.9rem}
-.s-bottom{z-index:3;width:100%;max-width:480px;margin-top:.8rem;display:flex;flex-direction:column;align-items:center;gap:.6rem}
-.s-copy-row{display:flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:50px;padding:.4rem .4rem .4rem .9rem;width:100%}
-.s-url{flex:1;font-size:.7rem;color:rgba(255,255,255,.4);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:monospace}
-
-/* INTERNAL VIEW */
-#view-page{position:fixed;inset:0;z-index:500;background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;overflow-y:auto;padding:4rem 1rem 6rem}
-#view-page.on{display:flex}
-#vconf-cv{position:fixed;inset:0;z-index:1;pointer-events:none}
-#view-canvas{width:100%;max-width:480px;border-radius:var(--r2);overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.8);position:relative;z-index:2}
-.v-share-banner{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;align-items:center;gap:.6rem;padding:.7rem 1.2rem;background:rgba(0,0,0,.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.1)}
-/* card-for label inside view-page top bar */
-.v-card-for{display:flex;align-items:center;gap:.4rem;flex:1;overflow:hidden}
-.v-card-for-name{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;color:var(--gold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.v-card-for-sub{font-size:.7rem;color:rgba(255,255,255,.4);white-space:nowrap}
-/* short link row in view-page */
-.v-link-pill{display:flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:.35rem .7rem;cursor:pointer;transition:background .2s;max-width:240px;overflow:hidden}
-.v-link-pill:hover{background:rgba(240,192,64,.1);border-color:rgba(240,192,64,.3)}
-.v-link-pill-txt{font-family:monospace;font-size:.67rem;color:rgba(255,255,255,.5);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
-.v-link-pill-badge{background:linear-gradient(135deg,#f0c040,#e89020);border-radius:4px;padding:.1rem .35rem;font-size:.6rem;font-weight:800;color:#0a0812;flex-shrink:0}
-.v-bottom{position:fixed;bottom:0;left:0;right:0;z-index:10;padding:.8rem 1rem 1.2rem;background:linear-gradient(to top,rgba(0,0,0,.9) 70%,transparent);display:flex;flex-direction:column;gap:.5rem;align-items:center}
-.v-btn-row{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center}
-
-/* NOT FOUND VIEW */
-#not-found-view{display:none;position:fixed;inset:0;z-index:9998;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;background:linear-gradient(160deg,#0a0812,#1a1535,#0a0812)}
-#not-found-view.on{display:flex}
-.nf-icon{font-size:5rem;margin-bottom:1.2rem;animation:floatUp 3s ease-in-out infinite}
-.nf-title{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:700;margin-bottom:.6rem}
-.nf-sub{color:var(--muted);font-size:1rem;max-width:380px;line-height:1.7;margin-bottom:2rem}
-.nf-hint{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);border-radius:var(--r3);padding:1rem;font-size:.82rem;color:var(--muted);max-width:380px;line-height:1.7;margin-bottom:1.5rem}
-.nf-hint b{color:var(--violet)}
-
-/* MODALS */
-.modal-wrap{position:fixed;inset:0;z-index:900;background:rgba(5,3,14,.9);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:1rem}
-.modal-wrap.on{display:flex}
-.modal-box{background:var(--card);border-radius:var(--r2);border:1px solid var(--border2);max-width:540px;width:100%;padding:2rem;position:relative;max-height:88vh;overflow-y:auto;animation:popIn .25s ease}
-@keyframes popIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
-.modal-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;margin-bottom:.3rem}
-.modal-sub{color:var(--muted);font-size:.85rem;margin-bottom:1.4rem}
-.modal-close{position:absolute;top:1.1rem;right:1.1rem;background:var(--panel);border:1px solid var(--border);color:var(--muted);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
-.modal-close:hover{background:rgba(248,113,113,.2);border-color:#f87171;color:#f87171}
-.modal-footer{display:flex;gap:.8rem;margin-top:1.5rem;flex-wrap:wrap}
-.toast{position:fixed;bottom:2rem;right:2rem;z-index:9999;background:var(--panel);border:1px solid var(--border2);border-radius:14px;padding:1rem 1.4rem;font-size:.9rem;font-weight:600;box-shadow:0 10px 40px rgba(0,0,0,.5);animation:toastIn .3s ease,toastOut .3s ease 2.8s forwards;pointer-events:none;max-width:320px}
-@keyframes toastIn{from{opacity:0;transform:translateY(16px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
-@keyframes toastOut{from{opacity:1}to{opacity:0;transform:translateY(8px)}}
-::-webkit-scrollbar{width:6px;height:6px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--subtle);border-radius:10px}
-@keyframes floatUp{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-8px)}80%{transform:translateX(8px)}}
-@keyframes fallPart{0%{transform:translateY(-10px) rotate(0deg);opacity:.9}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
-@keyframes risePart{0%{transform:translateY(20px) scale(.5);opacity:0}40%{opacity:.9}100%{transform:translateY(-80px) scale(1.2);opacity:0}}
-@keyframes slideDown{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
-</style>
-</head>
-<body>
-
-<!-- NOT FOUND VIEW -->
-<div id="not-found-view">
-  <div class="nf-icon">🔍</div>
-  <div class="nf-title">Card Not Found</div>
-  <div class="nf-sub">This greeting card link is only available on the device that created it. Ask the card creator to share the link directly.</div>
-  <div class="nf-hint"><b>Why?</b> Short links store card data on the creator's device. To share cross-device, the creator should use the <b>"Copy Full Link"</b> option instead.</div>
-  <button class="btn btn-primary" onclick="goHome()">🏠 Create Your Own Card</button>
-</div>
-
-<!-- SHARE VIEW — card-only, no app chrome -->
-<div id="share-view">
-  <canvas id="sconf-cv"></canvas>
-  <!-- Card-for chip (top) -->
-  <div class="s-card-for-chip" id="s-card-for-chip">
-    <div class="s-card-for-chip-inner">
-      <span>🎁 Card for</span>
-      <span class="chip-name" id="s-chip-name"></span>
-    </div>
-  </div>
-  <!-- Recipient banner -->
-  <div id="s-banner" class="s-banner">
-    <div class="s-banner-name" id="s-banner-name"></div>
-    <div style="font-size:.78rem;color:rgba(255,255,255,.5);margin-top:.2rem">Someone special sent this just for you ✨</div>
-  </div>
-  <div class="s-card-wrap" id="s-card-inner"></div>
-  <div class="s-bottom">
-    <!-- Short link row -->
-    <div class="s-copy-row">
-      <span class="s-url" id="s-url-txt"></span>
-      <button onclick="sCopy()" style="background:linear-gradient(135deg,#f0c040,#e89020);border:none;border-radius:50px;padding:.35rem .85rem;font-size:.75rem;font-weight:700;cursor:pointer;color:#0a0812;flex-shrink:0">📋 Copy</button>
-      <button onclick="sShare()" style="background:linear-gradient(135deg,#f472b6,#e11d85);border:none;border-radius:50px;padding:.35rem .85rem;font-size:.75rem;font-weight:700;cursor:pointer;color:#fff;flex-shrink:0">↗ Share</button>
-    </div>
-    <div style="font-size:.7rem;color:rgba(255,255,255,.25)">Made with FestivaCard Pro ✨</div>
-  </div>
-</div>
-
-<!-- MAIN APP -->
-<canvas id="bg-canvas"></canvas>
-<div id="root">
-  <header>
-    <a class="brand" onclick="nav('gallery')">
-      <div class="brand-icon">🎊</div>
-      <span class="brand-name">FestivaCard Pro</span>
-    </a>
-    <nav class="nav-tabs">
-      <button class="nav-tab on" data-page="gallery" onclick="nav('gallery')">🌟 Gallery</button>
-      <button class="nav-tab" data-page="create"  onclick="nav('create')">✨ Create</button>
-      <button class="nav-tab" data-page="admin"   onclick="nav('admin')">⚙️ Admin</button>
-    </nav>
-  </header>
-
-  <!-- GALLERY -->
-  <main class="page on" id="pg-gallery">
-    <div class="hero">
-      <div class="hero-badge">🔗 NEW: Short Share Links • Card-Only View • 50+ Emojis</div>
-      <h1>Create & Share<br><em>Beautiful Greetings</em></h1>
-      <p>Short link for same-device sharing. Copy Full Link to share across any phone or computer!</p>
-      <div class="hero-actions">
-        <button class="btn btn-primary" onclick="nav('create')">✨ Create New Card</button>
-        <button class="btn btn-ghost"   onclick="nav('admin')">⚙️ Admin Panel</button>
-      </div>
-    </div>
-    <div class="stats-row" id="stats-row"></div>
-    <div class="filter-row" id="filter-row"></div>
-    <div class="grid" id="gallery-grid"></div>
-  </main>
-
-  <!-- CREATE -->
-  <main class="page" id="pg-create">
-    <div class="s-head">
-      <div class="s-title">✨ Create Greeting Card</div>
-      <div class="s-sub">Fill in the details — then copy the short link or full link to share!</div>
-    </div>
-    <div class="create-layout">
-      <div class="form-panel">
-
-        <div class="form-row">
-          <div class="fld">
-            <label>Event Type *</label>
-            <select id="f-type" onchange="onTypeChange()">
-              <option value="">— Select Event —</option>
-              <optgroup label="🎂 Birthday & Milestones">
-                <option value="birthday">🎂 Birthday</option>
-                <option value="birthday_half">🎈 Half Birthday</option>
-                <option value="birthday_surprise">🎁 Surprise Birthday</option>
-                <option value="birthday_milestone">🎖️ Milestone Birthday</option>
-                <option value="first_birthday">👶🎂 First Birthday</option>
-              </optgroup>
-              <optgroup label="💍 Love & Relationships">
-                <option value="wedding">💍 Wedding</option>
-                <option value="marriage">🌸 Marriage</option>
-                <option value="anniversary">💕 Anniversary</option>
-                <option value="engagement">💎 Engagement</option>
-                <option value="proposal">💝 Proposal</option>
-                <option value="valday">❤️ Valentine's Day</option>
-              </optgroup>
-              <optgroup label="🎓 Achievement">
-                <option value="graduation">🎓 Graduation</option>
-                <option value="promotion">🚀 Job Promotion</option>
-                <option value="newjob">💼 New Job</option>
-                <option value="retirement">🌅 Retirement</option>
-                <option value="exam_pass">📚 Exam Success</option>
-              </optgroup>
-              <optgroup label="👶 Family">
-                <option value="babyshower">👶 Baby Shower</option>
-                <option value="newborn">🍼 Newborn Baby</option>
-                <option value="naming">🌷 Naming Ceremony</option>
-                <option value="mothersday">💐 Mother's Day</option>
-                <option value="fathersday">👨‍👧 Father's Day</option>
-              </optgroup>
-              <optgroup label="👋 Social">
-                <option value="farewell">👋 Farewell</option>
-                <option value="welcome">🤗 Welcome</option>
-                <option value="getwell">🌿 Get Well Soon</option>
-                <option value="thankyou">🙏 Thank You</option>
-                <option value="sorry">😔 Sorry / Apology</option>
-              </optgroup>
-              <optgroup label="🪔 Indian Festivals">
-                <option value="diwali">🪔 Diwali</option>
-                <option value="holi">🌈 Holi</option>
-                <option value="pongal">🌾 Pongal</option>
-                <option value="onam">🌺 Onam</option>
-                <option value="navratri">🕺 Navratri</option>
-                <option value="dussehra">🏹 Dussehra</option>
-                <option value="ugadi">🌻 Ugadi</option>
-                <option value="vishu">🌼 Vishu</option>
-                <option value="baisakhi">🌾 Baisakhi</option>
-                <option value="raksha">🪢 Raksha Bandhan</option>
-                <option value="ganesh">🐘 Ganesh Chaturthi</option>
-                <option value="janmashtami">🦚 Janmashtami</option>
-              </optgroup>
-              <optgroup label="🌙 Islamic Festivals">
-                <option value="eid">🌙 Eid ul-Fitr</option>
-                <option value="eid_adha">🐑 Eid ul-Adha</option>
-                <option value="ramadan">☪️ Ramadan Mubarak</option>
-              </optgroup>
-              <optgroup label="🎄 Global Festivals">
-                <option value="christmas">🎄 Christmas</option>
-                <option value="newyear">🎆 New Year</option>
-                <option value="easter">🐣 Easter</option>
-                <option value="halloween">🎃 Halloween</option>
-                <option value="thanksgiving">🦃 Thanksgiving</option>
-              </optgroup>
-              <option value="general">🎊 General Celebration</option>
-              <option value="custom">⚙️ Custom Event</option>
-            </select>
-          </div>
-          <div class="fld">
-            <label>Person / Couple Name *</label>
-            <input type="text" id="f-name" placeholder="e.g. Priya Sharma" maxlength="50" oninput="livePreview()">
-          </div>
-        </div>
-
-        <!-- Festival Name / Event Title Edit -->
-        <div class="festival-name-row" id="festival-name-row">
-          <div class="fld">
-            <label>🎨 Edit Festival / Event Title</label>
-            <div style="display:flex;gap:.6rem;align-items:center">
-              <span class="selected-emoji-preview" id="festival-emoji-preview">🎊</span>
-              <input type="text" id="f-festival-name" placeholder="e.g. Sweet 16, Golden Jubilee..." maxlength="40" oninput="livePreview()" style="flex:1">
+        <!-- ══ BACKGROUND COLOR PICKER (NEW) ══ -->
+        <div class="bg-color-section">
+          <label style="display:block;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:.6rem">🎨 Background Color</label>
+          <div style="font-size:.75rem;color:var(--muted);margin-bottom:.7rem">Choose preset gradients or pick your own custom colors</div>
+
+          <!-- Preset swatches -->
+          <div class="bg-presets" id="bg-presets"></div>
+
+          <!-- Custom two-color picker + direction -->
+          <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:.5rem">Custom Colors</div>
+          <div class="bg-custom-row">
+            <div class="color-input-wrap">
+              <label>Color 1</label>
+              <input type="color" id="f-bg1" value="#2d0a4e" oninput="onCustomBg()">
             </div>
-            <div class="festival-hint">This replaces the default event label on the card (e.g. "Birthday" → "Sweet 16")</div>
-          </div>
-          <div style="margin-top:.8rem">
-            <label style="display:block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:.4rem">Pick Card Emoji / Icon</label>
-            <div class="emoji-grid" id="emoji-grid"></div>
-          </div>
-        </div>
-
-        <div class="fld">
-          <label>Greeting Message</label>
-          <textarea id="f-msg" placeholder="Write a heartfelt message…" maxlength="280" oninput="livePreview()"></textarea>
-        </div>
-
-        <div class="form-row">
-          <div class="fld">
-            <label>From / Sender</label>
-            <input type="text" id="f-from" placeholder="e.g. With love, Mom ❤️" maxlength="70" oninput="livePreview()">
-          </div>
-          <div class="fld">
-            <label>Card Template</label>
-            <select id="f-tpl" onchange="livePreview()">
-              <option value="classic">Classic Elegant</option>
-              <option value="modern">Modern Bold</option>
-              <option value="minimal">Minimal Soft</option>
-              <option value="royal">Royal Dark</option>
-              <option value="floral">Floral Bloom</option>
+            <div class="color-input-wrap">
+              <label>Color 2</label>
+              <input type="color" id="f-bg2" value="#5b0f7c" oninput="onCustomBg()">
+            </div>
+            <div class="color-input-wrap">
+              <label>Color 3</label>
+              <input type="color" id="f-bg3" value="#2d0a4e" oninput="onCustomBg()">
+            </div>
+            <select class="bg-dir-select" id="f-bg-dir" onchange="onCustomBg()">
+              <option value="160deg">↗ Diagonal</option>
+              <option value="180deg">↓ Vertical</option>
+              <option value="90deg">→ Horizontal</option>
+              <option value="135deg">↘ Soft Diagonal</option>
+              <option value="45deg">↙ Reverse</option>
             </select>
+            <button class="bg-reset-btn" onclick="resetBg()">↺ Reset</button>
           </div>
-        </div>
-
-        <!-- Dynamic Date/Age row -->
-        <div class="form-row" id="date-age-row" style="display:none">
-          <div class="fld" id="date-field-wrap" style="display:none">
-            <label id="date-label">📅 Event Date</label>
-            <input type="date" id="f-date" onchange="livePreview()">
-          </div>
-          <div class="fld" id="age-field-wrap" style="display:none">
-            <label id="age-label">🎂 Age (Turning)</label>
-            <input type="number" id="f-age" placeholder="e.g. 25" min="1" max="120" oninput="livePreview()" style="appearance:none;-moz-appearance:textfield">
-          </div>
-        </div>
-
-        <!-- Birthday Alternate Options -->
-        <div id="birthday-alt-row" style="display:none;background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.22);border-radius:var(--r3);padding:1rem">
-          <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:.7rem">🎂 Birthday Alternate Options</div>
-          <div style="display:flex;gap:.5rem;flex-wrap:wrap">
-            <label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:.5rem .8rem;font-size:.8rem;font-weight:600;color:var(--text)"><input type="radio" name="bday-alt" value="normal" checked onchange="onBdayAlt()" style="accent-color:var(--gold)"> 🎂 Normal Birthday</label>
-            <label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:.5rem .8rem;font-size:.8rem;font-weight:600;color:var(--text)"><input type="radio" name="bday-alt" value="half" onchange="onBdayAlt()" style="accent-color:var(--gold)"> 🎈 Half Birthday</label>
-            <label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:.5rem .8rem;font-size:.8rem;font-weight:600;color:var(--text)"><input type="radio" name="bday-alt" value="surprise" onchange="onBdayAlt()" style="accent-color:var(--gold)"> 🎁 Surprise Party</label>
-            <label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:.5rem .8rem;font-size:.8rem;font-weight:600;color:var(--text)"><input type="radio" name="bday-alt" value="milestone" onchange="onBdayAlt()" style="accent-color:var(--gold)"> 🎖️ Milestone</label>
-            <label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:.5rem .8rem;font-size:.8rem;font-weight:600;color:var(--text)"><input type="radio" name="bday-alt" value="first" onchange="onBdayAlt()" style="accent-color:var(--gold)"> 👶 First Birthday</label>
-            <label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:.5rem .8rem;font-size:.8rem;font-weight:600;color:var(--text)"><input type="radio" name="bday-alt" value="joint" onchange="onBdayAlt()" style="accent-color:var(--gold)"> 👫 Joint Birthday</label>
-          </div>
-          <div id="bday-alt-hint" style="margin-top:.5rem;font-size:.75rem;color:var(--muted)">Card label & emoji will update automatically</div>
-        </div>
-
-        <div class="fld">
-          <label>Animation Effect</label>
-          <div class="style-grid" id="style-grid"></div>
         </div>
 
         <div class="fld">
@@ -2027,8 +569,6 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
 <!-- INTERNAL VIEW -->
 <div id="view-page">
   <canvas id="vconf-cv"></canvas>
-
-  <!-- Top bar: Back + Card-for name + short link pill -->
   <div class="v-share-banner">
     <button class="btn btn-ghost btn-xs" onclick="closeView()">← Back</button>
     <div class="v-card-for" id="v-card-for">
@@ -2037,21 +577,16 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
         <div class="v-card-for-sub" id="v-card-for-sub"></div>
       </div>
     </div>
-    <!-- Short link pill — click to copy -->
     <div class="v-link-pill" onclick="vCopyShort()" title="Copy short link">
       <span class="v-link-pill-badge">SHORT</span>
       <span class="v-link-pill-txt" id="v-short-url-txt"></span>
     </div>
   </div>
-
   <div id="view-canvas"></div>
-
   <div class="v-bottom">
     <div style="font-size:.72rem;color:rgba(255,255,255,.4);margin-bottom:.2rem">📤 Share this card</div>
     <div class="v-btn-row">
-      <!-- Short link (same device) -->
       <button class="btn btn-primary" onclick="vCopyShort()">🔗 Copy Short Link</button>
-      <!-- Full encoded link (any device) -->
       <button class="btn btn-violet" onclick="vCopyFull()">🌐 Copy Full Link</button>
       <button class="btn btn-rose btn-sm" onclick="vShare()">↗ Share</button>
       <button class="btn btn-ghost btn-sm" onclick="vWhatsApp()">💬 WhatsApp</button>
@@ -2120,130 +655,143 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.9r
 </div>
 
 <script>
-// ═══════════════════════════════════════════════
-// CONFIG & STATE
-// ═══════════════════════════════════════════════
-const SK_DATA='fcv7_data', SK_PWD='fcv7_pwd', SK_SES='fcv7_ses';
+const SK_DATA='fcv8_data', SK_PWD='fcv7_pwd', SK_SES='fcv7_ses';
 let cards=[], _imgData=null, _style='confetti', _filter='all', _editId=null, _delId=null;
 let _shortUrl='', _fullUrl='', _shareRecipient='', _baseUrl='';
 let _selectedEmoji='';
-let _currentCard=null; // card being viewed (for share)
+let _currentCard=null;
+// Custom BG state
+let _bgColors=['','',''], _bgDir='160deg', _bgPresetIdx=-1;
 
-// ═══════════════════════════════════════════════
-// EMOJI SETS
-// ═══════════════════════════════════════════════
+// ── BG PRESETS ──
+const BG_PRESETS=[
+  {label:'Purple Dream',   c:['#2d0a4e','#5b0f7c','#2d0a4e'], dir:'160deg'},
+  {label:'Rose Garden',    c:['#2a0020','#6b003a','#2a0020'], dir:'160deg'},
+  {label:'Ocean Night',    c:['#00071a','#001a3d','#001020'], dir:'160deg'},
+  {label:'Forest Deep',    c:['#001808','#003a14','#001808'], dir:'160deg'},
+  {label:'Golden Hour',    c:['#1a0a00','#4a2500','#1a0a00'], dir:'160deg'},
+  {label:'Midnight Blue',  c:['#0a0020','#10003a','#0a001a'], dir:'160deg'},
+  {label:'Cherry Blossom', c:['#3a0020','#7a1040','#3a0020'], dir:'160deg'},
+  {label:'Emerald',        c:['#001510','#003020','#001510'], dir:'160deg'},
+  {label:'Sunset Fire',    c:['#2a0800','#5a1500','#2a0800'], dir:'160deg'},
+  {label:'Arctic Sky',     c:['#001530','#003060','#001030'], dir:'160deg'},
+  {label:'Violet Haze',    c:['#1a0040','#3a0080','#1a0060'], dir:'160deg'},
+  {label:'Warm Sand',      c:['#2a1a00','#5a3500','#2a1a00'], dir:'160deg'},
+  {label:'Neon Night',     c:['#050012','#150030','#050020'], dir:'160deg'},
+  {label:'Teal Mist',      c:['#001a18','#003530','#001a18'], dir:'160deg'},
+  {label:'Candy Pink',     c:['#350020','#750045','#350020'], dir:'160deg'},
+  {label:'Royal Gold',     c:['#1a1200','#3d2b00','#1a1200'], dir:'160deg'},
+];
+
 const EMOJI_SETS = {
-  birthday:   ['🎂','🎁','🎈','🎉','🎊','🪅','🍰','🥳','🎀','🕯️','🎆','🎇','🍭','🎠','👑','🌟','💫','✨','🫶','🥂'],
+  birthday:['🎂','🎁','🎈','🎉','🎊','🪅','🍰','🥳','🎀','🕯️','🎆','🎇','🍭','🎠','👑','🌟','💫','✨','🫶','🥂'],
   birthday_half:['🎈','🍰','🎂','🥳','🎉','🎁','✨','🌟','💫','🎀'],
   birthday_surprise:['🎁','🎊','🎉','🤫','😱','🎈','🥳','🎀','🎆','🌟'],
   birthday_milestone:['🎖️','🏆','👑','💎','🌟','⭐','🥇','🎗️','🎊','✨'],
   first_birthday:['👶','🍰','🎂','🎉','🐣','🌈','🦋','🌸','💕','✨'],
-  wedding:    ['💍','💒','👰','🤵','💐','🥂','💫','🌹','🎊','✨','🕊️','💌','🌸','🏵️','👫'],
-  marriage:   ['🌸','💍','🤵','👰','💐','💖','🌹','🕊️','🥂','✨'],
+  wedding:['💍','💒','👰','🤵','💐','🥂','💫','🌹','🎊','✨','🕊️','💌','🌸','🏵️','👫'],
+  marriage:['🌸','💍','🤵','👰','💐','💖','🌹','🕊️','🥂','✨'],
   anniversary:['💕','💑','🥂','🌹','💝','🎊','🌟','💫','💌','🎁','💍','❤️','🌸','🫶','💞'],
-  engagement: ['💎','💍','🎊','💕','🥂','🌹','💫','✨','🌸','❤️'],
-  proposal:   ['💝','💍','🌹','💌','❤️','✨','🌟','🎊','🥂','😍'],
-  valday:     ['❤️','💕','💝','🌹','💌','💑','🫶','💖','🥂','🎊'],
-  graduation: ['🎓','📜','🎊','🏆','⭐','🎉','📚','🖊️','🌟','✨','👑','🥇','🎖️','🚀','💪'],
-  promotion:  ['🚀','💼','🏆','⭐','🎊','👑','💫','🌟','🥇','🎉'],
-  newjob:     ['💼','🚀','🎉','🌟','✨','🏆','👏','🎊','💪','⭐'],
-  retirement: ['🌅','🏖️','🎊','🌟','✨','🏆','🎈','🥂','🌺','🌸'],
-  exam_pass:  ['📚','🎓','✨','🌟','🏆','🥇','🎊','💪','⭐','👏'],
-  babyshower: ['👶','🍼','🌸','💕','🎀','🌈','🦋','🌷','✨','💫','🐣','🎊','🌺','🥳','🎁'],
-  newborn:    ['🍼','👶','💕','🌸','🌈','🌷','🎀','✨','💫','🐣'],
-  naming:     ['🌷','💐','✨','🌸','🎊','👶','🕊️','🌟','💫','🎈'],
-  mothersday: ['💐','🌷','🌸','❤️','🫶','🌹','✨','💕','🥰','👑'],
-  fathersday: ['👨‍👧','🏆','❤️','🫶','⭐','🌟','💪','🎊','🥂','👑'],
-  farewell:   ['👋','✈️','🌍','🎊','💌','🌟','🤗','🫶','🥂','🌸'],
-  welcome:    ['🤗','🎊','🌟','✨','🎉','🫶','💐','🌈','👏','🥳'],
-  getwell:    ['🌿','💐','🌸','🍀','💚','🌱','🌼','✨','🤗','🫶'],
-  thankyou:   ['🙏','💐','✨','🌸','❤️','🫶','🌟','💫','🎊','🥰'],
-  sorry:      ['😔','🙏','💐','🌸','💌','❤️','🫶','✨','🌷','🌿'],
-  diwali:     ['🪔','✨','🎆','🎇','🌟','💫','🎊','🏮','🌺','🌸','🌼','⭐','💥','🎉','🌙'],
-  holi:       ['🌈','🎨','🎉','💦','🎊','🌸','🌺','🌼','💫','🥳'],
-  pongal:     ['🌾','🍲','🌻','🌞','🎊','✨','🌟','🐄','🏺','🌽'],
-  onam:       ['🌺','🌼','🎊','🌸','🌿','🏵️','🌟','✨','🦚','🌈'],
-  navratri:   ['🕺','💃','🌟','✨','🎊','🎭','🌸','🌺','💫','🙏'],
-  dussehra:   ['🏹','🎊','✨','🌟','💫','🔥','🎉','🌺','🙏','⭐'],
-  ugadi:      ['🌻','🌿','🎊','✨','🌺','🌼','🌸','🍃','🌟','💫'],
-  vishu:      ['🌼','🌿','🎊','✨','🌺','🌸','🌟','💫','🙏','⭐'],
-  baisakhi:   ['🌾','🎊','💃','🕺','🌟','✨','🎉','🥳','🌻','⭐'],
-  raksha:     ['🪢','❤️','🌸','💕','🎁','✨','🌟','💫','🎊','🙏'],
-  ganesh:     ['🐘','🙏','🎊','✨','🌟','💫','🌺','🌸','🏺','🌼'],
+  engagement:['💎','💍','🎊','💕','🥂','🌹','💫','✨','🌸','❤️'],
+  proposal:['💝','💍','🌹','💌','❤️','✨','🌟','🎊','🥂','😍'],
+  valday:['❤️','💕','💝','🌹','💌','💑','🫶','💖','🥂','🎊'],
+  graduation:['🎓','📜','🎊','🏆','⭐','🎉','📚','🖊️','🌟','✨','👑','🥇','🎖️','🚀','💪'],
+  promotion:['🚀','💼','🏆','⭐','🎊','👑','💫','🌟','🥇','🎉'],
+  newjob:['💼','🚀','🎉','🌟','✨','🏆','👏','🎊','💪','⭐'],
+  retirement:['🌅','🏖️','🎊','🌟','✨','🏆','🎈','🥂','🌺','🌸'],
+  exam_pass:['📚','🎓','✨','🌟','🏆','🥇','🎊','💪','⭐','👏'],
+  babyshower:['👶','🍼','🌸','💕','🎀','🌈','🦋','🌷','✨','💫','🐣','🎊','🌺','🥳','🎁'],
+  newborn:['🍼','👶','💕','🌸','🌈','🌷','🎀','✨','💫','🐣'],
+  naming:['🌷','💐','✨','🌸','🎊','👶','🕊️','🌟','💫','🎈'],
+  mothersday:['💐','🌷','🌸','❤️','🫶','🌹','✨','💕','🥰','👑'],
+  fathersday:['👨‍👧','🏆','❤️','🫶','⭐','🌟','💪','🎊','🥂','👑'],
+  farewell:['👋','✈️','🌍','🎊','💌','🌟','🤗','🫶','🥂','🌸'],
+  welcome:['🤗','🎊','🌟','✨','🎉','🫶','💐','🌈','👏','🥳'],
+  getwell:['🌿','💐','🌸','🍀','💚','🌱','🌼','✨','🤗','🫶'],
+  thankyou:['🙏','💐','✨','🌸','❤️','🫶','🌟','💫','🎊','🥰'],
+  sorry:['😔','🙏','💐','🌸','💌','❤️','🫶','✨','🌷','🌿'],
+  diwali:['🪔','✨','🎆','🎇','🌟','💫','🎊','🏮','🌺','🌸','🌼','⭐','💥','🎉','🌙'],
+  holi:['🌈','🎨','🎉','💦','🎊','🌸','🌺','🌼','💫','🥳'],
+  pongal:['🌾','🍲','🌻','🌞','🎊','✨','🌟','🐄','🏺','🌽'],
+  onam:['🌺','🌼','🎊','🌸','🌿','🏵️','🌟','✨','🦚','🌈'],
+  navratri:['🕺','💃','🌟','✨','🎊','🎭','🌸','🌺','💫','🙏'],
+  dussehra:['🏹','🎊','✨','🌟','💫','🔥','🎉','🌺','🙏','⭐'],
+  ugadi:['🌻','🌿','🎊','✨','🌺','🌼','🌸','🍃','🌟','💫'],
+  vishu:['🌼','🌿','🎊','✨','🌺','🌸','🌟','💫','🙏','⭐'],
+  baisakhi:['🌾','🎊','💃','🕺','🌟','✨','🎉','🥳','🌻','⭐'],
+  raksha:['🪢','❤️','🌸','💕','🎁','✨','🌟','💫','🎊','🙏'],
+  ganesh:['🐘','🙏','🎊','✨','🌟','💫','🌺','🌸','🏺','🌼'],
   janmashtami:['🦚','🎊','🙏','✨','🌟','💫','🌺','🌸','🎆','💛'],
-  eid:        ['🌙','⭐','🕌','✨','🎊','💫','🌟','🥳','🎁','🤲'],
-  eid_adha:   ['🐑','🌙','⭐','🕌','✨','🎊','💫','🙏','🤲','🌟'],
-  ramadan:    ['☪️','🌙','⭐','🕌','✨','🤲','💫','🌟','🙏','🎊'],
-  christmas:  ['🎄','⛄','🎁','🎅','🌟','❄️','🔔','🕯️','✨','🦌','🎊','🍪','🌸','💫','🥂'],
-  newyear:    ['🎆','🎇','🥂','🎊','✨','🌟','💫','🎉','🥳','🎈','⭐','🌙','🌃','🍾','🫧'],
-  easter:     ['🐣','🐰','🌸','🌷','✨','🎊','🌟','💐','🥚','🌺'],
-  halloween:  ['🎃','🦇','🌙','⭐','👻','🕷️','🕸️','🌚','🍬','🔮'],
+  eid:['🌙','⭐','🕌','✨','🎊','💫','🌟','🥳','🎁','🤲'],
+  eid_adha:['🐑','🌙','⭐','🕌','✨','🎊','💫','🙏','🤲','🌟'],
+  ramadan:['☪️','🌙','⭐','🕌','✨','🤲','💫','🌟','🙏','🎊'],
+  christmas:['🎄','⛄','🎁','🎅','🌟','❄️','🔔','🕯️','✨','🦌','🎊','🍪','🌸','💫','🥂'],
+  newyear:['🎆','🎇','🥂','🎊','✨','🌟','💫','🎉','🥳','🎈','⭐','🌙','🌃','🍾','🫧'],
+  easter:['🐣','🐰','🌸','🌷','✨','🎊','🌟','💐','🥚','🌺'],
+  halloween:['🎃','🦇','🌙','⭐','👻','🕷️','🕸️','🌚','🍬','🔮'],
   thanksgiving:['🦃','🍂','🍁','🌽','🎊','🌟','✨','🥧','🏡','🍁'],
-  general:    ['🎊','🎉','🎈','🌟','✨','💫','⭐','🏆','🥂','🎆','💐','🌸','🎀','🎁','🪅'],
-  custom:     ['⚙️','✨','🌟','💫','🎊','🎉','🌈','🎆','💐','🎭','🏆','🥂','💡','🌺','🎁'],
+  general:['🎊','🎉','🎈','🌟','✨','💫','⭐','🏆','🥂','🎆','💐','🌸','🎀','🎁','🪅'],
+  custom:['⚙️','✨','🌟','💫','🎊','🎉','🌈','🎆','💐','🎭','🏆','🥂','💡','🌺','🎁'],
 };
 
-// ═══════════════════════════════════════════════
-// EVENT TYPES
-// ═══════════════════════════════════════════════
 const T={
-  birthday:   {label:'Birthday',icon:'🎂',color:'#f472b6',accent:'#fbbf24',bg:['#2d0a4e','#5b0f7c','#2d0a4e'],msg:"Wishing you a day as magical as you are! May all your dreams come true! 🎉"},
+  birthday:{label:'Birthday',icon:'🎂',color:'#f472b6',accent:'#fbbf24',bg:['#2d0a4e','#5b0f7c','#2d0a4e'],msg:"Wishing you a day as magical as you are! May all your dreams come true! 🎉"},
   birthday_half:{label:'Half Birthday',icon:'🎈',color:'#f472b6',accent:'#fbbf24',bg:['#2d0a4e','#5b0f7c','#2d0a4e'],msg:"Happy Half Birthday! You're halfway to your next big celebration! 🎈"},
   birthday_surprise:{label:'Surprise Birthday',icon:'🎁',color:'#f472b6',accent:'#fbbf24',bg:['#2d0a4e','#5b0f7c','#2d0a4e'],msg:"Surprise! Wishing you the most amazing birthday full of joy! 🎁"},
   birthday_milestone:{label:'Milestone Birthday',icon:'🎖️',color:'#f0c040',accent:'#fde68a',bg:['#1e1200','#3d2500','#1e1200'],msg:"What a milestone! You've achieved so much — here's to many more amazing years! 🎖️"},
   first_birthday:{label:'1st Birthday',icon:'👶🎂',color:'#f9a8d4',accent:'#fbcfe8',bg:['#2a001a','#500032','#2a001a'],msg:"Happy 1st Birthday! Your first year has been a beautiful blessing! 👶🎂"},
-  wedding:    {label:'Wedding',icon:'💍',color:'#f0c040',accent:'#fde68a',bg:['#1a1200','#3d2b00','#1a1200'],msg:"As you begin this beautiful journey, may your love grow stronger every day! 💍"},
-  marriage:   {label:'Marriage',icon:'🌸',color:'#fb7185',accent:'#fda4af',bg:['#2a0020','#550040','#2a0020'],msg:"Two hearts, one soul, a lifetime of beautiful memories! Heartiest congratulations! 🌸"},
+  wedding:{label:'Wedding',icon:'💍',color:'#f0c040',accent:'#fde68a',bg:['#1a1200','#3d2b00','#1a1200'],msg:"As you begin this beautiful journey, may your love grow stronger every day! 💍"},
+  marriage:{label:'Marriage',icon:'🌸',color:'#fb7185',accent:'#fda4af',bg:['#2a0020','#550040','#2a0020'],msg:"Two hearts, one soul, a lifetime of beautiful memories! Heartiest congratulations! 🌸"},
   anniversary:{label:'Anniversary',icon:'💕',color:'#f472b6',accent:'#c084fc',bg:['#1e0030','#420055','#1e0030'],msg:"Another year of love, laughter and beautiful memories together! Happy Anniversary! 💕"},
-  engagement: {label:'Engagement',icon:'💎',color:'#a78bfa',accent:'#c4b5fd',bg:['#1e0040','#3a0070','#1e0040'],msg:"You said YES! Wishing you a lifetime of love and happiness together! 💎"},
-  proposal:   {label:'Proposal',icon:'💝',color:'#f472b6',accent:'#fda4af',bg:['#2a0020','#550040','#2a0020'],msg:"You popped the question! May this be the beginning of forever! 💝"},
-  valday:     {label:"Valentine's",icon:'❤️',color:'#f87171',accent:'#fca5a5',bg:['#2a0010','#550020','#2a0010'],msg:"Happy Valentine's Day! You make every day feel special! ❤️"},
-  graduation: {label:'Graduation',icon:'🎓',color:'#a78bfa',accent:'#c4b5fd',bg:['#0e0630','#1e0b60','#0e0630'],msg:"Congratulations Graduate! Your hard work has paid off — the world is yours! 🎓"},
-  promotion:  {label:'Promotion',icon:'🚀',color:'#38bdf8',accent:'#7dd3fc',bg:['#00071a','#001035','#00071a'],msg:"Congratulations on your well-deserved promotion! Sky's the limit for you! 🚀"},
-  newjob:     {label:'New Job',icon:'💼',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"Exciting times ahead! Wishing you great success in your new role! 💼"},
-  retirement: {label:'Retirement',icon:'🌅',color:'#f97316',accent:'#fdba74',bg:['#1a0700','#3d1000','#1a0700'],msg:"Congratulations on a wonderful career! May retirement bring you joy and adventure! 🌅"},
-  exam_pass:  {label:'Exam Success',icon:'📚',color:'#a78bfa',accent:'#c4b5fd',bg:['#0e0630','#1e0b60','#0e0630'],msg:"You did it! Congratulations on your brilliant result! 📚"},
-  babyshower: {label:'Baby Shower',icon:'👶',color:'#f9a8d4',accent:'#fbcfe8',bg:['#2a001a','#500032','#2a001a'],msg:"A precious little one is on the way! Wishing you a wonderful journey! 👶"},
-  newborn:    {label:'Newborn',icon:'🍼',color:'#f9a8d4',accent:'#fbcfe8',bg:['#2a001a','#500032','#2a001a'],msg:"Welcome to the world, little one! May your life be filled with love and laughter! 🍼"},
-  naming:     {label:'Naming Ceremony',icon:'🌷',color:'#fb7185',accent:'#fda4af',bg:['#2a0020','#550040','#2a0020'],msg:"A beautiful name for a beautiful soul! Warmest wishes on this special occasion! 🌷"},
-  mothersday: {label:"Mother's Day",icon:'💐',color:'#f472b6',accent:'#fda4af',bg:['#2a0020','#550040','#2a0020'],msg:"To the most wonderful mother — thank you for your endless love and care! 💐"},
-  fathersday: {label:"Father's Day",icon:'👨‍👧',color:'#38bdf8',accent:'#7dd3fc',bg:['#00071a','#001035','#00071a'],msg:"To the best dad in the world — you are our hero every single day! 👨‍👧"},
-  farewell:   {label:'Farewell',icon:'👋',color:'#94a3b8',accent:'#cbd5e1',bg:['#0a1020','#162040','#0a1020'],msg:"It's not goodbye — it's see you on the next adventure! You'll be missed! 👋"},
-  welcome:    {label:'Welcome',icon:'🤗',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"Welcome! So happy to have you here — this is just the beginning of great things! 🤗"},
-  getwell:    {label:'Get Well Soon',icon:'🌿',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"Wishing you a speedy recovery! Take rest and be back stronger than ever! 🌿"},
-  thankyou:   {label:'Thank You',icon:'🙏',color:'#f0c040',accent:'#fde68a',bg:['#1a1200','#3d2b00','#1a1200'],msg:"Thank you from the bottom of my heart! You truly made a difference! 🙏"},
-  sorry:      {label:'Apology',icon:'😔',color:'#94a3b8',accent:'#cbd5e1',bg:['#0a1020','#162040','#0a1020'],msg:"I'm truly sorry. You mean the world to me and I hope you can forgive me. 😔"},
-  diwali:     {label:'Diwali',icon:'🪔',color:'#f97316',accent:'#fb923c',bg:['#1a0700','#3d1500','#1a0700'],msg:"May the festival of lights bring joy, prosperity and happiness! Happy Diwali! 🪔"},
-  holi:       {label:'Holi',icon:'🌈',color:'#f472b6',accent:'#a78bfa',bg:['#1a0040','#380080','#1a0040'],msg:"May the vibrant colours of Holi paint your life with happiness! Happy Holi! 🌈"},
-  pongal:     {label:'Pongal',icon:'🌾',color:'#fbbf24',accent:'#fde68a',bg:['#1a1000','#3a2000','#1a1000'],msg:"May the harvest season bring abundance, peace and joy! Happy Pongal! 🌾"},
-  onam:       {label:'Onam',icon:'🌺',color:'#fb923c',accent:'#fde047',bg:['#00180a','#003a14','#00180a'],msg:"May the spirit of Onam fill your home with flowers and laughter! Happy Onam! 🌺"},
-  navratri:   {label:'Navratri',icon:'🕺',color:'#c084fc',accent:'#f472b6',bg:['#200040','#400080','#200040'],msg:"May Maa Durga bless you with strength and endless joy! Jai Mata Di! 🕺"},
-  dussehra:   {label:'Dussehra',icon:'🏹',color:'#f97316',accent:'#fb923c',bg:['#1a0700','#3d1500','#1a0700'],msg:"May the triumph of good over evil bring light and hope to your life! Happy Dussehra! 🏹"},
-  ugadi:      {label:'Ugadi',icon:'🌻',color:'#fbbf24',accent:'#fde68a',bg:['#1a1000','#3a2000','#1a1000'],msg:"Wishing you a New Year filled with new beginnings and blessings! Happy Ugadi! 🌻"},
-  vishu:      {label:'Vishu',icon:'🌼',color:'#fbbf24',accent:'#fde68a',bg:['#00180a','#003a14','#00180a'],msg:"May this Vishu bring you prosperity, happiness and good fortune! Happy Vishu! 🌼"},
-  baisakhi:   {label:'Baisakhi',icon:'🌾',color:'#fbbf24',accent:'#fde68a',bg:['#1a1000','#3a2000','#1a1000'],msg:"May the harvest festival bring joy and abundance to your life! Happy Baisakhi! 🌾"},
-  raksha:     {label:'Raksha Bandhan',icon:'🪢',color:'#f97316',accent:'#fb923c',bg:['#1a0700','#3d1500','#1a0700'],msg:"The bond of siblings is the most precious bond in the world! Happy Raksha Bandhan! 🪢"},
-  ganesh:     {label:'Ganesh Chaturthi',icon:'🐘',color:'#f0c040',accent:'#fde68a',bg:['#1a1200','#3d2b00','#1a1200'],msg:"May Lord Ganesha remove all obstacles and fill your life with success! Ganpati Bappa Morya! 🐘"},
+  engagement:{label:'Engagement',icon:'💎',color:'#a78bfa',accent:'#c4b5fd',bg:['#1e0040','#3a0070','#1e0040'],msg:"You said YES! Wishing you a lifetime of love and happiness together! 💎"},
+  proposal:{label:'Proposal',icon:'💝',color:'#f472b6',accent:'#fda4af',bg:['#2a0020','#550040','#2a0020'],msg:"You popped the question! May this be the beginning of forever! 💝"},
+  valday:{label:"Valentine's",icon:'❤️',color:'#f87171',accent:'#fca5a5',bg:['#2a0010','#550020','#2a0010'],msg:"Happy Valentine's Day! You make every day feel special! ❤️"},
+  graduation:{label:'Graduation',icon:'🎓',color:'#a78bfa',accent:'#c4b5fd',bg:['#0e0630','#1e0b60','#0e0630'],msg:"Congratulations Graduate! Your hard work has paid off — the world is yours! 🎓"},
+  promotion:{label:'Promotion',icon:'🚀',color:'#38bdf8',accent:'#7dd3fc',bg:['#00071a','#001035','#00071a'],msg:"Congratulations on your well-deserved promotion! Sky's the limit for you! 🚀"},
+  newjob:{label:'New Job',icon:'💼',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"Exciting times ahead! Wishing you great success in your new role! 💼"},
+  retirement:{label:'Retirement',icon:'🌅',color:'#f97316',accent:'#fdba74',bg:['#1a0700','#3d1000','#1a0700'],msg:"Congratulations on a wonderful career! May retirement bring you joy and adventure! 🌅"},
+  exam_pass:{label:'Exam Success',icon:'📚',color:'#a78bfa',accent:'#c4b5fd',bg:['#0e0630','#1e0b60','#0e0630'],msg:"You did it! Congratulations on your brilliant result! 📚"},
+  babyshower:{label:'Baby Shower',icon:'👶',color:'#f9a8d4',accent:'#fbcfe8',bg:['#2a001a','#500032','#2a001a'],msg:"A precious little one is on the way! Wishing you a wonderful journey! 👶"},
+  newborn:{label:'Newborn',icon:'🍼',color:'#f9a8d4',accent:'#fbcfe8',bg:['#2a001a','#500032','#2a001a'],msg:"Welcome to the world, little one! May your life be filled with love and laughter! 🍼"},
+  naming:{label:'Naming Ceremony',icon:'🌷',color:'#fb7185',accent:'#fda4af',bg:['#2a0020','#550040','#2a0020'],msg:"A beautiful name for a beautiful soul! Warmest wishes on this special occasion! 🌷"},
+  mothersday:{label:"Mother's Day",icon:'💐',color:'#f472b6',accent:'#fda4af',bg:['#2a0020','#550040','#2a0020'],msg:"To the most wonderful mother — thank you for your endless love and care! 💐"},
+  fathersday:{label:"Father's Day",icon:'👨‍👧',color:'#38bdf8',accent:'#7dd3fc',bg:['#00071a','#001035','#00071a'],msg:"To the best dad in the world — you are our hero every single day! 👨‍👧"},
+  farewell:{label:'Farewell',icon:'👋',color:'#94a3b8',accent:'#cbd5e1',bg:['#0a1020','#162040','#0a1020'],msg:"It's not goodbye — it's see you on the next adventure! You'll be missed! 👋"},
+  welcome:{label:'Welcome',icon:'🤗',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"Welcome! So happy to have you here — this is just the beginning of great things! 🤗"},
+  getwell:{label:'Get Well Soon',icon:'🌿',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"Wishing you a speedy recovery! Take rest and be back stronger than ever! 🌿"},
+  thankyou:{label:'Thank You',icon:'🙏',color:'#f0c040',accent:'#fde68a',bg:['#1a1200','#3d2b00','#1a1200'],msg:"Thank you from the bottom of my heart! You truly made a difference! 🙏"},
+  sorry:{label:'Apology',icon:'😔',color:'#94a3b8',accent:'#cbd5e1',bg:['#0a1020','#162040','#0a1020'],msg:"I'm truly sorry. You mean the world to me and I hope you can forgive me. 😔"},
+  diwali:{label:'Diwali',icon:'🪔',color:'#f97316',accent:'#fb923c',bg:['#1a0700','#3d1500','#1a0700'],msg:"May the festival of lights bring joy, prosperity and happiness! Happy Diwali! 🪔"},
+  holi:{label:'Holi',icon:'🌈',color:'#f472b6',accent:'#a78bfa',bg:['#1a0040','#380080','#1a0040'],msg:"May the vibrant colours of Holi paint your life with happiness! Happy Holi! 🌈"},
+  pongal:{label:'Pongal',icon:'🌾',color:'#fbbf24',accent:'#fde68a',bg:['#1a1000','#3a2000','#1a1000'],msg:"May the harvest season bring abundance, peace and joy! Happy Pongal! 🌾"},
+  onam:{label:'Onam',icon:'🌺',color:'#fb923c',accent:'#fde047',bg:['#00180a','#003a14','#00180a'],msg:"May the spirit of Onam fill your home with flowers and laughter! Happy Onam! 🌺"},
+  navratri:{label:'Navratri',icon:'🕺',color:'#c084fc',accent:'#f472b6',bg:['#200040','#400080','#200040'],msg:"May Maa Durga bless you with strength and endless joy! Jai Mata Di! 🕺"},
+  dussehra:{label:'Dussehra',icon:'🏹',color:'#f97316',accent:'#fb923c',bg:['#1a0700','#3d1500','#1a0700'],msg:"May the triumph of good over evil bring light and hope to your life! Happy Dussehra! 🏹"},
+  ugadi:{label:'Ugadi',icon:'🌻',color:'#fbbf24',accent:'#fde68a',bg:['#1a1000','#3a2000','#1a1000'],msg:"Wishing you a New Year filled with new beginnings and blessings! Happy Ugadi! 🌻"},
+  vishu:{label:'Vishu',icon:'🌼',color:'#fbbf24',accent:'#fde68a',bg:['#00180a','#003a14','#00180a'],msg:"May this Vishu bring you prosperity, happiness and good fortune! Happy Vishu! 🌼"},
+  baisakhi:{label:'Baisakhi',icon:'🌾',color:'#fbbf24',accent:'#fde68a',bg:['#1a1000','#3a2000','#1a1000'],msg:"May the harvest festival bring joy and abundance to your life! Happy Baisakhi! 🌾"},
+  raksha:{label:'Raksha Bandhan',icon:'🪢',color:'#f97316',accent:'#fb923c',bg:['#1a0700','#3d1500','#1a0700'],msg:"The bond of siblings is the most precious bond in the world! Happy Raksha Bandhan! 🪢"},
+  ganesh:{label:'Ganesh Chaturthi',icon:'🐘',color:'#f0c040',accent:'#fde68a',bg:['#1a1200','#3d2b00','#1a1200'],msg:"May Lord Ganesha remove all obstacles and fill your life with success! Ganpati Bappa Morya! 🐘"},
   janmashtami:{label:'Janmashtami',icon:'🦚',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"May Lord Krishna's blessings fill your heart with joy and peace! Happy Janmashtami! 🦚"},
-  eid:        {label:'Eid ul-Fitr',icon:'🌙',color:'#34d399',accent:'#6ee7b7',bg:['#00180e','#003520','#00180e'],msg:"Eid Mubarak! May Allah shower you and your family with endless blessings! 🌙"},
-  eid_adha:   {label:'Eid ul-Adha',icon:'🐑',color:'#34d399',accent:'#6ee7b7',bg:['#00180e','#003520','#00180e'],msg:"Eid ul-Adha Mubarak! May the spirit of sacrifice bring peace and joy! 🐑"},
-  ramadan:    {label:'Ramadan',icon:'☪️',color:'#34d399',accent:'#6ee7b7',bg:['#00180e','#003520','#00180e'],msg:"Ramadan Mubarak! May this holy month bring peace, blessings and spiritual growth! ☪️"},
-  christmas:  {label:'Christmas',icon:'🎄',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"May the magic of Christmas fill your home with warmth and love! Merry Christmas! 🎄"},
-  newyear:    {label:'New Year',icon:'🎆',color:'#38bdf8',accent:'#7dd3fc',bg:['#00071a','#001035','#00071a'],msg:"Here's to new beginnings and new blessings! Wishing you an amazing New Year! 🎆"},
-  easter:     {label:'Easter',icon:'🐣',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"Wishing you a joyful Easter filled with hope, love and new beginnings! 🐣"},
-  halloween:  {label:'Halloween',icon:'🎃',color:'#f97316',accent:'#fb923c',bg:['#1a0700','#3d1500','#1a0700'],msg:"Have a spooktacular Halloween! May your night be full of treats and no tricks! 🎃"},
+  eid:{label:'Eid ul-Fitr',icon:'🌙',color:'#34d399',accent:'#6ee7b7',bg:['#00180e','#003520','#00180e'],msg:"Eid Mubarak! May Allah shower you and your family with endless blessings! 🌙"},
+  eid_adha:{label:'Eid ul-Adha',icon:'🐑',color:'#34d399',accent:'#6ee7b7',bg:['#00180e','#003520','#00180e'],msg:"Eid ul-Adha Mubarak! May the spirit of sacrifice bring peace and joy! 🐑"},
+  ramadan:{label:'Ramadan',icon:'☪️',color:'#34d399',accent:'#6ee7b7',bg:['#00180e','#003520','#00180e'],msg:"Ramadan Mubarak! May this holy month bring peace, blessings and spiritual growth! ☪️"},
+  christmas:{label:'Christmas',icon:'🎄',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"May the magic of Christmas fill your home with warmth and love! Merry Christmas! 🎄"},
+  newyear:{label:'New Year',icon:'🎆',color:'#38bdf8',accent:'#7dd3fc',bg:['#00071a','#001035','#00071a'],msg:"Here's to new beginnings and new blessings! Wishing you an amazing New Year! 🎆"},
+  easter:{label:'Easter',icon:'🐣',color:'#4ade80',accent:'#86efac',bg:['#001808','#003010','#001808'],msg:"Wishing you a joyful Easter filled with hope, love and new beginnings! 🐣"},
+  halloween:{label:'Halloween',icon:'🎃',color:'#f97316',accent:'#fb923c',bg:['#1a0700','#3d1500','#1a0700'],msg:"Have a spooktacular Halloween! May your night be full of treats and no tricks! 🎃"},
   thanksgiving:{label:'Thanksgiving',icon:'🦃',color:'#f97316',accent:'#fb923c',bg:['#1a0700','#3d1500','#1a0700'],msg:"Wishing you a wonderful Thanksgiving filled with gratitude, family and warmth! 🦃"},
-  general:    {label:'Celebration',icon:'🎊',color:'#f0c040',accent:'#a78bfa',bg:['#0d0b1e','#1e1840','#0d0b1e'],msg:"Congratulations and warmest wishes on this wonderful occasion! 🎊"},
-  custom:     {label:'Special Event',icon:'⚙️',color:'#a78bfa',accent:'#c4b5fd',bg:['#0e0630','#1e0b60','#0e0630'],msg:"Warmest wishes on this very special occasion! 🎊"},
+  general:{label:'Celebration',icon:'🎊',color:'#f0c040',accent:'#a78bfa',bg:['#0d0b1e','#1e1840','#0d0b1e'],msg:"Congratulations and warmest wishes on this wonderful occasion! 🎊"},
+  custom:{label:'Special Event',icon:'⚙️',color:'#a78bfa',accent:'#c4b5fd',bg:['#0e0630','#1e0b60','#0e0630'],msg:"Warmest wishes on this very special occasion! 🎊"},
 };
 
-const BDAY_ALTS = {
-  normal:    {label:'Birthday',icon:'🎂',msg:"Wishing you a day as magical as you are! May all your dreams come true! 🎉"},
-  half:      {label:'Half Birthday',icon:'🎈',msg:"Happy Half Birthday! You're halfway to your next big celebration! 🎈"},
-  surprise:  {label:'Surprise Party',icon:'🎁',msg:"Surprise! Wishing you the most amazing birthday full of joy and happiness! 🎁"},
-  milestone: {label:'Milestone Birthday',icon:'🎖️',msg:"What a milestone! Here's to celebrating all that you've achieved! 🎖️"},
-  first:     {label:'1st Birthday',icon:'👶',msg:"Happy 1st Birthday, little star! You've brought so much joy to our lives! 👶"},
-  joint:     {label:'Joint Birthday',icon:'👫',msg:"Celebrating you both together! Wishing you double the joy and double the fun! 👫"},
+const BDAY_ALTS={
+  normal:{label:'Birthday',icon:'🎂',msg:"Wishing you a day as magical as you are! May all your dreams come true! 🎉"},
+  half:{label:'Half Birthday',icon:'🎈',msg:"Happy Half Birthday! You're halfway to your next big celebration! 🎈"},
+  surprise:{label:'Surprise Party',icon:'🎁',msg:"Surprise! Wishing you the most amazing birthday full of joy and happiness! 🎁"},
+  milestone:{label:'Milestone Birthday',icon:'🎖️',msg:"What a milestone! Here's to celebrating all that you've achieved! 🎖️"},
+  first:{label:'1st Birthday',icon:'👶',msg:"Happy 1st Birthday, little star! You've brought so much joy to our lives! 👶"},
+  joint:{label:'Joint Birthday',icon:'👫',msg:"Celebrating you both together! Wishing you double the joy and double the fun! 👫"},
 };
 
 const EFFECTS=[
@@ -2262,97 +810,91 @@ const TPLS={
   floral:{nameSz:'2rem',msgSz:'.92rem',nameFont:"'Great Vibes',cursive",divider:true},
 };
 
-// ═══════════════════════════════════════════════
-// URL — SHORT LINK (ID-based) + FULL LINK (encoded)
-// ═══════════════════════════════════════════════
-function makeShortUrl(card){
-  // Short: ?id=CARD_ID — works on same device (localStorage)
-  return _baseUrl + '?id=' + encodeURIComponent(card.id);
+// ── BG COLOR FUNCTIONS ──
+function buildBgPresets(){
+  const wrap=document.getElementById('bg-presets');
+  if(!wrap)return;
+  wrap.innerHTML=BG_PRESETS.map((p,i)=>{
+    const g=`linear-gradient(${p.dir},${p.c[0]},${p.c[1]},${p.c[2]})`;
+    return `<button class="bg-preset-btn${_bgPresetIdx===i?' on':''}" style="background:${g}" title="${p.label}" onclick="pickBgPreset(${i})"></button>`;
+  }).join('');
 }
 
-function makeFullUrl(card){
-  // Full: ?card=BASE64 — works on any device (self-contained)
-  const enc = encodeCard(card);
-  if(!enc) return _baseUrl;
-  return _baseUrl + '?card=' + enc;
+function pickBgPreset(i){
+  _bgPresetIdx=i;
+  const p=BG_PRESETS[i];
+  _bgColors=[p.c[0],p.c[1],p.c[2]];
+  _bgDir=p.dir;
+  document.getElementById('f-bg1').value=p.c[0];
+  document.getElementById('f-bg2').value=p.c[1];
+  document.getElementById('f-bg3').value=p.c[2];
+  document.getElementById('f-bg-dir').value=p.dir;
+  buildBgPresets();
+  livePreview();
 }
+
+function onCustomBg(){
+  _bgColors=[
+    document.getElementById('f-bg1').value,
+    document.getElementById('f-bg2').value,
+    document.getElementById('f-bg3').value,
+  ];
+  _bgDir=document.getElementById('f-bg-dir').value;
+  _bgPresetIdx=-1;
+  buildBgPresets();
+  livePreview();
+}
+
+function resetBg(){
+  _bgColors=['','',''];_bgDir='160deg';_bgPresetIdx=-1;
+  document.getElementById('f-bg1').value='#2d0a4e';
+  document.getElementById('f-bg2').value='#5b0f7c';
+  document.getElementById('f-bg3').value='#2d0a4e';
+  document.getElementById('f-bg-dir').value='160deg';
+  buildBgPresets();
+  livePreview();
+}
+
+function getCustomBg(){
+  return (_bgColors[0]&&_bgColors[1]&&_bgColors[2]) ? {colors:_bgColors,dir:_bgDir} : null;
+}
+
+// ── URL helpers ──
+function makeShortUrl(card){return _baseUrl+'?id='+encodeURIComponent(card.id);}
+function makeFullUrl(card){const enc=encodeCard(card);if(!enc)return _baseUrl;return _baseUrl+'?card='+enc;}
 
 function encodeCard(card){
-  const d={
-    t:card.type, n:card.name, m:card.msg,
-    f:card.from, tp:card.tpl, e:card.effect,
-    ps:card.photoShape, r:card.recipient||'',
-    dt:card.date||'', ag:card.age||'',
-    fn:card.festivalName||'', fe:card.festivalEmoji||''
-  };
-  if(card.imgData && card.imgData.length < 200000){
-    const raw = card.imgData.replace(/^data:image\/[^;]+;base64,/,'');
-    d.i = raw.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-  }
-  try{
-    const b64 = btoa(unescape(encodeURIComponent(JSON.stringify(d))));
-    return b64.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-  }catch(ex){return null;}
+  const d={t:card.type,n:card.name,m:card.msg,f:card.from,tp:card.tpl,e:card.effect,ps:card.photoShape,r:card.recipient||'',dt:card.date||'',ag:card.age||'',fn:card.festivalName||'',fe:card.festivalEmoji||'',bc:card.bgColors||null,bd:card.bgDir||''};
+  if(card.imgData&&card.imgData.length<200000){const raw=card.imgData.replace(/^data:image\/[^;]+;base64,/,'');d.i=raw.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+  try{const b64=btoa(unescape(encodeURIComponent(JSON.stringify(d))));return b64.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}catch(ex){return null;}
 }
 
 function decodeCard(str){
   try{
-    const b64 = str.replace(/-/g,'+').replace(/_/g,'/');
-    const padded = b64 + '=='.slice(0,(4 - b64.length % 4) % 4);
-    const d = JSON.parse(decodeURIComponent(escape(atob(padded))));
-    let imgData = null;
-    if(d.i){
-      const rawB64 = d.i.replace(/-/g,'+').replace(/_/g,'/');
-      const rawPad = rawB64 + '=='.slice(0,(4 - rawB64.length % 4) % 4);
-      imgData = 'data:image/jpeg;base64,' + rawPad;
-    }
-    return {
-      type:d.t||'general', name:d.n||'', msg:d.m||'',
-      from:d.f||'', tpl:d.tp||'classic', effect:d.e||'confetti',
-      photoShape:d.ps||'circle', recipient:d.r||'',
-      date:d.dt||'', age:d.ag||'',
-      festivalName:d.fn||'', festivalEmoji:d.fe||'',
-      imgData
-    };
+    const b64=str.replace(/-/g,'+').replace(/_/g,'/');
+    const padded=b64+'=='.slice(0,(4-b64.length%4)%4);
+    const d=JSON.parse(decodeURIComponent(escape(atob(padded))));
+    let imgData=null;
+    if(d.i){const rawB64=d.i.replace(/-/g,'+').replace(/_/g,'/');const rawPad=rawB64+'=='.slice(0,(4-rawB64.length%4)%4);imgData='data:image/jpeg;base64,'+rawPad;}
+    return{type:d.t||'general',name:d.n||'',msg:d.m||'',from:d.f||'',tpl:d.tp||'classic',effect:d.e||'confetti',photoShape:d.ps||'circle',recipient:d.r||'',date:d.dt||'',age:d.ag||'',festivalName:d.fn||'',festivalEmoji:d.fe||'',bgColors:d.bc||null,bgDir:d.bd||'',imgData};
   }catch(ex){return null;}
 }
 
-// ═══════════════════════════════════════════════
-// PASSWORD / SESSION
-// ═══════════════════════════════════════════════
+// ── Password / Session ──
 const getPwd=()=>localStorage.getItem(SK_PWD)||'admin123';
 const setPwd=p=>localStorage.setItem(SK_PWD,p);
 const isSes=()=>sessionStorage.getItem(SK_SES)==='1';
 const setSes=v=>v?sessionStorage.setItem(SK_SES,'1'):sessionStorage.removeItem(SK_SES);
-
-function tryLogin(){
-  const el=document.getElementById('admin-pwd');
-  const err=document.getElementById('admin-err');
-  if(el.value===getPwd()){setSes(true);el.value='';err.style.display='none';showAdminPanel();}
-  else{err.style.display='block';el.value='';el.style.animation='none';void el.offsetWidth;el.style.animation='shake .4s ease';}
-}
+function tryLogin(){const el=document.getElementById('admin-pwd');const err=document.getElementById('admin-err');if(el.value===getPwd()){setSes(true);el.value='';err.style.display='none';showAdminPanel();}else{err.style.display='block';el.value='';el.style.animation='none';void el.offsetWidth;el.style.animation='shake .4s ease';}}
 function doLogout(){setSes(false);document.getElementById('admin-panel').style.display='none';document.getElementById('admin-login-section').style.display='block';toast('👋 Logged out');}
-function changePwd(){
-  const c=document.getElementById('pc').value,n=document.getElementById('pn').value,f=document.getElementById('pf').value;
-  const m=document.getElementById('pwd-msg');
-  const show=(t,col)=>{m.textContent=t;m.style.color=col;m.style.display='block';setTimeout(()=>m.style.display='none',3000);};
-  if(c!==getPwd()){show('❌ Current password incorrect','#f87171');return;}
-  if(n.length<6){show('❌ Minimum 6 characters required','#f87171');return;}
-  if(n!==f){show('❌ Passwords do not match','#f87171');return;}
-  setPwd(n);['pc','pn','pf'].forEach(id=>document.getElementById(id).value='');
-  show('✅ Password changed!','#4ade80');
-}
+function changePwd(){const c=document.getElementById('pc').value,n=document.getElementById('pn').value,f=document.getElementById('pf').value;const m=document.getElementById('pwd-msg');const show=(t,col)=>{m.textContent=t;m.style.color=col;m.style.display='block';setTimeout(()=>m.style.display='none',3000);};if(c!==getPwd()){show('❌ Current password incorrect','#f87171');return;}if(n.length<6){show('❌ Minimum 6 characters required','#f87171');return;}if(n!==f){show('❌ Passwords do not match','#f87171');return;}setPwd(n);['pc','pn','pf'].forEach(id=>document.getElementById(id).value='');show('✅ Password changed!','#4ade80');}
 function toggleEye(id,btn){const i=document.getElementById(id);i.type=i.type==='password'?'text':'password';btn.textContent=i.type==='password'?'👁':'🙈';}
 
-// ═══════════════════════════════════════════════
-// STORAGE
-// ═══════════════════════════════════════════════
+// ── Storage ──
 function load(){try{const d=localStorage.getItem(SK_DATA);if(d)cards=JSON.parse(d);}catch(e){cards=[];}}
 function save(){localStorage.setItem(SK_DATA,JSON.stringify(cards));}
 
-// ═══════════════════════════════════════════════
-// BG ANIMATION
-// ═══════════════════════════════════════════════
+// ── BG Animation ──
 function initBG(){
   const cv=document.getElementById('bg-canvas');if(!cv)return;
   cv.width=window.innerWidth;cv.height=window.innerHeight;
@@ -2362,9 +904,7 @@ function initBG(){
   window.addEventListener('resize',()=>{cv.width=window.innerWidth;cv.height=window.innerHeight;});
 }
 
-// ═══════════════════════════════════════════════
-// NAV
-// ═══════════════════════════════════════════════
+// ── Nav ──
 function nav(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('on'));
@@ -2376,115 +916,55 @@ function nav(id){
   if(id==='admin'&&isSes())showAdminPanel();
   window.scrollTo({top:0,behavior:'smooth'});
 }
+function goHome(){document.getElementById('not-found-view').classList.remove('on');try{history.replaceState({},'',_baseUrl);}catch(e){}initBG();renderGallery();}
 
-function goHome(){
-  document.getElementById('not-found-view').classList.remove('on');
-  try{history.replaceState({},'',_baseUrl);}catch(e){}
-  initBG();renderGallery();
-}
+function showCardNotFound(){document.getElementById('root').style.display='none';document.getElementById('bg-canvas').style.display='none';document.getElementById('not-found-view').classList.add('on');}
 
-// ═══════════════════════════════════════════════
-// NOT FOUND VIEW
-// ═══════════════════════════════════════════════
-function showCardNotFound(){
-  document.getElementById('root').style.display='none';
-  document.getElementById('bg-canvas').style.display='none';
-  document.getElementById('not-found-view').classList.add('on');
-}
+// ── Emoji Picker ──
+function buildEmojiPicker(type){const emojis=EMOJI_SETS[type]||EMOJI_SETS.general;const grid=document.getElementById('emoji-grid');if(!grid)return;grid.innerHTML=emojis.map(e=>`<button class="ep-btn${_selectedEmoji===e?' on':''}" onclick="selectEmoji('${e}')" title="${e}">${e}</button>`).join('');}
+function selectEmoji(em){_selectedEmoji=em;const prev=document.getElementById('festival-emoji-preview');if(prev)prev.textContent=em;document.querySelectorAll('.ep-btn').forEach(b=>{b.classList.toggle('on',b.textContent===em);});livePreview();}
+function getEffectiveIcon(card){if(card.festivalEmoji)return card.festivalEmoji;return(T[card.type]||T.general).icon;}
+function getEffectiveLabel(card){if(card.festivalName&&card.festivalName.trim())return card.festivalName.trim();return(T[card.type]||T.general).label;}
 
-// ═══════════════════════════════════════════════
-// EMOJI PICKER
-// ═══════════════════════════════════════════════
-function buildEmojiPicker(type){
-  const emojis = EMOJI_SETS[type] || EMOJI_SETS.general;
-  const grid = document.getElementById('emoji-grid');
-  if(!grid) return;
-  grid.innerHTML = emojis.map(e =>
-    `<button class="ep-btn${_selectedEmoji===e?' on':''}" onclick="selectEmoji('${e}')" title="${e}">${e}</button>`
-  ).join('');
-}
-
-function selectEmoji(em){
-  _selectedEmoji = em;
-  const prev = document.getElementById('festival-emoji-preview');
-  if(prev) prev.textContent = em;
-  document.querySelectorAll('.ep-btn').forEach(b=>{
-    b.classList.toggle('on', b.textContent === em);
-  });
-  livePreview();
-}
-
-function getEffectiveIcon(card){
-  if(card.festivalEmoji) return card.festivalEmoji;
-  return (T[card.type]||T.general).icon;
-}
-
-function getEffectiveLabel(card){
-  if(card.festivalName && card.festivalName.trim()) return card.festivalName.trim();
-  return (T[card.type]||T.general).label;
-}
-
-// ═══════════════════════════════════════════════
-// BUILD CARD HTML
-// ═══════════════════════════════════════════════
-function formatDate(dateStr){
-  if(!dateStr) return '';
-  try{const d=new Date(dateStr+'T00:00:00');return d.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});}
-  catch(e){return dateStr;}
-}
+// ── Build Card ──
+function formatDate(dateStr){if(!dateStr)return'';try{const d=new Date(dateStr+'T00:00:00');return d.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});}catch(e){return dateStr;}}
 
 function buildCard(c,full=false){
-  const th=T[c.type]||T.general, tpl=TPLS[c.tpl]||TPLS.classic;
-  const bg=`linear-gradient(160deg,${th.bg[0]},${th.bg[1]},${th.bg[2]})`;
-  const h=full?'540px':'340px', pSz=full?'120px':'75px';
+  const th=T[c.type]||T.general,tpl=TPLS[c.tpl]||TPLS.classic;
+  // Use custom bg if set, else event default
+  let bg;
+  if(c.bgColors&&c.bgColors[0]&&c.bgColors[1]&&c.bgColors[2]){
+    bg=`linear-gradient(${c.bgDir||'160deg'},${c.bgColors[0]},${c.bgColors[1]},${c.bgColors[2]})`;
+  } else {
+    bg=`linear-gradient(160deg,${th.bg[0]},${th.bg[1]},${th.bg[2]})`;
+  }
+  const h=full?'540px':'340px',pSz=full?'120px':'75px';
   const nameSz=full?tpl.nameSz:parseFloat(tpl.nameSz)*.7+'rem';
   const msgSz=full?tpl.msgSz:parseFloat(tpl.msgSz)*.82+'rem';
   const iconSz=full?'5.5rem':'3.2rem';
   const pts=getParticles(c.effect||'confetti',full);
-  const displayIcon = getEffectiveIcon(c);
-  const displayLabel = getEffectiveLabel(c);
-
+  const displayIcon=getEffectiveIcon(c);
+  const displayLabel=getEffectiveLabel(c);
   let ph='';
-  if(c.imgData){
-    const s=c.photoShape||'circle';
-    const css=s==='circle'
-      ?`border-radius:50%;border:4px solid rgba(255,255,255,.35);box-shadow:0 0 40px ${th.color}66`
-      :s==='rect'
-      ?`border-radius:14px;border:3px solid rgba(255,255,255,.3);box-shadow:0 8px 30px rgba(0,0,0,.6)`
-      :`clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%)`;
-    ph=`<img src="${c.imgData}" style="width:${pSz};height:${pSz};object-fit:cover;${css};display:block;margin:0 auto ${full?'1rem':'.5rem'}">`;
-  }else{
-    ph=`<div style="font-size:${iconSz};margin-bottom:${full?'.7rem':'.3rem'};animation:floatUp 3s ease-in-out infinite;text-align:center">${displayIcon}</div>`;
-  }
-
+  if(c.imgData){const s=c.photoShape||'circle';const css=s==='circle'?`border-radius:50%;border:4px solid rgba(255,255,255,.35);box-shadow:0 0 40px ${th.color}66`:s==='rect'?`border-radius:14px;border:3px solid rgba(255,255,255,.3);box-shadow:0 8px 30px rgba(0,0,0,.6)`:`clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%)`;ph=`<img src="${c.imgData}" style="width:${pSz};height:${pSz};object-fit:cover;${css};display:block;margin:0 auto ${full?'1rem':'.5rem'}">`;}
+  else{ph=`<div style="font-size:${iconSz};margin-bottom:${full?'.7rem':'.3rem'};animation:floatUp 3s ease-in-out infinite;text-align:center">${displayIcon}</div>`;}
   const div=tpl.divider?`<div style="width:${full?'60px':'36px'};height:${full?'2px':'1.5px'};background:linear-gradient(90deg,transparent,${th.color},transparent);margin:${full?'.6rem':'.3rem'} auto;border-radius:2px"></div>`:'';
   const frm=c.from?`<div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:${full?'.88rem':'.65rem'};margin-top:${full?'.5rem':'.3rem'};opacity:.5">${c.from}</div>`:'';
-
   let ageBadge='';
-  if(c.age && (c.type==='birthday'||c.type==='anniversary'||c.type==='birthday_milestone'||c.type==='birthday_half'||c.type==='first_birthday')){
-    const label=c.type==='anniversary'?`${c.age} Years Together 💕`:`Turning ${c.age} ${displayIcon}`;
-    ageBadge=`<div style="display:inline-block;background:linear-gradient(135deg,${th.color}44,${th.accent}33);border:1.5px solid ${th.color}88;border-radius:50px;padding:${full?'.35rem .9rem':'.2rem .55rem'};font-size:${full?'.82rem':'.6rem'};font-weight:800;letter-spacing:.5px;margin:${full?'.5rem 0 .4rem':'0.25rem 0'};color:${th.accent}">${label}</div>`;
-  }
-
+  if(c.age&&(c.type==='birthday'||c.type==='anniversary'||c.type==='birthday_milestone'||c.type==='birthday_half'||c.type==='first_birthday')){const label=c.type==='anniversary'?`${c.age} Years Together 💕`:`Turning ${c.age} ${displayIcon}`;ageBadge=`<div style="display:inline-block;background:linear-gradient(135deg,${th.color}44,${th.accent}33);border:1.5px solid ${th.color}88;border-radius:50px;padding:${full?'.35rem .9rem':'.2rem .55rem'};font-size:${full?'.82rem':'.6rem'};font-weight:800;letter-spacing:.5px;margin:${full?'.5rem 0 .4rem':'0.25rem 0'};color:${th.accent}">${label}</div>`;}
   let dateLine='';
-  if(c.date){
-    const fmtDate=formatDate(c.date);
-    dateLine=`<div style="display:flex;align-items:center;justify-content:center;gap:.3rem;margin-top:${full?'.5rem':'.3rem'};font-size:${full?'.78rem':'.58rem'};opacity:.65;font-weight:600">📅 ${fmtDate}</div>`;
-  }
-
+  if(c.date){const fmtDate=formatDate(c.date);dateLine=`<div style="display:flex;align-items:center;justify-content:center;gap:.3rem;margin-top:${full?'.5rem':'.3rem'};font-size:${full?'.78rem':'.58rem'};opacity:.65;font-weight:600">📅 ${fmtDate}</div>`;}
   return `<div style="width:100%;min-height:${h};background:${bg};position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif">
 <div style="position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none">${pts}</div>
 <div style="position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,${th.color}18,transparent)"></div>
 <div style="position:relative;z-index:2;text-align:center;padding:${full?'1.8rem 2.5rem':'1rem 1.2rem'};width:100%;color:#fff">
 ${ph}
 <div style="font-size:${full?'.65rem':'.5rem'};font-weight:900;letter-spacing:3px;text-transform:uppercase;opacity:.6;margin-bottom:${full?'.4rem':'.2rem'};color:${th.accent}">${displayLabel}</div>
-${div}
-${ageBadge}
+${div}${ageBadge}
 <div style="font-family:${tpl.nameFont};font-size:${nameSz};font-weight:700;line-height:1.2;margin:${full?'.2rem 0 .5rem':'0.15rem 0 .25rem'};text-shadow:0 2px 20px rgba(0,0,0,.4);color:#fff">${c.name||'Your Name'}</div>
 ${div}
 <div style="font-size:${msgSz};line-height:1.6;opacity:.88;max-width:${full?'380px':'240px'};margin:0 auto;font-weight:500">${c.msg||(th.msg)}</div>
-${dateLine}
-${frm}
+${dateLine}${frm}
 </div>
 <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,${th.color},${th.accent},${th.color},transparent);z-index:3"></div>
 </div>`;
@@ -2494,149 +974,55 @@ function getParticles(eff,full){
   const cnt=full?50:20;
   const MAP={confetti:['🎊','🎉','🎈','🎀','🎁'],firework:['✦','★','✸','✹','✺'],hearts:['❤️','💖','💕','💗','💓'],sparkle:['✨','💫','⭐','🌟','✦'],snow:['❄️','🌨️','✦','❋','❊'],flowers:['🌸','🌺','🌼','🌻','🌹'],stars:['⭐','🌟','💫','✨','☆'],bubbles:['○','◌','◦','•','●'],leaves:['🍂','🍁','🍃','🌿','☘️'],gold:['✦','✧','◆','◇','❖']};
   const p=MAP[eff]||MAP.sparkle;let out='';
-  for(let i=0;i<cnt;i++){
-    const x=Math.random()*100,y=Math.random()*100;
-    const sz=full?(0.8+Math.random()*1.6):(0.5+Math.random()*.9);
-    const dur=2+Math.random()*5,del=Math.random()*4;
-    const anim=(eff==='snow'||eff==='leaves'||eff==='confetti')?`animation:fallPart ${dur}s ease-in-out infinite ${del}s`:`animation:risePart ${dur}s ease-in-out infinite ${del}s`;
-    out+=`<div style="position:absolute;left:${x}%;top:${y}%;font-size:${sz}rem;${anim};opacity:${.3+Math.random()*.5}">${p[i%p.length]}</div>`;
-  }
+  for(let i=0;i<cnt;i++){const x=Math.random()*100,y=Math.random()*100;const sz=full?(0.8+Math.random()*1.6):(0.5+Math.random()*.9);const dur=2+Math.random()*5,del=Math.random()*4;const anim=(eff==='snow'||eff==='leaves'||eff==='confetti')?`animation:fallPart ${dur}s ease-in-out infinite ${del}s`:`animation:risePart ${dur}s ease-in-out infinite ${del}s`;out+=`<div style="position:absolute;left:${x}%;top:${y}%;font-size:${sz}rem;${anim};opacity:${.3+Math.random()*.5}">${p[i%p.length]}</div>`;}
   return out;
 }
 
-// ═══════════════════════════════════════════════
-// SHARE VIEW — card-only, opened via ?id= or ?card=
-// ═══════════════════════════════════════════════
-function showShareView(card, shortUrl, fullUrl){
-  const th=T[card.type]||T.general;
-  _currentCard = card;
-  document.getElementById('root').style.display='none';
-  document.getElementById('bg-canvas').style.display='none';
+// ── Share View ──
+function showShareView(card,shortUrl,fullUrl){
+  const th=T[card.type]||T.general;_currentCard=card;
+  document.getElementById('root').style.display='none';document.getElementById('bg-canvas').style.display='none';
   const sv=document.getElementById('share-view');
-  sv.style.background=`linear-gradient(160deg,${th.bg[0]},${th.bg[1]},${th.bg[2]})`;
-
-  // Show "Card for [Name]" chip at top
-  const displayName = card.recipient || card.name;
-  if(displayName){
-    document.getElementById('s-chip-name').textContent = displayName;
-    document.getElementById('s-card-for-chip').style.display='flex';
-  }
-
-  // Recipient personal banner
-  if(card.recipient){
-    document.getElementById('s-banner-name').textContent=`Hey ${card.recipient}, you have a special greeting! 🎉`;
-    document.getElementById('s-banner').style.display='block';
-  }
-
+  sv.style.background=card.bgColors&&card.bgColors[0]?`linear-gradient(${card.bgDir||'160deg'},${card.bgColors[0]},${card.bgColors[1]},${card.bgColors[2]})`:`linear-gradient(160deg,${th.bg[0]},${th.bg[1]},${th.bg[2]})`;
+  const displayName=card.recipient||card.name;
+  if(displayName){document.getElementById('s-chip-name').textContent=displayName;document.getElementById('s-card-for-chip').style.display='flex';}
+  if(card.recipient){document.getElementById('s-banner-name').textContent=`Hey ${card.recipient}, you have a special greeting! 🎉`;document.getElementById('s-banner').style.display='block';}
   document.getElementById('s-card-inner').innerHTML=buildCard(card,true);
-
-  // Show short link in the URL bar
-  _shortUrl = shortUrl || _baseUrl;
-  _fullUrl  = fullUrl  || _baseUrl;
-  _shareRecipient = card.recipient||'';
-
-  // Display the short URL in the copy row
-  document.getElementById('s-url-txt').textContent = _shortUrl;
+  _shortUrl=shortUrl||_baseUrl;_fullUrl=fullUrl||_baseUrl;_shareRecipient=card.recipient||'';
+  document.getElementById('s-url-txt').textContent=_shortUrl;
   sv.classList.add('on');
-
-  setTimeout(()=>{
-    const cv=document.getElementById('sconf-cv');
-    cv.width=window.innerWidth;cv.height=window.innerHeight;
-    runEffect(card.effect||'confetti',cv);
-  },500);
+  setTimeout(()=>{const cv=document.getElementById('sconf-cv');cv.width=window.innerWidth;cv.height=window.innerHeight;runEffect(card.effect||'confetti',cv);},500);
 }
 
-function sCopy(){
-  cpToClipboard(_shortUrl);
-  showFloatMsg('🔗 Short link copied!');
-}
-function sShare(){
-  const name = _currentCard ? (_currentCard.recipient || _currentCard.name) : '';
-  const title=name?`A greeting for ${name}!`:'FestivaCard Greeting';
-  const text=name?`Hey ${name}, you have a special greeting! 🎉`:'Check out this greeting card!';
-  if(navigator.share)navigator.share({title,text,url:_shortUrl}).catch(()=>sCopy());
-  else sCopy();
-}
-function showFloatMsg(msg){
-  const t=document.createElement('div');t.textContent=msg;
-  t.style.cssText='position:fixed;bottom:6rem;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.15);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.2);border-radius:50px;padding:.6rem 1.4rem;font-size:.85rem;font-weight:700;color:#fff;z-index:9999;pointer-events:none';
-  document.body.appendChild(t);setTimeout(()=>t.remove(),2000);
-}
+function sCopy(){cpToClipboard(_shortUrl);showFloatMsg('🔗 Short link copied!');}
+function sShare(){const name=_currentCard?(_currentCard.recipient||_currentCard.name):'';const title=name?`A greeting for ${name}!`:'FestivaCard Greeting';const text=name?`Hey ${name}, you have a special greeting! 🎉`:'Check out this greeting card!';if(navigator.share)navigator.share({title,text,url:_shortUrl}).catch(()=>sCopy());else sCopy();}
+function showFloatMsg(msg){const t=document.createElement('div');t.textContent=msg;t.style.cssText='position:fixed;bottom:6rem;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.15);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.2);border-radius:50px;padding:.6rem 1.4rem;font-size:.85rem;font-weight:700;color:#fff;z-index:9999;pointer-events:none';document.body.appendChild(t);setTimeout(()=>t.remove(),2000);}
 
-// ═══════════════════════════════════════════════
-// INTERNAL VIEW (from gallery / admin)
-// ═══════════════════════════════════════════════
+// ── Internal View ──
 function viewCard(id){
   const c=cards.find(x=>x.id===id);if(!c)return;
-  const th=T[c.type]||T.general;
-  _currentCard = c;
-
+  const th=T[c.type]||T.general;_currentCard=c;
   document.getElementById('view-canvas').innerHTML=buildCard(c,true);
-  document.getElementById('view-page').style.background=`linear-gradient(160deg,${th.bg[0]},${th.bg[1]},${th.bg[2]})`;
-
-  // Build both URLs
-  _shortUrl = makeShortUrl(c);
-  _fullUrl  = makeFullUrl(c);
-  _shareRecipient = c.recipient||'';
-
-  // Top bar: Card for [name] + event label
-  const displayName = c.name;
-  const displayLabel = getEffectiveLabel(c);
-  const displayIcon = getEffectiveIcon(c);
-  document.getElementById('v-card-for-name').textContent = `${displayIcon} ${displayName}`;
-  document.getElementById('v-card-for-sub').textContent  = `${displayLabel}${c.recipient ? ' · For: '+c.recipient : ''}`;
-
-  // Short link pill
-  document.getElementById('v-short-url-txt').textContent = _shortUrl;
-
-  // Push short URL to browser bar
+  const bgStyle=c.bgColors&&c.bgColors[0]?`linear-gradient(${c.bgDir||'160deg'},${c.bgColors[0]},${c.bgColors[1]},${c.bgColors[2]})`:`linear-gradient(160deg,${th.bg[0]},${th.bg[1]},${th.bg[2]})`;
+  document.getElementById('view-page').style.background=bgStyle;
+  _shortUrl=makeShortUrl(c);_fullUrl=makeFullUrl(c);_shareRecipient=c.recipient||'';
+  const displayLabel=getEffectiveLabel(c);const displayIcon=getEffectiveIcon(c);
+  document.getElementById('v-card-for-name').textContent=`${displayIcon} ${c.name}`;
+  document.getElementById('v-card-for-sub').textContent=`${displayLabel}${c.recipient?' · For: '+c.recipient:''}`;
+  document.getElementById('v-short-url-txt').textContent=_shortUrl;
   try{history.pushState({cardId:id},'',_shortUrl);}catch(e){}
-
-  document.getElementById('view-page').classList.add('on');
-  document.body.style.overflow='hidden';
-
-  setTimeout(()=>{
-    const cv=document.getElementById('vconf-cv');
-    cv.width=window.innerWidth;cv.height=window.innerHeight;
-    runEffect(c.effect||'confetti',cv);
-  },400);
+  document.getElementById('view-page').classList.add('on');document.body.style.overflow='hidden';
+  setTimeout(()=>{const cv=document.getElementById('vconf-cv');cv.width=window.innerWidth;cv.height=window.innerHeight;runEffect(c.effect||'confetti',cv);},400);
 }
-
-function closeView(){
-  document.getElementById('view-page').classList.remove('on');
-  document.body.style.overflow='';stopFX();
-  try{history.pushState({},'',_baseUrl);}catch(e){}
-}
-
-// Short link — same device (localStorage lookup)
-function vCopyShort(){
-  cpToClipboard(_shortUrl);
-  toast('🔗 Short link copied! Works instantly on this device.');
-}
-// Full encoded link — cross-device
-function vCopyFull(){
-  cpToClipboard(_fullUrl);
-  toast('🌐 Full link copied! Share via WhatsApp, SMS, Email — opens on any phone ✨');
-}
-function vShare(){
-  const name = _currentCard ? (_currentCard.recipient || _currentCard.name) : '';
-  const title=name?`A greeting for ${name}!`:'FestivaCard';
-  const text=name?`Hey ${name}, you have a special greeting! 🎉`:'Check this greeting!';
-  // Share the full URL so it works on any device
-  if(navigator.share)navigator.share({title,text,url:_fullUrl}).catch(()=>vCopyFull());
-  else vCopyFull();
-}
-function vWhatsApp(){
-  const name = _currentCard ? (_currentCard.recipient || _currentCard.name) : '';
-  const text=encodeURIComponent((name?`Hey ${name}, you have a special greeting! 🎉 `:'Check this greeting card! 🎊 ')+_fullUrl);
-  window.open('https://wa.me/?text='+text,'_blank');
-}
+function closeView(){document.getElementById('view-page').classList.remove('on');document.body.style.overflow='';stopFX();try{history.pushState({},'',_baseUrl);}catch(e){}}
+function vCopyShort(){cpToClipboard(_shortUrl);toast('🔗 Short link copied! Works instantly on this device.');}
+function vCopyFull(){cpToClipboard(_fullUrl);toast('🌐 Full link copied! Share via WhatsApp, SMS, Email — opens on any phone ✨');}
+function vShare(){const name=_currentCard?(_currentCard.recipient||_currentCard.name):'';const title=name?`A greeting for ${name}!`:'FestivaCard';const text=name?`Hey ${name}, you have a special greeting! 🎉`:'Check this greeting!';if(navigator.share)navigator.share({title,text,url:_fullUrl}).catch(()=>vCopyFull());else vCopyFull();}
+function vWhatsApp(){const name=_currentCard?(_currentCard.recipient||_currentCard.name):'';const text=encodeURIComponent((name?`Hey ${name}, you have a special greeting! 🎉 `:'Check this greeting card! 🎊 ')+_fullUrl);window.open('https://wa.me/?text='+text,'_blank');}
 function cpToClipboard(txt){if(navigator.clipboard)navigator.clipboard.writeText(txt).catch(()=>legacyCopy(txt));else legacyCopy(txt);}
 function legacyCopy(txt){const t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();}
 
-// ═══════════════════════════════════════════════
-// EFFECTS
-// ═══════════════════════════════════════════════
+// ── Effects ──
 let _fx=null;
 function stopFX(){if(_fx){_fx();_fx=null;}}
 function runEffect(eff,cv){
@@ -2652,28 +1038,21 @@ function runEffect(eff,cv){
   _fx=()=>{cancelAnimationFrame(rf);ctx.clearRect(0,0,cv.width,cv.height);};
 }
 
-// ═══════════════════════════════════════════════
-// GALLERY
-// ═══════════════════════════════════════════════
+// ── Gallery ──
 function renderGallery(){
   const tc=cards.reduce((a,c)=>{a[c.type]=(a[c.type]||0)+1;return a;},{});
-  document.getElementById('stats-row').innerHTML=
-    `<div class="stat"><b>${cards.length}</b> Cards</div>`+
-    Object.entries(tc).slice(0,5).map(([t,n])=>`<div class="stat"><b>${n}</b> ${T[t]?.label||t}</div>`).join('');
+  document.getElementById('stats-row').innerHTML=`<div class="stat"><b>${cards.length}</b> Cards</div>`+Object.entries(tc).slice(0,5).map(([t,n])=>`<div class="stat"><b>${n}</b> ${T[t]?.label||t}</div>`).join('');
   const types=[...new Set(cards.map(c=>c.type))];
-  document.getElementById('filter-row').innerHTML=
-    `<button class="filter-pill${_filter==='all'?' on':''}" onclick="setFilter('all',this)">All</button>`+
-    types.map(t=>`<button class="filter-pill${_filter===t?' on':''}" onclick="setFilter('${t}',this)">${T[t]?.icon||'🎊'} ${T[t]?.label||t}</button>`).join('');
+  document.getElementById('filter-row').innerHTML=`<button class="filter-pill${_filter==='all'?' on':''}" onclick="setFilter('all',this)">All</button>`+types.map(t=>`<button class="filter-pill${_filter===t?' on':''}" onclick="setFilter('${t}',this)">${T[t]?.icon||'🎊'} ${T[t]?.label||t}</button>`).join('');
   const fl=_filter==='all'?cards:cards.filter(c=>c.type===_filter);
   const g=document.getElementById('gallery-grid');
   if(!fl.length){g.innerHTML=`<div class="empty"><div class="empty-icon">🌟</div><h3>${cards.length?'No cards of this type':'No cards yet'}</h3><br><button class="btn btn-primary" onclick="nav('create')" style="margin-top:.8rem">✨ Create Card</button></div>`;return;}
   g.innerHTML=fl.map(c=>{
     const th=T[c.type]||T.general;
-    const lbl=getEffectiveLabel(c);
-    const icon=getEffectiveIcon(c);
-    const shortLink=makeShortUrl(c);
+    const lbl=getEffectiveLabel(c);const icon=getEffectiveIcon(c);
+    const thumbBg=c.bgColors&&c.bgColors[0]?`linear-gradient(135deg,${c.bgColors[0]},${c.bgColors[1]})`:`linear-gradient(160deg,${th.bg[0]},${th.bg[1]})`;
     return `<div class="gtile">
-<div class="gtile-thumb" style="background:linear-gradient(160deg,${th.bg[0]},${th.bg[1]})" onclick="viewCard('${c.id}')">
+<div class="gtile-thumb" style="background:${thumbBg}" onclick="viewCard('${c.id}')">
 ${c.imgData?`<img src="${c.imgData}" alt="${c.name}">`:`<div class="gtile-no-img">${icon}</div>`}
 <div class="gtile-badge" style="color:${th.color};border-color:${th.color}33">${lbl}</div>
 </div>
@@ -2692,160 +1071,75 @@ ${c.recipient?`<div style="margin-top:.4rem;font-size:.72rem;background:rgba(240
 
 function setFilter(f,el){_filter=f;document.querySelectorAll('.filter-pill').forEach(p=>p.classList.remove('on'));el.classList.add('on');renderGallery();}
 
-// ═══════════════════════════════════════════════
-// CREATE PAGE
-// ═══════════════════════════════════════════════
-function setupCreate(){buildStyleGrid();_selectedEmoji='';livePreview();}
-
-function buildStyleGrid(){
-  document.getElementById('style-grid').innerHTML=EFFECTS.map(e=>
-    `<div class="style-tile${_style===e.id?' on':''}" onclick="pickStyle('${e.id}',this)"><div class="st-icon">${e.icon}</div><div class="st-name">${e.label}</div></div>`
-  ).join('');
-}
-
+// ── Create ──
+function setupCreate(){buildStyleGrid();buildBgPresets();_selectedEmoji='';livePreview();}
+function buildStyleGrid(){document.getElementById('style-grid').innerHTML=EFFECTS.map(e=>`<div class="style-tile${_style===e.id?' on':''}" onclick="pickStyle('${e.id}',this)"><div class="st-icon">${e.icon}</div><div class="st-name">${e.label}</div></div>`).join('');}
 function pickStyle(id,el){_style=id;document.querySelectorAll('.style-tile').forEach(t=>t.classList.remove('on'));el.classList.add('on');livePreview();}
 
 function onTypeChange(){
   const t=document.getElementById('f-type').value;
-  if(t && T[t] && !document.getElementById('f-msg').value) document.getElementById('f-msg').value=T[t].msg;
+  if(t&&T[t]&&!document.getElementById('f-msg').value)document.getElementById('f-msg').value=T[t].msg;
   const fnRow=document.getElementById('festival-name-row');
-  if(t){
-    fnRow.classList.add('show');
-    const fnInput=document.getElementById('f-festival-name');
-    if(!fnInput.value) fnInput.placeholder=T[t]?T[t].label:'Custom Event';
-    const defaultEmoji = T[t]?.icon || '🎊';
-    if(!_selectedEmoji) document.getElementById('festival-emoji-preview').textContent=defaultEmoji;
-    buildEmojiPicker(t);
-  } else {
-    fnRow.classList.remove('show');
-  }
+  if(t){fnRow.classList.add('show');const fnInput=document.getElementById('f-festival-name');if(!fnInput.value)fnInput.placeholder=T[t]?T[t].label:'Custom Event';const defaultEmoji=T[t]?.icon||'🎊';if(!_selectedEmoji)document.getElementById('festival-emoji-preview').textContent=defaultEmoji;buildEmojiPicker(t);}else{fnRow.classList.remove('show');}
   const bdayAlt=document.getElementById('birthday-alt-row');
-  if(t==='birthday'){bdayAlt.style.display='block';}
-  else{bdayAlt.style.display='none';document.querySelector('input[name="bday-alt"][value="normal"]').checked=true;}
-  const row=document.getElementById('date-age-row');
-  const dateWrap=document.getElementById('date-field-wrap');
-  const ageWrap=document.getElementById('age-field-wrap');
-  const dateLabel=document.getElementById('date-label');
-  const ageLabel=document.getElementById('age-label');
-  dateWrap.style.display='none'; ageWrap.style.display='none'; row.style.display='none';
-  if(t==='birthday'||t==='birthday_half'||t==='birthday_surprise'||t==='birthday_milestone'||t==='first_birthday'){
-    row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='🎂 Date of Birth';ageWrap.style.display='block';ageLabel.textContent='🎂 Turning Age';
-  } else if(t==='wedding'||t==='marriage'||t==='engagement'||t==='proposal'){
-    row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='💍 Event Date';
-  } else if(t==='anniversary'){
-    row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='💕 Anniversary Date';ageWrap.style.display='block';ageLabel.textContent='💕 Years Together';
-  } else if(t==='graduation'||t==='promotion'||t==='newjob'||t==='retirement'||t==='exam_pass'){
-    row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='📅 Event Date';
-  } else if(['diwali','christmas','eid','eid_adha','newyear','holi','pongal','onam','navratri','dussehra','ugadi','vishu','baisakhi','raksha','ganesh','janmashtami','ramadan','easter','halloween','thanksgiving'].includes(t)){
-    row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='📅 Festival Date';
-  } else if(t){
-    row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='📅 Event Date';
-  }
+  if(t==='birthday'){bdayAlt.style.display='block';}else{bdayAlt.style.display='none';document.querySelector('input[name="bday-alt"][value="normal"]').checked=true;}
+  const row=document.getElementById('date-age-row');const dateWrap=document.getElementById('date-field-wrap');const ageWrap=document.getElementById('age-field-wrap');const dateLabel=document.getElementById('date-label');const ageLabel=document.getElementById('age-label');
+  dateWrap.style.display='none';ageWrap.style.display='none';row.style.display='none';
+  if(t==='birthday'||t==='birthday_half'||t==='birthday_surprise'||t==='birthday_milestone'||t==='first_birthday'){row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='🎂 Date of Birth';ageWrap.style.display='block';ageLabel.textContent='🎂 Turning Age';}
+  else if(t==='wedding'||t==='marriage'||t==='engagement'||t==='proposal'){row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='💍 Event Date';}
+  else if(t==='anniversary'){row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='💕 Anniversary Date';ageWrap.style.display='block';ageLabel.textContent='💕 Years Together';}
+  else if(t==='graduation'||t==='promotion'||t==='newjob'||t==='retirement'||t==='exam_pass'){row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='📅 Event Date';}
+  else if(['diwali','christmas','eid','eid_adha','newyear','holi','pongal','onam','navratri','dussehra','ugadi','vishu','baisakhi','raksha','ganesh','janmashtami','ramadan','easter','halloween','thanksgiving'].includes(t)){row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='📅 Festival Date';}
+  else if(t){row.style.display='grid';dateWrap.style.display='block';dateLabel.textContent='📅 Event Date';}
   livePreview();
 }
 
 function onBdayAlt(){
-  const val=document.querySelector('input[name="bday-alt"]:checked')?.value||'normal';
-  const alt=BDAY_ALTS[val];
+  const val=document.querySelector('input[name="bday-alt"]:checked')?.value||'normal';const alt=BDAY_ALTS[val];
   const hints={normal:'Standard birthday card',half:'Perfect for celebrating the 6-month mark!',surprise:'Shhh! Great for surprise party invites',milestone:'Perfect for 18th, 21st, 50th, etc.',first:'Adorable first birthday celebration card',joint:'Two names, double the celebration!'};
   document.getElementById('bday-alt-hint').textContent=hints[val]||'';
-  const fnInput=document.getElementById('f-festival-name');
-  fnInput.value=alt.label;
-  _selectedEmoji=alt.icon;
-  document.getElementById('festival-emoji-preview').textContent=alt.icon;
-  document.querySelectorAll('.ep-btn').forEach(b=>{b.classList.toggle('on', b.textContent===alt.icon);});
-  const msgEl=document.getElementById('f-msg');
-  if(!msgEl.value || Object.values(BDAY_ALTS).some(a=>a.msg===msgEl.value)) msgEl.value=alt.msg;
+  const fnInput=document.getElementById('f-festival-name');fnInput.value=alt.label;_selectedEmoji=alt.icon;document.getElementById('festival-emoji-preview').textContent=alt.icon;
+  document.querySelectorAll('.ep-btn').forEach(b=>{b.classList.toggle('on',b.textContent===alt.icon);});
+  const msgEl=document.getElementById('f-msg');if(!msgEl.value||Object.values(BDAY_ALTS).some(a=>a.msg===msgEl.value))msgEl.value=alt.msg;
   livePreview();
 }
 
 function onImgChange(inp){
   if(!inp.files||!inp.files[0])return;
-  const img=new Image(), r=new FileReader();
-  r.onload=e=>{
-    img.onload=()=>{
-      const c=document.createElement('canvas');
-      const M=280;let w=img.width,h=img.height;
-      if(w>M||h>M){if(w>h){h=Math.round(h*M/w);w=M;}else{w=Math.round(w*M/h);h=M;}}
-      c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);
-      _imgData=c.toDataURL('image/jpeg',0.60);
-      const th=document.getElementById('img-prev-thumb');
-      th.src=_imgData;th.style.display='block';
-      document.getElementById('img-prev-name').textContent=inp.files[0].name+' (compressed ✓)';
-      document.getElementById('img-remove-btn').style.display='inline-block';
-      document.getElementById('photo-style-row').style.display='block';
-      const warn=document.getElementById('img-warn');warn.style.display=_imgData.length>160000?'block':'none';
-      livePreview();
-    };img.src=e.target.result;
-  };r.readAsDataURL(inp.files[0]);
+  const img=new Image(),r=new FileReader();
+  r.onload=e=>{img.onload=()=>{const c=document.createElement('canvas');const M=280;let w=img.width,h=img.height;if(w>M||h>M){if(w>h){h=Math.round(h*M/w);w=M;}else{w=Math.round(w*M/h);h=M;}}c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);_imgData=c.toDataURL('image/jpeg',0.60);const th=document.getElementById('img-prev-thumb');th.src=_imgData;th.style.display='block';document.getElementById('img-prev-name').textContent=inp.files[0].name+' (compressed ✓)';document.getElementById('img-remove-btn').style.display='inline-block';document.getElementById('photo-style-row').style.display='block';const warn=document.getElementById('img-warn');warn.style.display=_imgData.length>160000?'block':'none';livePreview();};img.src=e.target.result;};r.readAsDataURL(inp.files[0]);
 }
 
-function removeImg(){
-  _imgData=null;
-  document.getElementById('img-prev-thumb').style.display='none';
-  document.getElementById('img-prev-name').textContent='';
-  document.getElementById('img-remove-btn').style.display='none';
-  document.getElementById('img-warn').style.display='none';
-  document.getElementById('photo-style-row').style.display='none';
-  document.getElementById('f-img').value='';
-  livePreview();
-}
-
+function removeImg(){_imgData=null;document.getElementById('img-prev-thumb').style.display='none';document.getElementById('img-prev-name').textContent='';document.getElementById('img-remove-btn').style.display='none';document.getElementById('img-warn').style.display='none';document.getElementById('photo-style-row').style.display='none';document.getElementById('f-img').value='';livePreview();}
 function getShape(){const r=document.querySelector('input[name="photo-shape"]:checked');return r?r.value:'circle';}
 
-function livePreview(){
-  const pw=document.getElementById('prev-wrap');
-  if(!pw)return;
-  pw.innerHTML=buildCard(getFormCard(),false);
-}
+function livePreview(){const pw=document.getElementById('prev-wrap');if(!pw)return;pw.innerHTML=buildCard(getFormCard(),false);}
 
 function getFormCard(){
   const type=document.getElementById('f-type')?.value||'general';
-  return {
-    type,
-    name:document.getElementById('f-name')?.value||'Your Name',
-    msg:document.getElementById('f-msg')?.value||'',
-    from:document.getElementById('f-from')?.value||'',
-    tpl:document.getElementById('f-tpl')?.value||'classic',
-    effect:_style, imgData:_imgData, photoShape:getShape(),
-    recipient:document.getElementById('f-recipient')?.value||'',
-    date:document.getElementById('f-date')?.value||'',
-    age:document.getElementById('f-age')?.value||'',
-    festivalName:document.getElementById('f-festival-name')?.value||'',
-    festivalEmoji:_selectedEmoji||'',
-  };
+  const customBg=getCustomBg();
+  return{type,name:document.getElementById('f-name')?.value||'Your Name',msg:document.getElementById('f-msg')?.value||'',from:document.getElementById('f-from')?.value||'',tpl:document.getElementById('f-tpl')?.value||'classic',effect:_style,imgData:_imgData,photoShape:getShape(),recipient:document.getElementById('f-recipient')?.value||'',date:document.getElementById('f-date')?.value||'',age:document.getElementById('f-age')?.value||'',festivalName:document.getElementById('f-festival-name')?.value||'',festivalEmoji:_selectedEmoji||'',bgColors:customBg?customBg.colors:null,bgDir:customBg?customBg.dir:'160deg'};
 }
 
 function clearForm(){
   ['f-type','f-name','f-msg','f-from','f-recipient','f-date','f-age','f-festival-name'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
   document.getElementById('f-tpl').value='classic';
-  document.getElementById('date-age-row').style.display='none';
-  document.getElementById('date-field-wrap').style.display='none';
-  document.getElementById('age-field-wrap').style.display='none';
-  document.getElementById('festival-name-row').classList.remove('show');
-  document.getElementById('birthday-alt-row').style.display='none';
+  document.getElementById('date-age-row').style.display='none';document.getElementById('date-field-wrap').style.display='none';document.getElementById('age-field-wrap').style.display='none';
+  document.getElementById('festival-name-row').classList.remove('show');document.getElementById('birthday-alt-row').style.display='none';
   const eprev=document.getElementById('festival-emoji-preview');if(eprev)eprev.textContent='🎊';
-  removeImg();_style='confetti';_selectedEmoji='';buildStyleGrid();livePreview();
+  removeImg();_style='confetti';_selectedEmoji='';buildStyleGrid();
+  resetBg();livePreview();
 }
 
 function saveCard(){
-  const type=document.getElementById('f-type').value;
-  const name=document.getElementById('f-name').value.trim();
-  if(!type){toast('⚠️ Please select an event type');return;}
-  if(!name){toast('⚠️ Please enter a name');return;}
+  const type=document.getElementById('f-type').value;const name=document.getElementById('f-name').value.trim();
+  if(!type){toast('⚠️ Please select an event type');return;}if(!name){toast('⚠️ Please enter a name');return;}
   const c={id:'fc_'+Date.now()+'_'+Math.random().toString(36).slice(2,6),...getFormCard(),name,type,created:new Date().toISOString()};
-  cards.unshift(c);save();
-  toast('🎉 Card saved! Opening preview...');
-  nav('gallery');
-  setTimeout(()=>viewCard(c.id),300);
-  clearForm();
+  cards.unshift(c);save();toast('🎉 Card saved! Opening preview...');nav('gallery');setTimeout(()=>viewCard(c.id),300);clearForm();
 }
 
-// ═══════════════════════════════════════════════
-// ADMIN PANEL
-// ═══════════════════════════════════════════════
+// ── Admin ──
 function showAdminPanel(){document.getElementById('admin-login-section').style.display='none';document.getElementById('admin-panel').style.display='block';renderAdmin();}
-
 function renderAdmin(){
   const tc=cards.reduce((a,c)=>{a[c.type]=(a[c.type]||0)+1;return a;},{});
   document.getElementById('admin-stats').innerHTML=`<div class="stat"><b>${cards.length}</b> Total Cards</div>`+Object.entries(tc).slice(0,5).map(([t,n])=>`<div class="stat"><b>${n}</b> ${T[t]?.label||t}</div>`).join('');
@@ -2854,13 +1148,11 @@ function renderAdmin(){
   w.innerHTML=`<div class="tbl-wrap"><table class="atbl">
 <thead><tr><th>Card</th><th>Type</th><th>For</th><th>Short Link</th><th>Created</th><th>Actions</th></tr></thead>
 <tbody>${cards.map(c=>{
-  const th=T[c.type]||T.general;
-  const lbl=getEffectiveLabel(c);
-  const icon=getEffectiveIcon(c);
-  const sLink=makeShortUrl(c);
+  const th=T[c.type]||T.general;const lbl=getEffectiveLabel(c);const icon=getEffectiveIcon(c);const sLink=makeShortUrl(c);
+  const thumbBg=c.bgColors&&c.bgColors[0]?`linear-gradient(135deg,${c.bgColors[0]},${c.bgColors[1]})`:`linear-gradient(135deg,${th.bg[0]},${th.bg[1]})`;
   return `<tr>
 <td><div style="display:flex;align-items:center;gap:.8rem">
-<div style="width:46px;height:46px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,${th.bg[0]},${th.bg[1]});flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.4rem">
+<div style="width:46px;height:46px;border-radius:10px;overflow:hidden;background:${thumbBg};flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.4rem">
 ${c.imgData?`<img src="${c.imgData}" style="width:46px;height:46px;object-fit:cover">`:`${icon}`}</div>
 <div><div style="font-weight:700">${c.name}</div><div style="font-size:.75rem;color:var(--muted);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${(c.msg||'').slice(0,45)}…</div></div>
 </div></td>
@@ -2873,128 +1165,43 @@ ${c.imgData?`<img src="${c.imgData}" style="width:46px;height:46px;object-fit:co
 <button class="btn btn-ghost btn-xs" onclick="openEdit('${c.id}')">✏️</button>
 <button class="btn btn-red btn-xs" onclick="promptDel('${c.id}')">🗑️</button>
 </div></td>
-</tr>`;
-}).join('')}</tbody></table></div>`;
+</tr>`;}).join('')}</tbody></table></div>`;
 }
 
-// ═══════════════════════════════════════════════
-// EDIT / DELETE
-// ═══════════════════════════════════════════════
-function onEditTypeChange(){
-  const t=document.getElementById('em-type').value;
-  const emFestRow=document.getElementById('em-festival-row');
-  if(t) emFestRow.classList.add('show'); else emFestRow.classList.remove('show');
-  const showAge=['birthday','anniversary','birthday_milestone','birthday_half','first_birthday'].includes(t);
-  document.getElementById('em-age-wrap').style.display=showAge?'block':'none';
-}
-
-function openEdit(id){
-  const c=cards.find(x=>x.id===id);if(!c)return;
-  _editId=id;
-  document.getElementById('em-type').innerHTML=Object.keys(T).map(k=>`<option value="${k}"${k===c.type?' selected':''}>${T[k].icon} ${T[k].label}</option>`).join('');
-  document.getElementById('em-name').value=c.name||'';
-  document.getElementById('em-msg').value=c.msg||'';
-  document.getElementById('em-from').value=c.from||'';
-  document.getElementById('em-recipient').value=c.recipient||'';
-  document.getElementById('em-date').value=c.date||'';
-  document.getElementById('em-age').value=c.age||'';
-  document.getElementById('em-festival-name').value=c.festivalName||'';
-  const showAge=['birthday','anniversary','birthday_milestone','birthday_half','first_birthday'].includes(c.type);
-  document.getElementById('em-age-wrap').style.display=showAge?'block':'none';
-  document.getElementById('em-festival-row').classList.add('show');
-  openModal('edit-modal');
-}
-
-function confirmEdit(){
-  const c=cards.find(x=>x.id===_editId);if(!c)return;
-  const name=document.getElementById('em-name').value.trim();
-  if(!name){toast('⚠️ Name required');return;}
-  c.type=document.getElementById('em-type').value;
-  c.name=name;c.msg=document.getElementById('em-msg').value;
-  c.from=document.getElementById('em-from').value;
-  c.recipient=document.getElementById('em-recipient').value;
-  c.date=document.getElementById('em-date').value;
-  c.age=document.getElementById('em-age').value;
-  c.festivalName=document.getElementById('em-festival-name').value;
-  save();closeModal('edit-modal');toast('✅ Card updated!');
-  if(isSes())renderAdmin();
-  renderGallery();
-}
-
+// ── Edit / Delete ──
+function onEditTypeChange(){const t=document.getElementById('em-type').value;const emFestRow=document.getElementById('em-festival-row');if(t)emFestRow.classList.add('show');else emFestRow.classList.remove('show');const showAge=['birthday','anniversary','birthday_milestone','birthday_half','first_birthday'].includes(t);document.getElementById('em-age-wrap').style.display=showAge?'block':'none';}
+function openEdit(id){const c=cards.find(x=>x.id===id);if(!c)return;_editId=id;document.getElementById('em-type').innerHTML=Object.keys(T).map(k=>`<option value="${k}"${k===c.type?' selected':''}>${T[k].icon} ${T[k].label}</option>`).join('');document.getElementById('em-name').value=c.name||'';document.getElementById('em-msg').value=c.msg||'';document.getElementById('em-from').value=c.from||'';document.getElementById('em-recipient').value=c.recipient||'';document.getElementById('em-date').value=c.date||'';document.getElementById('em-age').value=c.age||'';document.getElementById('em-festival-name').value=c.festivalName||'';const showAge=['birthday','anniversary','birthday_milestone','birthday_half','first_birthday'].includes(c.type);document.getElementById('em-age-wrap').style.display=showAge?'block':'none';document.getElementById('em-festival-row').classList.add('show');openModal('edit-modal');}
+function confirmEdit(){const c=cards.find(x=>x.id===_editId);if(!c)return;const name=document.getElementById('em-name').value.trim();if(!name){toast('⚠️ Name required');return;}c.type=document.getElementById('em-type').value;c.name=name;c.msg=document.getElementById('em-msg').value;c.from=document.getElementById('em-from').value;c.recipient=document.getElementById('em-recipient').value;c.date=document.getElementById('em-date').value;c.age=document.getElementById('em-age').value;c.festivalName=document.getElementById('em-festival-name').value;save();closeModal('edit-modal');toast('✅ Card updated!');if(isSes())renderAdmin();renderGallery();}
 function promptDel(id){_delId=id;openModal('del-modal');}
 function confirmDel(){cards=cards.filter(c=>c.id!==_delId);save();closeModal('del-modal');toast('🗑️ Deleted');renderAdmin();renderGallery();}
 function openModal(id){document.getElementById(id).classList.add('on');}
 function closeModal(id){document.getElementById(id).classList.remove('on');}
 
-// ═══════════════════════════════════════════════
-// TOAST
-// ═══════════════════════════════════════════════
 function toast(msg){document.querySelectorAll('.toast').forEach(t=>t.remove());const t=document.createElement('div');t.className='toast';t.innerHTML=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),3200);}
 
-// ═══════════════════════════════════════════════
-// SEED DATA
-// ═══════════════════════════════════════════════
 function seed(){
   if(cards.length)return;
   cards=[
-    {id:'s1',type:'birthday',name:'Aanya Kapoor',msg:"Wishing you a day as magical as you are! 🎂",from:'With love, your family',tpl:'royal',effect:'confetti',imgData:null,photoShape:'circle',recipient:'Aanya',created:new Date().toISOString(),festivalName:'Sweet 16',festivalEmoji:'🎂'},
-    {id:'s2',type:'diwali',name:'The Sharma Family',msg:"May the festival of lights bring joy! Happy Diwali! 🪔",from:'Warm wishes',tpl:'classic',effect:'firework',imgData:null,photoShape:'circle',recipient:'',created:new Date(Date.now()-86400000).toISOString(),festivalName:'',festivalEmoji:''},
-    {id:'s3',type:'wedding',name:'Rahul & Priya',msg:"May your love grow stronger each day! 💍",from:'With blessings',tpl:'minimal',effect:'hearts',imgData:null,photoShape:'circle',recipient:'Priya',created:new Date(Date.now()-172800000).toISOString(),festivalName:'',festivalEmoji:''},
-    {id:'s4',type:'birthday_half',name:'Little Aryan',msg:"Happy Half Birthday! 🎈 You're halfway there, champ!",from:'Mom & Dad',tpl:'classic',effect:'confetti',imgData:null,photoShape:'circle',recipient:'Aryan',created:new Date(Date.now()-259200000).toISOString(),festivalName:'Half Birthday',festivalEmoji:'🎈'},
+    {id:'s1',type:'birthday',name:'Aanya Kapoor',msg:"Wishing you a day as magical as you are! 🎂",from:'With love, your family',tpl:'royal',effect:'confetti',imgData:null,photoShape:'circle',recipient:'Aanya',created:new Date().toISOString(),festivalName:'Sweet 16',festivalEmoji:'🎂',bgColors:['#1a0040','#4a0090','#1a0040'],bgDir:'160deg'},
+    {id:'s2',type:'diwali',name:'The Sharma Family',msg:"May the festival of lights bring joy! Happy Diwali! 🪔",from:'Warm wishes',tpl:'classic',effect:'firework',imgData:null,photoShape:'circle',recipient:'',created:new Date(Date.now()-86400000).toISOString(),festivalName:'',festivalEmoji:'',bgColors:null,bgDir:''},
+    {id:'s3',type:'wedding',name:'Rahul & Priya',msg:"May your love grow stronger each day! 💍",from:'With blessings',tpl:'minimal',effect:'hearts',imgData:null,photoShape:'circle',recipient:'Priya',created:new Date(Date.now()-172800000).toISOString(),festivalName:'',festivalEmoji:'',bgColors:['#1a0800','#5a2000','#1a0800'],bgDir:'135deg'},
+    {id:'s4',type:'birthday_half',name:'Little Aryan',msg:"Happy Half Birthday! 🎈 You're halfway there, champ!",from:'Mom & Dad',tpl:'classic',effect:'confetti',imgData:null,photoShape:'circle',recipient:'Aryan',created:new Date(Date.now()-259200000).toISOString(),festivalName:'Half Birthday',festivalEmoji:'🎈',bgColors:null,bgDir:''},
   ];
   save();
 }
 
-// ═══════════════════════════════════════════════
-// INIT — handles ?id= (short), ?card= (full encoded), or home
-// ═══════════════════════════════════════════════
 window.addEventListener('load',()=>{
-  _baseUrl = location.href.split('?')[0].split('#')[0];
-  load();
-  seed();
-
-  const params = new URLSearchParams(location.search);
-
-  // ── SHORT LINK: ?id=CARD_ID ──────────────────
-  const idParam = params.get('id');
-  if(idParam){
-    const card = cards.find(c => c.id === decodeURIComponent(idParam));
-    if(card){
-      // Found in localStorage → show card-only view (no home)
-      const short = makeShortUrl(card);
-      const full  = makeFullUrl(card);
-      showShareView(card, short, full);
-      return;
-    } else {
-      // Not found — show helpful "not found" screen, NOT home
-      showCardNotFound();
-      return;
-    }
-  }
-
-  // ── FULL LINK: ?card=BASE64 (backward compat / cross-device) ──
-  const rawCard = params.get('card');
-  if(rawCard){
-    const safeParam = rawCard.replace(/ /g,'+');
-    const card = decodeCard(safeParam);
-    if(card){
-      // For full links the "short" url is same as full (no ID)
-      const full = location.href;
-      showShareView(card, full, full);
-      return;
-    }
-    try{history.replaceState({},'',_baseUrl);}catch(e){}
-  }
-
-  // ── HOME ──────────────────────────────────────
-  initBG();
-  renderGallery();
+  _baseUrl=location.href.split('?')[0].split('#')[0];
+  load();seed();
+  const params=new URLSearchParams(location.search);
+  const idParam=params.get('id');
+  if(idParam){const card=cards.find(c=>c.id===decodeURIComponent(idParam));if(card){showShareView(card,makeShortUrl(card),makeFullUrl(card));return;}else{showCardNotFound();return;}}
+  const rawCard=params.get('card');
+  if(rawCard){const safeParam=rawCard.replace(/ /g,'+');const card=decodeCard(safeParam);if(card){const full=location.href;showShareView(card,full,full);return;}try{history.replaceState({},'',_baseUrl);}catch(e){}}
+  initBG();renderGallery();
 });
 
-window.addEventListener('popstate',()=>{
-  const vp=document.getElementById('view-page');
-  if(vp.classList.contains('on')){vp.classList.remove('on');document.body.style.overflow='';stopFX();}
-});
+window.addEventListener('popstate',()=>{const vp=document.getElementById('view-page');if(vp.classList.contains('on')){vp.classList.remove('on');document.body.style.overflow='';stopFX();}});
 window.addEventListener('keydown',e=>{if(e.key==='Escape')closeView();});
 </script>
 </body>
